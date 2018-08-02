@@ -1,2 +1,3 @@
 # highlighter
-Uses neural networks to pick the best stocks.
+highlight test project
+(non-operational)
