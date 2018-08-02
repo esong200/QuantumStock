@@ -12,6 +12,7 @@ public class functions {
 		}
 		return returnArr;
 	}
+	
 	public static double[][] dotMultiply(double[][] a, double[][] b){
 		double[][]returnArr = new double[a.length][b[0].length];
 		for (int i = 0; i < a.length; i++) {
@@ -23,6 +24,7 @@ public class functions {
 		}
 		return returnArr;
 	}
+
 	public static double sigmoid(double x, boolean deriv) {
 		if(deriv==false) {
 			return 1/(1+Math.pow(Math.E,(-x)));
@@ -55,9 +57,9 @@ public class functions {
 			}
 		}
 		returnArr = dotMultiply(a,rotatedArr);
-
 		return returnArr;
 	}
+
 	public static double[][] rotateMultiply(double[]noRotate, double[]rotate){
 		double returnArr[][] = new double[rotate.length][noRotate.length];
 		for(int i=0; i<noRotate.length; i++) {
@@ -67,6 +69,7 @@ public class functions {
 		}
 		return returnArr;
 	}
+
 	public static double[][] rotateMultiply(double[][]a, double[][]b){
 		double[][] returnArr = new double[a.length][b.length];
 		double [][] rotatedArr = new double[b[0].length][b.length];
@@ -78,5 +81,4 @@ public class functions {
 		returnArr = dotMultiply(rotatedArr , a);
 		return returnArr;
 	}
-
 }
