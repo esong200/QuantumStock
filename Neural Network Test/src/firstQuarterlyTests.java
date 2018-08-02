@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class largeArray extends functions {
+public class firstQuarterlyTests extends functions {
 	public static void main(String[] args) {
 		String rawData="";
 		double[][] inputs = new double[35][55];
@@ -31,20 +31,20 @@ public class largeArray extends functions {
 				System.out.println(finalAnsArr[i]);
 				error1[i]=desiredOutcome[i]-finalAnsArr[i];
 				delta1[i]= error1[i]*sigmoid(finalAnsArr[i],true);
-			}	
+			}
 			double[][] error0 =  rotateMultiply(synapticWeights1,delta1);
 			double[][] delta0 = new double[35][35]; /*rotateMultiply(synapticWeights1,delta1);*/
-			
+
 			for(int i = 0; i<delta0.length; i++) {
 				for(int j=0; j<delta0[0].length; j++) {
 					delta0[i][j]=error0[i][j] * sigmoid(intermediateAnswer,true)[i][j];
 				}
-			}	
+			}
 			for(int i=0; i<delta1.length; i++) {
 				double[] x = rotateMultiply(intermediateAnswer, delta1);
 				synapticWeights1[i]+= x[i];
 			}
-			
+
 			for (int i = 0; i<synapticWeights0.length; i++) {
 				for(int j = 0; j<synapticWeights0[0].length; j++) {
 					synapticWeights0[i][j] += rotateMultiply(delta0, inputs )[i][j];
@@ -66,7 +66,7 @@ public class largeArray extends functions {
 				System.out.print(x + "\t");
 			}
 			System.out.println();
-			
+
 		}
 		scan.close();
 		/*System.out.println();
