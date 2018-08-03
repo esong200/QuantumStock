@@ -74,11 +74,11 @@ public class functions {
 		return returnArr;
 	}
 
-	public static double[][] rotateMultiply(double[][]a, double[][]b){
-		double[][] returnArr = new double[a.length][b.length];
-		double [][] rotatedArr = new double[b[0].length][b.length];
-		for(int i= 0; i<b.length; i++) {
-			for(int j = 0; j<b[i].length; j++) {
+	public static double[][] rotateMultiply(double[][]noRotate, double[][]rotate){
+		double[][] returnArr = new double[noRotate.length][rotate.length];
+		double [][] rotatedArr = new double[rotate[0].length][rotate.length];
+		for(int i= 0; i<rotate.length; i++) {
+			for(int j = 0; j<rotate[0].length; j++) {
 				rotatedArr[j][i] = b[i][j];
 			}
 		}
