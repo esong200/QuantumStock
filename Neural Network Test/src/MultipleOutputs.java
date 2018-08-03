@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class MultipleOutputs extends functions {
-	//test
 //Outputs in format {<-10%, -10% - -5%, -5% - -2%, -2% - 2%, 2% - 5%, 5% - 10%, >10%, beat S&P 500}
  public static void main(String[] args) {
  	String rawData="";
