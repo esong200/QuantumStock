@@ -3,7 +3,6 @@ public class DoubleLayer extends functions {
 
  //First test for machine learning w/ two layers
  // Just a test run
- //Random comment
 	public static void main(String[] args) {
 		double[][] inputs = {{0,0,1},{0,1,1},{1,0,1},{1,1,0}};// training data
 		double[][]synapticWeights0 = new double[3][4]; //Synaps
