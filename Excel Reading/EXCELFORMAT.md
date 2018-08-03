@@ -1,6 +1,8 @@
 ALL DATA IS IN PERCENT CHANGE FROM PREVIOUS YEAR SAME QUARTER
 IN EXCEL THE EQUATION IS (Current - Last)/abs(last)
 DATA STARTS ON SECOND COLUMNS FIRST COLUMN IS FOR CATEGORY AS LISTED BELOW
+DATA IS TAKEN FROM AMIGOBULLS
+
 
 
 Shares Outstanding
@@ -29,7 +31,7 @@ Net Cash From Used By Operating Activities
 Increase Decrease In Prop Plant And Equipment
 Increase Decrease In Investments
 Other Cas Inflow From Investment Activities
-Net Cash From Used By Invesment Activities
+Net Cash From Used By Investment Activities
 Issuance Purchase Of Equity Shares
 Payment Of Dividends And Other Cash Distributions
 Other Cash From Used By Financing Activities
