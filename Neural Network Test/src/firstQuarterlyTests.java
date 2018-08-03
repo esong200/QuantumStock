@@ -1,5 +1,7 @@
 import java.util.Scanner;
+
 public class firstQuarterlyTests extends functions {
+
 	public static void main(String[] args) {
 		String rawData="";
 		double[][] inputs = new double[35][55];
@@ -18,9 +20,10 @@ public class firstQuarterlyTests extends functions {
 				for(int j=0; j<35; j++) {
 					inputs[j][i]=Double.parseDouble(rawData.substring(0,rawData.indexOf("%")));
 					rawData = rawData.replaceFirst(rawData.substring(0,rawData.indexOf("%")+1),"");
-									}
+				}
 			}
 		}
+
 		for(int m = 0; m<10; m++) {
 			intermediateAnswer = sigmoid(dotMultiply(inputs, synapticWeights0), false);
 			finalAnsArr = sigmoid(dotMultiply(synapticWeights1, intermediateAnswer), false);
@@ -69,15 +72,6 @@ public class firstQuarterlyTests extends functions {
 
 		}
 		scan.close();
-		/*System.out.println();
-		System.out.println("Test Answers:");
-		double[][] testArr = {{1,0,0},{0,1,0},{0,1,1},{0,1,1}};
-		double[] answers = sigmoid(dotMultiply(synapticWeights1, sigmoid(dotMultiply(testArr, synapticWeights0), false)), false);
-		for(double i: answers) {
-			System.out.println(i);
-
-		}
-		*/
 	}
 
 }
