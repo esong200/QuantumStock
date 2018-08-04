@@ -6,10 +6,10 @@ public class MultipleOutputs extends functions {
  	String rawData="";
  	double[][] inputs = new double[35][55];
  	String[][] inputStrings  = new String[35][55];
- 	double[][]synapticWeights0 = new double[55][35] ;
- 	double[][]intermediateAnswer = new double[35][35];
- 	double[][] synapticWeights1 = new double[35][8] ;
- 	double[][]finalAnsArr = new double[35][8];
+ 	double[][] synapticWeights0 = new double[55][35] ;
+ 	double[][] intermediateAnswer = new double[35][35];
+ 	double[][] synapticWeights1 = new double[35][8];
+ 	double[][] finalAnsArr = new double[35][8];
  	double[][] desiredOutcome = new double[35][8]; //need more data to put the desired Outcome
 
   //to read inputs can be replaced w/ excel reading
@@ -49,9 +49,12 @@ public class MultipleOutputs extends functions {
  				delta0[i][j]=error0[i][j] * sigmoid(intermediateAnswer,true)[i][j];
  			}
  		}
- 		for(int i=0; i<delta1.length; i++) {
- 			double[] x = rotateMultiply(intermediateAnswer, delta1);
- 			synapticWeights1[i]+= x[i];
+    double[][] x = rotateMultiply(intermediateAnswer, delta1);
+ 		for(int i=0; i<synapticWeights1.length; i++) {
+ 			for(int j=0; j<synapticWeights1[0].length;j++) {
+ 				synapticWeights1[i][j]+= x[i][j];
+ 			}
+
  		}
 
  		for (int i = 0; i<synapticWeights0.length; i++) {
