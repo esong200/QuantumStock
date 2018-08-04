@@ -49,7 +49,7 @@ public class MultipleOutputs extends functions {
  				delta0[i][j]=error0[i][j] * sigmoid(intermediateAnswer,true)[i][j];
  			}
  		}
-    for(int i=0; i<synapticWeights1.length; i++) {
+  		for(int i=0; i<synapticWeights1.length; i++) {
   			for(int j=0; j<synapticWeights1[0].length;j++) {
   				synapticWeights1[i][j] += rotateMultiply(intermediateAnswer, delta1)[i][j];
   			}
@@ -64,9 +64,11 @@ public class MultipleOutputs extends functions {
  	}
  	System.out.println();
  	System.out.println("Synaptic Weights1:");
- 	for(double i: synapticWeights1) {
- 		System.out.println(i);
- 		System.out.println();
+ 	for(int i=0; i<synapticWeights1.length; i++) {
+ 		for(int j=0; j<synapticWeights1.length; j++) {
+ 	 		System.out.println(i);
+ 	 		System.out.println();
+ 		}
  	}
  	System.out.println();
  	System.out.println("Synaptic Weights0:");
