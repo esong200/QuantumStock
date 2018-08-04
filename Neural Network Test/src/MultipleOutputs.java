@@ -31,8 +31,8 @@ public class MultipleOutputs extends functions {
  	for(int m = 0; m<1000; m++) {
  		intermediateAnswer = sigmoid(dotMultiply(inputs, synapticWeights0), false);
  		finalAnsArr = sigmoid(dotMultiply(synapticWeights1, intermediateAnswer), false);
- 		double[][] error1 = new double[desiredOutcome.length][desiredOutcome[0]];
- 		double[][] delta1 = new double[desiredOutcome.length][desiredOutcome[0]];
+ 		double[][] error1 = new double[desiredOutcome.length][desiredOutcome[0].length];
+ 		double[][] delta1 = new double[desiredOutcome.length][desiredOutcome[0].length];
  		System.out.println("Training Answer "+m+":");
  		for(int i=0; i<delta1.length; i++) {
 			for(int j = 0; j<delta1[0].length; j++){
