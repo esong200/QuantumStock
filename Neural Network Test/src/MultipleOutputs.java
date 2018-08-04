@@ -1,16 +1,15 @@
 import java.util.Scanner;
 
-public class MultipleOutputs extends functions {
-//Outputs in format {<-10%, -10% - -5%, -5% - -2%, -2% - 2%, 2% - 5%, 5% - 10%, >10%, beat S&P 500}
+public class MultipleOutputs extends functions, DataReader {
+//Outputs in format {<-10%, -10% - -5%, -5% - -2%, -2% - 0%, 0% - 2%, 2% - 5%, 5% - 10%, >10%}
  public static void main(String[] args) {
  	String rawData="";
- 	double[][] inputs = new double[35][55];
- 	String[][] inputStrings  = new String[35][55];
- 	double[][] synapticWeights0 = new double[55][35] ;
+ 	double[][] inputs = retreaveData(36, 13);
+ 	double[][] synapticWeights0 = new double[13][35] ;
  	double[][] intermediateAnswer = new double[35][35];
  	double[][] synapticWeights1 = new double[35][8];
  	double[][] finalAnsArr = new double[35][8];
- 	double[][] desiredOutcome = new double[35][8];   //need more data to put the desired Outcome
+ 	double[][] desiredOutcome = retreaveAnswers(36, 8, 13);   //need more data to put the desired Outcome
   double[][] error1 = new double[desiredOutcome.length][desiredOutcome[0].length];
   double[][] delta1 = new double[desiredOutcome.length][desiredOutcome[0].length];
 
