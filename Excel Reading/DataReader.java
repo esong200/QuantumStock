@@ -10,42 +10,56 @@ import java.util.Iterator;
 
 public class DataReader {
 
-	private static final String FILE_NAME = "Data Compiled.xlsx";
+  private static final String FILE_NAME = "Training Data.xlsx";
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        try {
+    double[][] inputData = new double[36][13];
+    double[] desiredOutcome = new double[36];
+    try {
+      XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
+      FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
+      XSSFSheet datatypeSheet = workbook.getSheetAt(0);
+      Iterator<Row> iterator = datatypeSheet.iterator();
+      Row currentRow = iterator.next();
+      int dataSet = 0;
+      int dataSetValue = 0;
 
-            FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
-            XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
-            XSSFSheet datatypeSheet = workbook.getSheetAt(0);
-            Iterator<Row> iterator = datatypeSheet.iterator();
+      while (iterator.hasNext()) {
 
-            while (iterator.hasNext()) {
+      currentRow = iterator.next();
+      Iterator<Cell> cellIterator = currentRow.iterator();
+      int i = 0; //make sure date is not put into the data set
+      dataSetValue = 0;
 
-                Row currentRow = iterator.next();
-                Iterator<Cell> cellIterator = currentRow.iterator();
+      while (cellIterator.hasNext()) {
 
-                while (cellIterator.hasNext()) {
-
-                    Cell currentCell = cellIterator.next();
-                    //getCellTypeEnum shown as deprecated for version 3.15
-                    //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
-                    if (currentCell.getCellTypeEnum() == CellType.STRING) {
-                        System.out.print(currentCell.getStringCellValue() + "--");
-                    } else if (currentCell.getCellTypeEnum() == CellType.NUMERIC) {
-                        System.out.print(currentCell.getNumericCellValue() + "--");
-                    }
-
-                }
-                System.out.println();
-
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Cell currentCell = cellIterator.next();
+        if(currentCell.getCellTypeEnum() != CellType.NUMERIC){
+          currentCell = cellIterator.next();
         }
+        if (currentCell.getCellTypeEnum() == CellType.NUMERIC & i >= 1 & dataSetValue!=13) {
+          //put dataset into the array
+          inputData[dataSet][dataSetValue] = currentCell.getNumericCellValue();
+          dataSetValue++;
+        }
+        elseif(dataSetValue == 12){
+          desiredoutcome[dataSet] = currentCell.getNumericCellValue();
+        }
+        i++;
+
+      }
+      dataSet++;
+      System.out.println();
 
     }
-	}
+  }
+    catch (FileNotFoundException e) {
+      e.printStackTrace();
+  }
+    catch (IOException e) {
+      e.printStackTrace();
+  }
+
+  }
+  }
