@@ -19,6 +19,7 @@ public class AlphaVantageCollector{
   public ArrayList<double[]> monthlyData (String symbol){
     //returns montly oepn high low close volume
     ArrayList<double[]> data = new ArrayList<double[]>();
+    double[] inputData = {0,0,0,0,0};
     try {
       Monthly response = stockTimeSeries.monthly(symbol);
       Map<String, String> metaData = response.getMetaData();
@@ -27,7 +28,6 @@ public class AlphaVantageCollector{
 
       List<StockData> stockData = response.getStockData();
       stockData.forEach(stock -> {
-        double[] inputData = {0,0,0,0,0};
         System.out.println("open:   " + stock.getOpen());
         inputData[0] = stock.getOpen();
         System.out.println("high:   " + stock.getHigh());
@@ -38,8 +38,12 @@ public class AlphaVantageCollector{
         inputData[3] = stock.getClose();
         System.out.println("volume: " + stock.getVolume());
         inputData[4] = stock.getVolume();
-        data.append(inputData);
+
       });
+      for(int i=0; i<inputData.length; i++) {
+    	  	  inputData[i]=a
+          data.append(inputData[i]);
+      }
 
     } catch (AlphaVantageException e) {
       System.out.println("something went wrong");
@@ -48,7 +52,7 @@ public class AlphaVantageCollector{
   }
 
   public ArrayList<double> simpleMovingAvg(String symbol){
-    ArrayList<double> SMA = new ArrayList<double);
+    ArrayList<double> SMA = new ArrayList<double>;
     try {
       //Monthly response = stockTimeSeries.monthly(symbol);
       //Need formula for each
@@ -68,7 +72,7 @@ public class AlphaVantageCollector{
   return SMA;
 }
   public ArrayList<double> expoMovAvg(String symbol){
-    ArrayList<double> EMA = new ArrayList<double);
+    ArrayList<double> EMA = new ArrayList<double>;
     try {
       //Monthly response = stockTimeSeries.monthly(symbol);
       //Need the formula for each
