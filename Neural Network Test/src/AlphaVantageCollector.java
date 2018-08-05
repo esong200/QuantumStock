@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -5,6 +6,7 @@ import org.patriques.*;
 import org.patriques.input.timeseries.Interval;
 import org.patriques.output.AlphaVantageException;
 import org.patriques.output.timeseries.IntraDay;
+import org.patriques.output.timeseries.Monthly;
 import org.patriques.output.timeseries.data.StockData;
 
 
@@ -16,7 +18,7 @@ public class AlphaVantageCollector{
 
   public ArrayList<double[]> monthlyData (String symbol){
     //returns montly oepn high low close volume
-    ArrayList<double[]> data = new ArrayList<double[5]>()
+    ArrayList<double[]> data = new ArrayList<double[]>();
     try {
       Monthly response = stockTimeSeries.monthly(symbol);
       Map<String, String> metaData = response.getMetaData();
@@ -45,7 +47,7 @@ public class AlphaVantageCollector{
   return data;
   }
 
-  public ArrayList<double> simpleMovingAvg (String symbol){
+  public ArrayList<double> simpleMovingAvg(String symbol){
     ArrayList<double> SMA = new ArrayList<double);
     try {
       //Monthly response = stockTimeSeries.monthly(symbol);
@@ -57,11 +59,12 @@ public class AlphaVantageCollector{
       List<StockData> stockData = response.getStockData();
       stockData.forEach(stock ->{
         SMA.append(stock.getSMA);
-      })
-  }
+      });
+    }
+
   catch (AlphaVantageException e) {
     System.out.println("something went wrong SMA");
-}
+  }
   return SMA;
 }
   public ArrayList<double> expoMovAvg(String symbol){
@@ -76,7 +79,7 @@ public class AlphaVantageCollector{
       List<StockData> stockData = response.getStockData();
       stockData.forEach(stock ->{
         EMA.append(stock.getEMA);
-      })
+      });
   }
   catch (AlphaVantageException e) {
     System.out.println("something went wrong EMA");
