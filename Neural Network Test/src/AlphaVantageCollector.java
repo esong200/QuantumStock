@@ -41,8 +41,7 @@ public class AlphaVantageCollector{
 
       });
       for(int i=0; i<inputData.length; i++) {
-    	  	  inputData[i]=a
-          data.append(inputData[i]);
+          inputData[i]=append(inputData[i]);
       }
 
     } catch (AlphaVantageException e) {
@@ -51,7 +50,8 @@ public class AlphaVantageCollector{
   return data;
   }
 
-  public ArrayList<double> simpleMovingAvg(String symbol){
+
+public ArrayList<double> simpleMovingAvg(String symbol){
     ArrayList<double> SMA = new ArrayList<double>;
     try {
       //Monthly response = stockTimeSeries.monthly(symbol);
