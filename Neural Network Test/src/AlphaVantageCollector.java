@@ -1,13 +1,22 @@
+import java.io.PrintStream;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.patriques.*;
-import org.patriques.input.timeseries.Interval;
+import org.patriques.input.technicalindicators.SeriesType;
+import org.patriques.input.technicalindicators.TimePeriod;
+//import org.patriques.input.timeseries.Interval;
 import org.patriques.output.AlphaVantageException;
+import org.patriques.output.technicalindicators.MACD;
+import org.patriques.output.technicalindicators.SMA;
+import org.patriques.output.technicalindicators.data.IndicatorData;
 import org.patriques.output.timeseries.IntraDay;
 import org.patriques.output.timeseries.Monthly;
+import org.patriques.input.technicalindicators.Interval;
 import org.patriques.output.timeseries.data.StockData;
+
 
 
 public class AlphaVantageCollector{
@@ -15,6 +24,8 @@ public class AlphaVantageCollector{
   static int timeout = 3000;
   static AlphaVantageConnector apiConnector = new AlphaVantageConnector(apiKey, timeout);
   TimeSeries stockTimeSeries = new TimeSeries(apiConnector);
+  TechnicalIndicators technicalIndicators = new TechnicalIndicators (apiConnector);
+  SMA smaTest = technicalIndicators.sma("MSFT", Interval.DAILY, TimePeriod.of(50), SeriesType.OPEN);
 
   public ArrayList<double[]> monthlyData (String symbol){
     //returns montly oepn high low close volume
@@ -38,11 +49,9 @@ public class AlphaVantageCollector{
         inputData[3] = stock.getClose();
         System.out.println("volume: " + stock.getVolume());
         inputData[4] = stock.getVolume();
+        data.add(inputData);
 
       });
-      for(int i=0; i<inputData.length; i++) {
-          inputData[i]=append(inputData[i]);
-      }
 
     } catch (AlphaVantageException e) {
       System.out.println("something went wrong");
@@ -50,44 +59,24 @@ public class AlphaVantageCollector{
   return data;
   }
 
+  public ArrayList<Double> SMA50 (String symbol){
+	  ArrayList<Double> returnArrayList = new ArrayList<Double>();
+	  SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+	  try {
+	      Map<String, String> metaData = smaTest.getMetaData();
+	      System.out.println("Symbol: " + metaData.get("1: Symbol"));
+	      System.out.println("Indicator: " + metaData.get("2: Indicator"));
 
-public ArrayList<double> simpleMovingAvg(String symbol){
-    ArrayList<double> SMA = new ArrayList<double>;
-    try {
-      //Monthly response = stockTimeSeries.monthly(symbol);
-      //Need formula for each
-      Map<String, String> metaData = response.getMetaData();
-      System.out.println("Information: " + metaData.get("1. Information"));
-      System.out.println("Stock: " + metaData.get("2. Symbol"));
-
-      List<StockData> stockData = response.getStockData();
-      stockData.forEach(stock ->{
-        SMA.append(stock.getSMA);
-      });
-    }
-
-  catch (AlphaVantageException e) {
-    System.out.println("something went wrong SMA");
-  }
-  return SMA;
-}
-  public ArrayList<double> expoMovAvg(String symbol){
-    ArrayList<double> EMA = new ArrayList<double>;
-    try {
-      //Monthly response = stockTimeSeries.monthly(symbol);
-      //Need the formula for each
-      Map<String, String> metaData = response.getMetaData();
-      System.out.println("Information: " + metaData.get("1. Information"));
-      System.out.println("Stock: " + metaData.get("2. Symbol"));
-
-      List<StockData> stockData = response.getStockData();
-      stockData.forEach(stock ->{
-        EMA.append(stock.getEMA);
-      });
-  }
-  catch (AlphaVantageException e) {
-    System.out.println("something went wrong EMA");
-}
-  return EMA;
+	      List<IndicatorData> smaData = smaTest.getData();
+	      smaData.forEach(data -> {
+	        System.out.println("SMA:            " + data.getData());
+	        returnArrayList.add(data.getData());
+	      });
+	    } catch (AlphaVantageException e) {
+	      System.out.println("something went wrong");
+	    }
+	  returnArrayList.remove(0);
+	  returnArrayList.remove(0);
+	  return returnArrayList;
   }
 }
