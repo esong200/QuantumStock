@@ -23,6 +23,9 @@ public class firstQuarterlyTests extends functions {
 				}
 			}
 		}
+		for (int i=0; i<synapticWeights1.length; i++) {
+			synapticWeights1[i] = (2*Math.random()) -1;
+		}
 
 		for(int m = 0; m<10; m++) {
 			intermediateAnswer = sigmoid(dotMultiply(inputs, synapticWeights0), false);

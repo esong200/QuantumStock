@@ -27,9 +27,11 @@ public class MultipleOutputs extends functions, DataReader {
  			}
  		}
  	}
-
-
- //synaptic training
+  for (int i=0; i<synapticWeights1.length; i++) {
+      for(int j=0; j<synapticWeights1[0].length; j++){
+        synapticWeights1[i][j] = (2*Math.random()) -1;
+      }
+		} //synaptic training
  	for(int m = 0; m<1000; m++) {
  		intermediateAnswer = sigmoid(dotMultiply(inputs, synapticWeights0), false);
  		finalAnsArr = sigmoid(dotMultiply(synapticWeights1, intermediateAnswer), false);
