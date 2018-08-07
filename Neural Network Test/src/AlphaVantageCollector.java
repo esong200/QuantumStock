@@ -378,7 +378,7 @@ public class AlphaVantageCollector{
          answer[6]= 0;
          answer[7]= 0;
       }
-      elseif(percentChange <=-5){
+      else if(percentChange <=-5){
         answer[0]= 0;
         answer[1]= 1;
         answer[2]= 0;
@@ -388,7 +388,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <= -2){
+      else if(percentChange <= -2){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 1;
@@ -398,7 +398,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <= 0){
+      else if(percentChange <= 0){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
@@ -408,7 +408,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <=2){
+      else if(percentChange <=2){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
@@ -418,7 +418,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <=5){
+      else if(percentChange <=5){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
@@ -428,7 +428,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <=10){
+      else if(percentChange <=10){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
@@ -438,7 +438,7 @@ public class AlphaVantageCollector{
         answer[6]= 1;
         answer[7]= 0;
       }
-      elseif(i>10){
+      else if(i>10){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
