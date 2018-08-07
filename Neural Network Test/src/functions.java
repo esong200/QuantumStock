@@ -31,7 +31,7 @@ public class functions extends DataReader {
         }
 		return returnArr;
 	}
-	public static double[][] dotMultiply(double[][] a, double[][]b){
+	/*public static double[][] dotMultiply(double[][] a, double[][]b){
 		double[][]returnArr = new double[a.length][b[0].length];
 		for (int i = 0; i < a.length; i++) {
             for (int k = 0; k < a[0].length; k++) {
@@ -42,6 +42,7 @@ public class functions extends DataReader {
 		}
 		return returnArr;
 	}
+	*/
 
 	public static double sigmoid(double x, boolean deriv) {
 		if(deriv==false) {
@@ -72,9 +73,10 @@ public class functions extends DataReader {
 		for(int i= 0; i<b.length; i++) {
 			for(int j = 0; j<b[i].length; j++) {
 				rotatedArr[j][i] = b[i][j];
+				//returnArr[i] += b[i][j] * a[j];
 			}
 		}
-		returnArr = dotMultiply(a,rotatedArr);
+	 returnArr = dotMultiply(a,rotatedArr);
 
 		return returnArr;
 	}
