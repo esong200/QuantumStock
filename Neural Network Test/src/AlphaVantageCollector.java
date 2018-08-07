@@ -31,8 +31,9 @@ public class AlphaVantageCollector{
   TimeSeries stockTimeSeries = new TimeSeries(apiConnector);
   TechnicalIndicators technicalIndicators = new TechnicalIndicators (apiConnector);
   SMA smaTest = technicalIndicators.sma("MSFT", Interval.DAILY, TimePeriod.of(50), SeriesType.OPEN);
+  private int ArrayLength = 0;
 
-  public ArrayList<double[]> monthlyData (String symbol){
+  public static ArrayList<double[]> monthlyData (String symbol){
     //returns montly oepn high low close volume
     ArrayList<double[]> data = new ArrayList<double[]>();
     double[] inputData = {0,0,0,0,0};
@@ -66,7 +67,7 @@ public class AlphaVantageCollector{
   }
 
 
-  public ArrayList<double[]> DataCollection (String symbol){
+  public static ArrayList<double[]> DataCollection (String symbol){
     /*returns data in form Open High Low close volume sma50 ema50 sma200 ema200 macdHist macdSig
     * macd stochd stochk rsi50 rsi200 adx50 adx200 aroon50down aroon50up aroon200down aroon200up
     * bband50Low bband50Mid bband50Hi bband200Low bband200Mid bband200Hi ad obv
@@ -138,6 +139,7 @@ public class AlphaVantageCollector{
 	    }
 	  returnArrayList.remove(0);
 	  returnArrayList.remove(0);
+    ArrayLength = returnArrayList.size();
 	  return returnArrayList;
   }
 
@@ -147,6 +149,9 @@ public class AlphaVantageCollector{
     ArrayList<double[]> answers = new ArrayList<double[]>();
     double[] answer = new double[8];
     for(int i = 0; i < monthly.size() -1; i++){
+      if(answers.size() == ArrayLength){
+        break;
+      }
       double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
       int percent = (int) percentChange;
       switch (percent)
@@ -353,8 +358,6 @@ public class AlphaVantageCollector{
     	       answer[7]= 1;
     	     };
       }
-
-
       answers.add(answer);
     }
 
