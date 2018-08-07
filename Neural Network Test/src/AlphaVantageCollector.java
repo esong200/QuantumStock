@@ -113,25 +113,25 @@ public class AlphaVantageCollector{
 
         int index = 0;
 	    for(IndicatorData data: smaData50) {
-        if(!(index == stockData.size() || index == data.size() || index == emaData50.size() || index == smaData.Size() || index == emaData.Size() ||
-        index == macdData.Size() || index == stochData.Size() || index == data50.Size() || index == data200.Size()
-        || index == adxdata50.Size() || index == adxdata200.Size() || index == aroondata50.Size() || index == aroon200.size()
-        || index == bbadns50.Size() || index == bbands200.Size() || index == ad.Size() || index == obv.size())){
-          break;
-        }
-	        double[] dataArr = {stockData.get(index).getOpen(), stockData.get(index).getHigh(), stockData.get(index).getLow(),
-	        		stockData.get(index).getClose(), stockData.get(index).getVolume(),
-	        		data.getData(), emaData50.get(index).getData(), smaData.get(index).getData(),
-	        		emaData.get(index).getData(),macdData.get(index).getHist(), macdData.get(index).getSignal(),
-	        		macdData.get(index).getMacd(),stochData.get(index).getSlowD(), stochData.get(index).getSlowk(),
-	        		data50.get(index).getData(),data200.get(index).getData(),adxdata50.get(index).getData(),
-	        		adxdata200.get(index).getData(),aroondata50.get(index).getAroonDown(), aroondata50.get(index).getAroonUp(),
-	        		aroondata200.get(index).getAroonDown(), aroondata200.get(index).getAroonUp(),
-	        		bband50.get(index).getLowerBand(), bband50.get(index).getMidBand(), bband50.get(index).getUpperBand(),
-	        		bband200.get(index).getLowerBand(), bband200.get(index).getMidBand(), bband200.get(index).getUpperBand(),
-	        		addata.get(index).getData(), obvdata.get(index).getData()};
-          returnArrayList.add(dataArr);
-          index++;
+        if(!(index == stockData.size() || index == smaData50.size() || index == emaData50.size() || index == smaData.size() || index == emaData.size() ||
+          index == macdData.size() || index == stochData.size() || index == data50.size() || index == data200.size()
+          || index == adxdata50.size() || index == adxdata200.size() || index == aroondata50.size() || index == aroondata200.size()
+          || index == bband50.size() || index == bband200.size() || index == addata.size() || index == obvdata.size())){
+            break;
+          }
+        double[] dataArr = {stockData.get(index).getOpen(), stockData.get(index).getHigh(), stockData.get(index).getLow(),
+           stockData.get(index).getClose(), stockData.get(index).getVolume(),
+           data.getData(), emaData50.get(index).getData(), smaData.get(index).getData(),
+           emaData.get(index).getData(),macdData.get(index).getHist(), macdData.get(index).getSignal(),
+           macdData.get(index).getMacd(),stochData.get(index).getSlowD(), stochData.get(index).getSlowK(),
+           data50.get(index).getData(),data200.get(index).getData(),adxdata50.get(index).getData(),
+           adxdata200.get(index).getData(),aroondata50.get(index).getAroonDown(), aroondata50.get(index).getAroonUp(),
+           aroondata200.get(index).getAroonDown(), aroondata200.get(index).getAroonUp(),
+           bband50.get(index).getLowerBand(), bband50.get(index).getMidBand(), bband50.get(index).getUpperBand(),
+           bband200.get(index).getLowerBand(), bband200.get(index).getMidBand(), bband200.get(index).getUpperBand(),
+           addata.get(index).getData(), obvdata.get(index).getData()};
+       returnArrayList.add(dataArr);
+       index++;
 	      };
         } catch (AlphaVantageException e) {
 	      System.out.println("something went wrong dataCollection");
@@ -140,7 +140,7 @@ public class AlphaVantageCollector{
 	  returnArrayList.remove(0);
 	  return returnArrayList;
   }
-  
+
   public ArrayList<double[]> answerCompile (String symbol){
     ArrayList<double[]> monthly = monthlyData(symbol);
     monthly.remove(0);
