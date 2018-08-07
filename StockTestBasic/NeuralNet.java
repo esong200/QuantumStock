@@ -1,9 +1,9 @@
-public class NeuralNet 
+public class NeuralNet
 {
 	public static double wa = 0, wb = 0, wc = 0;
 	//multipliers of the stock traits
-	
-	public static void main(String[] args) 
+	//Test COmment
+	public static void main(String[] args)
 	{
 		Stock aapl = new Stock(1,2,3, 17.2);
 		double tempwa = wa, tempwb = wb, tempwc = wc;
