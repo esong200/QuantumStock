@@ -25,13 +25,21 @@ import org.patriques.output.technicalindicators.MACD;
 
 
 public class AlphaVantageCollector{
-  static String apiKey = "EL09735SU2ZIYXW5";
-  static int timeout = 3000;
-  static AlphaVantageConnector apiConnector = new AlphaVantageConnector(apiKey, timeout);
-  static TimeSeries stockTimeSeries = new TimeSeries(apiConnector);
-  static TechnicalIndicators technicalIndicators = new TechnicalIndicators (apiConnector);
-  SMA smaTest = technicalIndicators.sma("MSFT", Interval.DAILY, TimePeriod.of(50), SeriesType.OPEN);
-  private static int ArrayLength = 0;
+    static String apiKey = "EL09735SU2ZIYXW5";
+    static String apiKey1 = "W7JYK9UWBIO9X75G";
+    static String apiKey2 = "356GGMBFYQWEUOFR";
+    static String apiKey3 = "M7NCSUIT1QIC6BRR";
+    static int timeout = 3000;
+    static AlphaVantageConnector apiConnector = new AlphaVantageConnector(apiKey, timeout);
+    static AlphaVantageConnector apiConnector1 = new AlphaVantageConnector(apiKey1, timeout);
+    static AlphaVantageConnector apiConnector2 = new AlphaVantageConnector(apiKey2 , timeout);
+    static AlphaVantageConnector apiConnector2 = new AlphaVantageConnector(apiKey3 , timeout);
+    TimeSeries stockTimeSeries = new TimeSeries(apiConnector3);
+    TechnicalIndicators technicalIndicators = new TechnicalIndicators (apiConnector);
+    TechnicalIndicators technicalIndicators1 = new TechnicalIndicators (apiConnector1);
+    TechnicalIndicators technicalIndicators2 = new TechnicalIndicators (apiConnector2);
+    TechnicalIndicators technicalIndicators3 = new TechnicalIndicators (apiConnector3);
+    private static int ArrayLength = 0;
 
   public static ArrayList<double[]> monthlyData (String symbol){
     //returns montly oepn high low close volume
@@ -45,7 +53,6 @@ public class AlphaVantageCollector{
 
       List<StockData> stockData = response.getStockData();
       stockData.forEach(stock -> {
-        System.out.println("open:   " + stock.getOpen());
         inputData[0] = stock.getOpen();
         System.out.println("high:   " + stock.getHigh());
         inputData[1] = stock.getHigh();
@@ -81,18 +88,22 @@ public class AlphaVantageCollector{
 	EMA ema = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
 	SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
   EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
-  STOCH stoch = technicalIndicators.stoch(symbol, Interval.MONTHLY, null, null, null, null, null);
-  RSI rsi50 = technicalIndicators.rsi(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
-  RSI rsi200 = technicalIndicators.rsi(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
-  ADX adx50 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
-  ADX adx200 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(200));
-  AROON aroon50 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50));
-  AROON aroon200 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200));
-  BBANDS bbands50 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
-  BBANDS bbands200 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN, null, null, null);
-  AD ad = technicalIndicators.ad(symbol, Interval.MONTHLY);
-  OBV obv = technicalIndicators.obv(symbol, Interval.MONTHLY);
+
+  STOCH stoch = technicalIndicators1.stoch(symbol, Interval.MONTHLY, null, null, null, null, null);
+  RSI rsi50 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+  RSI rsi200 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+  ADX adx50 = technicalIndicators1.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
+  ADX adx200 = technicalIndicators1.adx(symbol, Interval.MONTHLY, TimePeriod.of(200));
+
+  AROON aroon50 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50));
+  AROON aroon200 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200));
+  BBANDS bbands50 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
+  BBANDS bbands200 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN, null, null, null);
+  AD ad = technicalIndicators2.ad(symbol, Interval.MONTHLY);
+
+  OBV obv = technicalIndicators3.obv(symbol, Interval.MONTHLY);
   Monthly response = stockTimeSeries.monthly(symbol);
+
     try {
     	List<IndicatorData> smaData50 = sma.getData();
     	List<IndicatorData> emaData50 = ema.getData();
@@ -149,9 +160,6 @@ public class AlphaVantageCollector{
     ArrayList<double[]> answers = new ArrayList<double[]>();
     double[] answer = new double[8];
     for(int i = 0; i < monthly.size() -1; i++){
-      if(ArrayLength == answers.size()) {
-    	  	break;
-      }
       double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
       int percent = (int) percentChange;
       switch (percent)
@@ -363,5 +371,6 @@ public class AlphaVantageCollector{
 
     return answers;
   }
+
 
 }
