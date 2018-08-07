@@ -98,10 +98,6 @@ public class AlphaVantageCollector{
 	  SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
     EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
     try {
-	      Map<String, String> metaData = smaTest.getMetaData();
-	      System.out.println("Symbol: " + metaData.get("1: Symbol"));
-	      System.out.println("Indicator: " + metaData.get("2: Indicator"));
-
         List<IndicatorData> smaData = smaTest.getData();
         List<IndicatorData> emaData = emaTest.getData();
 	      smaData.forEach(data -> {
