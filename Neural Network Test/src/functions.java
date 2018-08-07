@@ -2,9 +2,6 @@
 public class functions extends DataReader {
 	public static double[] dotMultiply(double[] a, double[][] b){
 		double[]returnArr = new double[b.length];
-		for(int i = 0; i< returnArr.length; i++) {
-			returnArr[i]= 0;
-		}
 		for(int i = 0; i<b.length; i++) {
 			for(int j=0; j<a.length-1; j++) {
 				returnArr[i] += b[i][j] * a[j];
