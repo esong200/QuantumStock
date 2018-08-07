@@ -95,24 +95,30 @@ public class AlphaVantageCollector{
     try {
     	List<IndicatorData> smaData50 = sma.getData();
     	List<IndicatorData> emaData50 = ema.getData();
-        List<IndicatorData> smaData = smaTest.getData();
-        List<IndicatorData> emaData = emaTest.getData();
-        List<MACDData> macdData = macd.getData();
-        List<STOCHDataSlow> stochData = stoch.getData();
-        List<IndicatorData> data50 = rsi50.getData();
-        List<IndicatorData> data200 = rsi200.getData();
-        List<IndicatorData> adxdata50 = adx50.getData();
-        List<IndicatorData> adxdata200 = adx200.getData();
-        List<AROONData> aroondata50 = aroon50.getData();
-        List<AROONData> aroondata200 = aroon200.getData();
-        List<BBANDSData> bband50 = bbands50.getData();
-        List<BBANDSData> bband200 = bbands200.getData();
-        List<IndicatorData> addata = ad.getData();
-        List<IndicatorData> obvdata = obv.getData();
-        List<StockData> stockData = response.getStockData();
+      List<IndicatorData> smaData = smaTest.getData();
+      List<IndicatorData> emaData = emaTest.getData();
+      List<MACDData> macdData = macd.getData();
+      List<STOCHDataSlow> stochData = stoch.getData();
+      List<IndicatorData> data50 = rsi50.getData();
+      List<IndicatorData> data200 = rsi200.getData();
+      List<IndicatorData> adxdata50 = adx50.getData();
+      List<IndicatorData> adxdata200 = adx200.getData();
+      List<AROONData> aroondata50 = aroon50.getData();
+      List<AROONData> aroondata200 = aroon200.getData();
+      List<BBANDSData> bband50 = bbands50.getData();
+      List<BBANDSData> bband200 = bbands200.getData();
+      List<IndicatorData> addata = ad.getData();
+      List<IndicatorData> obvdata = obv.getData();
+      List<StockData> stockData = response.getStockData();
 
         int index = 0;
 	    for(IndicatorData data: smaData50) {
+        if(!(index == stockData.size() || index == data.size() || index == emaData50.size() || index == smaData.Size() || index == emaData.Size() ||
+        index == macdData.Size() || index == stochData.Size() || index == data50.Size() || index == data200.Size()
+        || index == adxdata50.Size() || index == adxdata200.Size() || index == aroondata50.Size() || index == aroon200.size()
+        || index == bbadns50.Size() || index == bbands200.Size() || index == ad.Size() || index == obv.size())){
+          break;
+        }
 	        double[] dataArr = {stockData.get(index).getOpen(), stockData.get(index).getHigh(), stockData.get(index).getLow(),
 	        		stockData.get(index).getClose(), stockData.get(index).getVolume(),
 	        		data.getData(), emaData50.get(index).getData(), smaData.get(index).getData(),
