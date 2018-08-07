@@ -70,7 +70,7 @@ public class AlphaVantageCollector{
 
   public ArrayList<double[]> SMAEMA50 (String symbol){
     //returns SMA,EMA
-	  ArrayList<double[]> returnArrayList = new ArrayList<double[2]>();
+	  ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
 	  SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
     EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
     try {
@@ -91,7 +91,7 @@ public class AlphaVantageCollector{
           returnArrayList[dataPoint][1] = data.getData();
         })
 	    } catch (AlphaVantageException e) {
-	      System.out.println("something went wrong");
+	      System.out.println("something went wrong SMAEMA50");
 	    }
 	  returnArrayList.remove(0);
 	  returnArrayList.remove(0);
@@ -100,7 +100,7 @@ public class AlphaVantageCollector{
 
   public ArrayList<double[]> SMAEMA200 (String symbol){
     //returns SMA,EMA
-	  ArrayList<double[]> returnArrayList = new ArrayList<double[2]>();
+	  ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
 	  SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
     EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
     try {
@@ -120,11 +120,30 @@ public class AlphaVantageCollector{
           returnArrayList[dataPoint][1] = data.getData();
         })
 	    } catch (AlphaVantageException e) {
-	      System.out.println("something went wrong");
+	      System.out.println("something went wrong EMASMA200");
 	    }
 	  returnArrayList.remove(0);
 	  returnArrayList.remove(0);
 	  return returnArrayList;
+  }
+
+  public ArrayList<double[]> MACD (String symbol){
+    ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
+    MACD macd = technicalIndicators.macd(symbol, Interval.MONTHLY, SeriesType.OPEN);
+    try{
+      Map<String, String> metaData = macd.getMetaData();
+
+      List<IndicatorData> macdData = macd.getData();
+      macdData.forEach(data ->{
+        double[] dataArr = {data.getHist(), data.getSignal(), data.getMacd}
+        returnArrayList.add(dataArr)
+      });
+
+    }
+    catch(AlphaVantageException e){
+      System.out.println("something went wrong MACD");
+    }
+    return returnArrayList;
   }
 
 }
