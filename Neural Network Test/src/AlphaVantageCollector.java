@@ -140,7 +140,7 @@ public class AlphaVantageCollector{
 	  returnArrayList.remove(0);
 	  return returnArrayList;
   }
-
+  
   public ArrayList<double[]> answerCompile (String symbol){
     ArrayList<double[]> monthly = monthlyData(symbol);
     monthly.remove(0);
@@ -148,89 +148,217 @@ public class AlphaVantageCollector{
     double[] answer = new double[8];
     for(int i = 0; i < monthly.size() -1; i++){
       double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
-      if(percentChange <= -10){
-         answer[0]= 1;
-         answer[1]= 0;
-         answer[2]= 0;
-         answer[3]= 0;
-         answer[4]= 0;
-         answer[5]= 0;
-         answer[6]= 0;
-         answer[7]= 0;
+      int percent = (int) percentChange;
+      switch (percent)
+      {
+      case -10:
+    	  answer[0]= 0;
+          answer[1]= 1;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case -9:
+    	  answer[0]= 0;
+          answer[1]= 1;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case -8:
+    	  answer[0]= 0;
+          answer[1]= 1;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case -7:
+    	  answer[0]= 0;
+          answer[1]= 1;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case -6:
+    	  answer[0]= 0;
+          answer[1]= 1;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case -5:
+    	  answer[0]= 0;
+          answer[1]= 1;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case -4:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 1;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case -3:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 1;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case -2:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 1;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case -1:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 1;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case 0:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 1;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case 1:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 1;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case 2:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 1;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+      case 3:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 1;
+          answer[6]= 0;
+          answer[7]= 0;
+      case 4:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 1;
+          answer[6]= 0;
+          answer[7]= 0;
+      case 5:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 1;
+          answer[6]= 0;
+          answer[7]= 0;
+      case 6:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 1;
+          answer[7]= 0;
+      case 7:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 1;
+          answer[7]= 0;
+      case 8:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 1;
+          answer[7]= 0;
+      case 9:
+    	  answer[0]= 0;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 1;
+          answer[7]= 0;
+      default:
+    	  if(percent < -10){
+          answer[0]= 1;
+          answer[1]= 0;
+          answer[2]= 0;
+          answer[3]= 0;
+          answer[4]= 0;
+          answer[5]= 0;
+          answer[6]= 0;
+          answer[7]= 0;
+       }
+    	 else if(percent>=10){
+    	       answer[0]= 0;
+    	       answer[1]= 0;
+    	       answer[2]= 0;
+    	       answer[3]= 0;
+    	       answer[4]= 0;
+    	       answer[5]= 0;
+    	       answer[6]= 0;
+    	       answer[7]= 1;
+    	     };
       }
-      else if(percentChange <=-5){
-        answer[0]= 0;
-        answer[1]= 1;
-        answer[2]= 0;
-        answer[3]= 0;
-        answer[4]= 0;
-        answer[5]= 0;
-        answer[6]= 0;
-        answer[7]= 0;
-      }
-      else if(percentChange <= -2){
-        answer[0]= 0;
-        answer[1]= 0;
-        answer[2]= 1;
-        answer[3]= 0;
-        answer[4]= 0;
-        answer[5]= 0;
-        answer[6]= 0;
-        answer[7]= 0;
-      }
-      else if(percentChange <= 0){
-        answer[0]= 0;
-        answer[1]= 0;
-        answer[2]= 0;
-        answer[3]= 1;
-        answer[4]= 0;
-        answer[5]= 0;
-        answer[6]= 0;
-        answer[7]= 0;
-      }
-      else if(percentChange <=2){
-        answer[0]= 0;
-        answer[1]= 0;
-        answer[2]= 0;
-        answer[3]= 0;
-        answer[4]= 1;
-        answer[5]= 0;
-        answer[6]= 0;
-        answer[7]= 0;
-      }
-      else if(percentChange <=5){
-        answer[0]= 0;
-        answer[1]= 0;
-        answer[2]= 0;
-        answer[3]= 0;
-        answer[4]= 0;
-        answer[5]= 1;
-        answer[6]= 0;
-        answer[7]= 0;
-      }
-      else if(percentChange <=10){
-        answer[0]= 0;
-        answer[1]= 0;
-        answer[2]= 0;
-        answer[3]= 0;
-        answer[4]= 0;
-        answer[5]= 0;
-        answer[6]= 1;
-        answer[7]= 0;
-      }
-      else if(i>10){
-        answer[0]= 0;
-        answer[1]= 0;
-        answer[2]= 0;
-        answer[3]= 0;
-        answer[4]= 0;
-        answer[5]= 0;
-        answer[6]= 0;
-        answer[7]= 1;
-      };
+
 
       answers.add(answer);
     }
 
     return answers;
   }
+
+}
