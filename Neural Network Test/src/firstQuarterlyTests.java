@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class firstQuarterlyTests extends functions {
+public class largeArray extends functions {
 
 	public static void main(String[] args) {
 		String rawData="";
@@ -11,6 +11,10 @@ public class firstQuarterlyTests extends functions {
 		double[] synapticWeights1 = new double[35] ;
 		double[]finalAnsArr = new double[35];
 		double[] desiredOutcome = {0,0,1,1,1,1,0,1,1,0,1,0,1,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,1};
+		double[] error1 = new double[desiredOutcome.length];
+		double[] delta1 = new double[desiredOutcome.length];
+		double[][] delta0 = new double[35][35];
+
 		System.out.print("Enter data: ");
 		Scanner scan = new Scanner (System.in);
 		if(scan.hasNext()) {
@@ -26,12 +30,10 @@ public class firstQuarterlyTests extends functions {
 		for (int i=0; i<synapticWeights1.length; i++) {
 			synapticWeights1[i] = (2*Math.random()) -1;
 		}
-
-		for(int m = 0; m<10; m++) {
-			intermediateAnswer = sigmoid(dotMultiply(inputs, synapticWeights0), false);
+		for(int m = 0; m<1000; m++) {
+			long start = System.currentTimeMillis();
+			intermediateAnswer = sigmoid(dotMultiplyFastest(inputs, synapticWeights0), false);
 			finalAnsArr = sigmoid(dotMultiply(synapticWeights1, intermediateAnswer), false);
-			double[] error1 = new double[desiredOutcome.length];
-			double[] delta1 = new double[desiredOutcome.length];
 			System.out.println("Training Answer "+m+":");
 			for(int i=0; i<delta1.length; i++) {
 				System.out.println(finalAnsArr[i]);
@@ -39,7 +41,7 @@ public class firstQuarterlyTests extends functions {
 				delta1[i]= error1[i]*sigmoid(finalAnsArr[i],true);
 			}
 			double[][] error0 =  rotateMultiply(synapticWeights1,delta1);
-			double[][] delta0 = new double[35][35]; /*rotateMultiply(synapticWeights1,delta1);*/
+            rotateMultiply(synapticWeights1,delta1);
 
 			for(int i = 0; i<delta0.length; i++) {
 				for(int j=0; j<delta0[0].length; j++) {
@@ -56,10 +58,14 @@ public class firstQuarterlyTests extends functions {
 					synapticWeights0[i][j] += rotateMultiply(delta0, inputs )[i][j];
 				}
 			}
-			System.out.println();
+			long stop = System.currentTimeMillis();
+			double elapsed = (stop - start) / 1000.0;
+			//System.out.println(m);
+			System.out.println("Time:" + elapsed);
+
 		}
 		System.out.println();
-		System.out.println("Synaptic Weights1:");
+		/*System.out.println("Synaptic Weights1:");
 		for(double i: synapticWeights1) {
 			System.out.println(i);
 			System.out.println();
@@ -74,7 +80,9 @@ public class firstQuarterlyTests extends functions {
 			System.out.println();
 
 		}
+		*/
 		scan.close();
+
 	}
 
 }
