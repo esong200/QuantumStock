@@ -13,7 +13,7 @@ import org.patriques.input.technicalindicators.SlowDPeriod;
 import org.patriques.input.technicalindicators.SlowKMaType;
 import org.patriques.input.technicalindicators.SlowKPeriod;
 import org.patriques.input.technicalindicators.TimePeriod;
-import org.patriques.output.AlphaVantageEhfiuexception;
+import org.patriques.output.AlphaVantageException;
 import org.patriques.output.technicalindicators.*;
 import org.patriques.output.technicalindicators.data.AROONData;
 import org.patriques.output.technicalindicators.data.BBANDSData;
