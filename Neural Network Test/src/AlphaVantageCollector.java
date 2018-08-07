@@ -192,6 +192,30 @@ public class AlphaVantageCollector{
    return returnArrayList;
   }
 
+  public ArrayList<double[]> ADX50200 (String symbol){
+    //returns {50,200} for ADX
+    ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
+    ADX rsi50 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+    ADX rsi200 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+    try {
+       List<IndicatorData> data50 = rsi50.getData();
+        List<IndicatorData> data200 = rsi200.getData();
+       data50.forEach(data -> {
+          double[] dataArr = {data.getData, 0};
+          returnArrayList.add(dataArr);
+       });
+        int dataPoint = 0;
+        data200.forEach(data ->{
+          returnArrayList[dataPoint][1] = data.getData();
+        })
+     } catch (AlphaVantageException e) {
+       System.out.println("something went wrong ADX");
+     }
+   returnArrayList.remove(0);
+   returnArrayList.remove(0);
+   return returnArrayList;
+  }
+
 
   }
 
