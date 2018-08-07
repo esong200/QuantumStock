@@ -67,7 +67,11 @@ public class AlphaVantageCollector{
 
 
   public ArrayList<double[]> DataCollection (String symbol){
-    //returns data in form
+    /*returns data in form Open High Low close volume sma50 ema50 sma200 ema200 macdHist macdSig
+    * macd stochd stochk rsi50 rsi200 adx50 adx200 aroon50down aroon50up aroon200down aroon200up
+    * bband50Low bband50Mid bband50Hi bband200Low bband200Mid bband200Hi ad obv
+    */
+
 	ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
 	MACD macd = technicalIndicators.macd(symbol, Interval.MONTHLY,
 	    		/*don't know why we need time period*/
@@ -75,19 +79,19 @@ public class AlphaVantageCollector{
 	SMA sma = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
 	EMA ema = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
 	SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
-    EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
-    STOCH stoch = technicalIndicators.stoch(symbol, Interval.MONTHLY, null, null, null, null, null);
-    RSI rsi50 = technicalIndicators.rsi(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
-    RSI rsi200 = technicalIndicators.rsi(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
-    ADX adx50 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
-    ADX adx200 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(200));
-    AROON aroon50 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50));
-    AROON aroon200 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200));
-    BBANDS bbands50 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
-    BBANDS bbands200 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN, null, null, null);
-    AD ad = technicalIndicators.ad(symbol, Interval.MONTHLY);
-    OBV obv = technicalIndicators.obv(symbol, Interval.MONTHLY);
-    Monthly response = stockTimeSeries.monthly(symbol);
+  EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+  STOCH stoch = technicalIndicators.stoch(symbol, Interval.MONTHLY, null, null, null, null, null);
+  RSI rsi50 = technicalIndicators.rsi(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+  RSI rsi200 = technicalIndicators.rsi(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+  ADX adx50 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
+  ADX adx200 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(200));
+  AROON aroon50 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50));
+  AROON aroon200 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200));
+  BBANDS bbands50 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
+  BBANDS bbands200 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN, null, null, null);
+  AD ad = technicalIndicators.ad(symbol, Interval.MONTHLY);
+  OBV obv = technicalIndicators.obv(symbol, Interval.MONTHLY);
+  Monthly response = stockTimeSeries.monthly(symbol);
     try {
     	List<IndicatorData> smaData50 = sma.getData();
     	List<IndicatorData> emaData50 = ema.getData();
@@ -113,7 +117,7 @@ public class AlphaVantageCollector{
 	        		stockData.get(index).getClose(), stockData.get(index).getVolume(),
 	        		data.getData(), emaData50.get(index).getData(), smaData.get(index).getData(),
 	        		emaData.get(index).getData(),macdData.get(index).getHist(), macdData.get(index).getSignal(),
-	        		macdData.get(index).getMacd(),stochData.get(index).getSlowD(), stochData.get(index).getSlowD(),
+	        		macdData.get(index).getMacd(),stochData.get(index).getSlowD(), stochData.get(index).getSlowk(),
 	        		data50.get(index).getData(),data200.get(index).getData(),adxdata50.get(index).getData(),
 	        		adxdata200.get(index).getData(),aroondata50.get(index).getAroonDown(), aroondata50.get(index).getAroonUp(),
 	        		aroondata200.get(index).getAroonDown(), aroondata200.get(index).getAroonUp(),
