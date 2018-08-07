@@ -8,22 +8,19 @@ import org.patriques.*;
 import org.patriques.input.technicalindicators.Interval;
 import org.patriques.input.technicalindicators.SeriesType;
 import org.patriques.input.technicalindicators.TimePeriod;
-import org.patriques.input.timeseries.Interval;
 import org.patriques.output.AlphaVantageException;
-import org.patriques.output.technicalindicators.MACD;
-import org.patriques.output.technicalindicators.SMA;
+import org.patriques.output.technicalindicators.*;
+import org.patriques.output.technicalindicators.data.AROONData;
+import org.patriques.output.technicalindicators.data.BBANDSData;
 import org.patriques.output.technicalindicators.data.IndicatorData;
-import org.patriques.output.timeseries.IntraDay;
+import org.patriques.output.technicalindicators.data.MACDData;
+import org.patriques.output.technicalindicators.data.STOCHDataSlow;
 import org.patriques.output.timeseries.Monthly;
 import org.patriques.output.timeseries.data.StockData;
 import java.util.List;
 
-import org.patriques.input.technicalindicators.SeriesType;
 //import org.patriques.output.AlphaVantageException;
 import org.patriques.output.technicalindicators.MACD;
-import org.patriques.output.technicalindicators.data.IndicatorData;
-import org.patriques.output.timeseries.Monthly;
-import org.patriques.output.timeseries.data.StockData;
 
 
 
@@ -74,22 +71,19 @@ public class AlphaVantageCollector{
 	  SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
     EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
     try {
-	      Map<String, String> metaDataS = smaTest.getMetaData();
-        Map<String, String> metaDataE = emaTest.getMetaData();
-        System.out.println("Symbol: " + metaData.get("1: Symbol"));
-	      System.out.println("Indicator: " + metaData.get("2: Indicator"));
 
-	      List<IndicatorData> smaData = smaTest.getData();
+	    List<IndicatorData> smaData = smaTest.getData();
         List<IndicatorData> emaData = emaTest.getData();
 	      smaData.forEach(data -> {
 	        System.out.println("SMA:            " + data.getData());
-	        double[] dataArr = {data.getData, 0};
-          returnArrayList.add(dataArr);
+	        double[] dataArr = {data.getData(), 0};
+	        returnArrayList.add(dataArr);
 	      });
         int dataPoint = 0;
         emaData.forEach(data ->{
-          returnArrayList[dataPoint][1] = data.getData();
-        })
+        	double[] dataArr = {returnArrayList.get(dataPoint)[0], data.getData()};
+        	returnArrayList.set(dataPoint, dataArr);
+        });
 	    } catch (AlphaVantageException e) {
 	      System.out.println("something went wrong SMAEMA50");
 	    }
@@ -112,13 +106,14 @@ public class AlphaVantageCollector{
         List<IndicatorData> emaData = emaTest.getData();
 	      smaData.forEach(data -> {
 	        System.out.println("SMA:            " + data.getData());
-	        double[] dataArr = {data.getData, 0};
+	        double[] dataArr = {data.getData(), 0};
           returnArrayList.add(dataArr);
 	      });
         int dataPoint = 0;
         emaData.forEach(data ->{
-          returnArrayList[dataPoint][1] = data.getData();
-        })
+        	double[] dataArr = {returnArrayList.get(dataPoint)[0], data.getData()};
+        	returnArrayList.set(dataPoint, dataArr);
+        });
 	    } catch (AlphaVantageException e) {
 	      System.out.println("something went wrong EMASMA200");
 	    }
@@ -130,14 +125,16 @@ public class AlphaVantageCollector{
   public ArrayList<double[]> MACD (String symbol){
     //returns arraylist w/ double[3]'s
     ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
-    MACD macd = technicalIndicators.macd(symbol, Interval.MONTHLY, SeriesType.OPEN);
+    MACD macd = technicalIndicators.macd(symbol, Interval.MONTHLY,
+    		/*don't know why we need time period*/
+    		TimePeriod.of(10), SeriesType.OPEN, null, null, null);
     try{
       Map<String, String> metaData = macd.getMetaData();
 
-      List<IndicatorData> macdData = macd.getData();
+      List<MACDData> macdData = macd.getData();
       macdData.forEach(data ->{
-        double[] dataArr = {data.getHist(), data.getSignal(), data.getMacd}
-        returnArrayList.add(dataArr)
+        double[] dataArr = {data.getHist(), data.getSignal(), data.getMacd()};
+        returnArrayList.add(dataArr);
       });
 
     }
@@ -150,14 +147,12 @@ public class AlphaVantageCollector{
   public ArrayList<double[]> STOCH (String symbol){
     //returns double[2]
     ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
-    STOCH stoch = technicalIndicators.stoch(symbol, Interval.MONTHLY);
+    STOCH stoch = technicalIndicators.stoch(symbol, Interval.MONTHLY, null, null, null, null, null);
     try{
-      Map<String, String> metaData = stoch.getMetaData();
-
-      List<IndicatorData> stochData = stoch.getData();
+      List<STOCHDataSlow> stochData = stoch.getData();
       stochData.forEach(data ->{
-        double[] dataArr = {data.getslowD(), data.getslowK()}
-        returnArrayList.add(dataArr)
+        double[] dataArr = {data.getSlowD(), data.getSlowD()};
+        returnArrayList.add(dataArr);
       });
 
     }
@@ -177,13 +172,14 @@ public class AlphaVantageCollector{
         List<IndicatorData> data200 = rsi200.getData();
        data50.forEach(data -> {
          System.out.println("SMA:            " + data.getData());
-         double[] dataArr = {data.getData, 0};
+         double[] dataArr = {data.getData(), 0};
           returnArrayList.add(dataArr);
        });
         int dataPoint = 0;
         data200.forEach(data ->{
-          returnArrayList[dataPoint][1] = data.getData();
-        })
+        	double[] dataArr = {returnArrayList.get(dataPoint)[0], data.getData()};
+        	returnArrayList.set(dataPoint, dataArr);
+        });
      } catch (AlphaVantageException e) {
        System.out.println("something went wrong RSI");
      }
@@ -193,22 +189,24 @@ public class AlphaVantageCollector{
   }
 
   public ArrayList<double[]> ADX50200 (String symbol){
-    //returns {50,200} for ADX
+    //returns double[2] for ADX
     ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
-    ADX rsi50 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
-    ADX rsi200 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+    ADX rsi50 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
+    ADX rsi200 = technicalIndicators.adx(symbol, Interval.MONTHLY, TimePeriod.of(200));
     try {
        List<IndicatorData> data50 = rsi50.getData();
         List<IndicatorData> data200 = rsi200.getData();
        data50.forEach(data -> {
-          double[] dataArr = {data.getData, 0};
+          double[] dataArr = {data.getData(), 0};
           returnArrayList.add(dataArr);
        });
         int dataPoint = 0;
         data200.forEach(data ->{
-          returnArrayList[dataPoint][1] = data.getData();
-        })
-     } catch (AlphaVantageException e) {
+        double[] dataArr = {returnArrayList.get(dataPoint)[0], data.getData()};
+    	returnArrayList.set(dataPoint, dataArr);
+    });
+        }
+    catch (AlphaVantageException e) {
        System.out.println("something went wrong ADX");
      }
    returnArrayList.remove(0);
@@ -217,21 +215,23 @@ public class AlphaVantageCollector{
   }
 
   public ArrayList<double[]> AROON50200 (String symbol){
-    //returns {50,200} for AROON
+    //returns double[4] for AROON
     ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
-    AROON rsi50 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
-    AROON rsi200 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+    AROON rsi50 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50));
+    AROON rsi200 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200));
     try {
-       List<IndicatorData> data50 = rsi50.getData();
-        List<IndicatorData> data200 = rsi200.getData();
+       List<AROONData> data50 = rsi50.getData();
+        List<AROONData> data200 = rsi200.getData();
        data50.forEach(data -> {
-          double[] dataArr = {data.getData, 0};
+          double[] dataArr = {data.getAroonUp(), data.getAroonDown()};
           returnArrayList.add(dataArr);
        });
         int dataPoint = 0;
         data200.forEach(data ->{
-          returnArrayList[dataPoint][1] = data.getData();
-        })
+        	double[] dataArr = {returnArrayList.get(dataPoint)[0], returnArrayList.get(dataPoint)[1],
+        			data.getAroonUp(), data.getAroonDown()};
+        	returnArrayList.set(dataPoint, dataArr);
+        });
      } catch (AlphaVantageException e) {
        System.out.println("something went wrong AROON");
      }
@@ -241,21 +241,24 @@ public class AlphaVantageCollector{
   }
 
   public ArrayList<double[]> BBANDS50200 (String symbol){
-    //returns {50,200} for BBANDS
+    //returns double[6] for BBANDS
     ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
-    BBANDS rsi50 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
-    BBANDS rsi200 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+    BBANDS rsi50 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
+    BBANDS rsi200 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN, null, null, null);
     try {
-       List<IndicatorData> data50 = rsi50.getData();
-        List<IndicatorData> data200 = rsi200.getData();
+       List<BBANDSData> data50 = rsi50.getData();
+        List<BBANDSData> data200 = rsi200.getData();
        data50.forEach(data -> {
-          double[] dataArr = {data.getData, 0};
+          double[] dataArr = {data.getLowerBand(), data.getUpperBand(), data.getMidBand()};
           returnArrayList.add(dataArr);
        });
         int dataPoint = 0;
         data200.forEach(data ->{
-          returnArrayList[dataPoint][1] = data.getData();
-        })
+        	double[] dataArr = {returnArrayList.get(dataPoint)[0], returnArrayList.get(dataPoint)[1],
+        			returnArrayList.get(dataPoint)[2],data.getLowerBand(),
+        			data.getUpperBand(), data.getMidBand()};
+        	returnArrayList.set(dataPoint, dataArr);
+        });
      } catch (AlphaVantageException e) {
        System.out.println("something went wrong ADX");
      }
@@ -265,7 +268,7 @@ public class AlphaVantageCollector{
   }
 
   public ArrayList<double[]> ADOBV (String symbol){
-    //returns arraylist of just doubles
+    //returns double[2] of just doubles
     ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
     AD rsi50 = technicalIndicators.ad(symbol, Interval.MONTHLY);
     OBV rsi200 = technicalIndicators.obv(symbol, Interval.MONTHLY);
@@ -273,13 +276,14 @@ public class AlphaVantageCollector{
        List<IndicatorData> data50 = rsi50.getData();
         List<IndicatorData> data200 = rsi200.getData();
        data50.forEach(data -> {
-          double[] dataArr = {data.getData, 0};
+          double[] dataArr = {data.getData(), 0};
           returnArrayList.add(dataArr);
        });
         int dataPoint = 0;
         data200.forEach(data ->{
-          returnArrayList[dataPoint][1] = data.getData();
-        })
+        	double[] dataArr = {returnArrayList.get(dataPoint)[0], data.getData()};
+    	returnArrayList.set(dataPoint, dataArr);
+        });
      } catch (AlphaVantageException e) {
        System.out.println("something went wrong AD OBV");
      }
@@ -298,76 +302,83 @@ public class AlphaVantageCollector{
     ArrayList<double[]> stoch = STOCH(symbol);//2
     ArrayList<double[]> rsi = RSI50200(symbol);//2
     ArrayList<double[]> adx = ADX50200(symbol);//2
-    ArrayList<double[]> aroon = AROON50200(symbol);//2
-    ArrayList<double[]> bbands = BBANDS50200(symbol);//2
+    ArrayList<double[]> aroon = AROON50200(symbol);//4
+    ArrayList<double[]> bbands = BBANDS50200(symbol);//6
     ArrayList<double[]> adobv = ADOBV(symbol);//2
 
-    ArrayList<double[]> final = new ArrayList<double[]>();
-    double[] inputs = new double[22];
-    for(int i = 0; i<monthly.length; i++){
+    ArrayList<double[]> Final = new ArrayList<double[]>();
+    double[] inputs = new double[28];
+    for(int i = 0; i<monthly.size(); i++){
       for(int j = 0; j<inputs.length; j++){
         switch (j)
         {
-          case 0: inputs[0] = monthly[i][0];
+          case 0: inputs[0] = monthly.get(i)[0];
                   break;
-          case 1: inpus[1] = monthly[i][1];
+          case 1: inputs[1] = monthly.get(i)[1];
                   break;
-          case 2: inputs[2] = monthly[i][2];
+          case 2: inputs[2] = monthly.get(i)[2];
                   break;
-          case 3: inputs[3] = smaema50[i][0];
+          case 3: inputs[3] = smaema50.get(i)[0];
                   break;
-          case 4:inputs[4] = smaema50[i][1];
+          case 4:inputs[4] = smaema50.get(i)[1];
                   break;
-          case 5:inputs[5] = smaema200[i][0];
+          case 5:inputs[5] = smaema200.get(i)[0];
                   break;
-          case 6:inputs[6] = smaema200[i][1];
+          case 6:inputs[6] = smaema200.get(i)[1];
                   break;
-          case 7:inputs[7] = macd[i][0];
+          case 7:inputs[7] = macd.get(i)[0];
                   break;
-          case 8: inputs[8] = macd[i][1];
+          case 8: inputs[8] = macd.get(i)[1];
                   break;
-          case 9: inputs[9] = macd[i][2];
+          case 9: inputs[9] = macd.get(i)[2];
                   break;
-          case 10: inputs[10] = stoch[i][0];
+          case 10: inputs[10] = stoch.get(i)[0];
                   break;
-          case 11: inputs[11] = stoch[i][1];
+          case 11: inputs[11] = stoch.get(i)[1];
                   break;
-          case 12:  inputs[12] = rsi[i][0];
+          case 12:  inputs[12] = rsi.get(i)[0];
                   break;
-          case 13: inputs[13] = rsi[i][1];
+          case 13: inputs[13] = rsi.get(i)[1];
                   break;
-          case 14: inputs[14] = adx[i][0];
+          case 14: inputs[14] = adx.get(i)[0];
                   break;
-          case 15: inputs[15] = adx[i][1];
+          case 15: inputs[15] = adx.get(i)[1];
                   break;
-          case 16: inputs[16] = aroon[i][0];
+          case 16: inputs[16] = aroon.get(i)[0];
                   break;
-          case 17: inputs[17] = aroon[i][1];
+          case 17: inputs[17] = aroon.get(i)[1];
                   break;
-          case 18: inputs[18] = bbands[i][0];
+          case 18: inputs[18] = aroon.get(i)[2];
                   break;
-          case 19: inputs[19] = bbands[i][1];
+          case 19: inputs[19] = aroon.get(i)[3];
                   break;
-          case 20: inputs[20] = adobv[i][0];
+          case 20: inputs[20] = bbands.get(i)[0];
                   break;
-          case 21: inputs[21] = adobv[i][1];
+          case 21: inputs[21] = bbands.get(i)[1];
                   break;
+          case 22:inputs[22] = bbands.get(i)[2];
+          case 23:inputs[23] = bbands.get(i)[3];
+        	  break;
+          case 24:inputs[24] = bbands.get(i)[4];
+          case 25:inputs[25] = bbands.get(i)[5];
+          case 26:inputs[26] = adobv.get(i)[0];
+          case 27:inputs[27] = adobv.get(i)[1];
         }
-        final.add(inputs);
+        Final.add(inputs);
       }
 
     }
 
-    return final;
+    return Final;
   }
 
   public ArrayList<double[]> answerCompile (String symbol){
     ArrayList<double[]> monthly = monthlyData(symbol);
     monthly.remove(0);
     ArrayList<double[]> answers = new ArrayList<double[]>();
-    double[] answer = new double[]
-    for(int i = 0; i < monthly.length -1; i++){
-      double percentChange = (monthly[i][0] - monthly[i+1][0])/monthly[i+1][0];
+    double[] answer = new double[8];
+    for(int i = 0; i < monthly.size() -1; i++){
+      double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
       if(percentChange <= -10){
          answer[0]= 1;
          answer[1]= 0;
@@ -378,7 +389,7 @@ public class AlphaVantageCollector{
          answer[6]= 0;
          answer[7]= 0;
       }
-      elseif(percentChange <=-5){
+      else if(percentChange <=-5){
         answer[0]= 0;
         answer[1]= 1;
         answer[2]= 0;
@@ -388,7 +399,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <= -2){
+      else if(percentChange <= -2){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 1;
@@ -398,7 +409,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <= 0){
+      else if(percentChange <= 0){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
@@ -408,7 +419,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <=2){
+      else if(percentChange <=2){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
@@ -418,7 +429,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <=5){
+      else if(percentChange <=5){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
@@ -428,7 +439,7 @@ public class AlphaVantageCollector{
         answer[6]= 0;
         answer[7]= 0;
       }
-      elseif(percentChange <=10){
+      else if(percentChange <=10){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
@@ -438,7 +449,7 @@ public class AlphaVantageCollector{
         answer[6]= 1;
         answer[7]= 0;
       }
-      elseif(i>10){
+      else if(i>10){
         answer[0]= 0;
         answer[1]= 0;
         answer[2]= 0;
@@ -447,11 +458,13 @@ public class AlphaVantageCollector{
         answer[5]= 0;
         answer[6]= 0;
         answer[7]= 1;
-      }
+      };
 
-      answers.add(answers);
+      answers.add(answer);
     }
 
     return answers;
   }
+
+
 }
