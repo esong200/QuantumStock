@@ -8,7 +8,7 @@ public class largeArray extends functions {
 		String[][] inputStrings  = new String[35][55];
 		double[][]synapticWeights0 = new double[55][35] ;
 		double[][]intermediateAnswer = new double[35][35];
-		double[] synapticWeights1 = new double[35] ;
+		double[] synapticWeights1 = new double[35];
 		double[]finalAnsArr = new double[35];
 		double[] desiredOutcome = {0,0,1,1,1,1,0,1,1,0,1,0,1,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,1};
 		double[] error1 = new double[desiredOutcome.length];
@@ -49,8 +49,7 @@ public class largeArray extends functions {
 				}
 			}
 			for(int i=0; i<delta1.length; i++) {
-				double[] x = rotateMultiply(intermediateAnswer, delta1);
-				synapticWeights1[i]+= x[i];
+				synapticWeights1[i] += rotateMultiply(intermediateAnswer, delta1)[i];
 			}
 
 			for (int i = 0; i<synapticWeights0.length; i++) {
