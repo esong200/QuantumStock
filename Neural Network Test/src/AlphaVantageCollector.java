@@ -288,4 +288,76 @@ public class AlphaVantageCollector{
    return returnArrayList;
   }
 
+  public ArrayList<double[]> dataCompile(String symbol){
+    ArrayList<double[]> monthly = monthlyData(symbol);//5
+    monthly.remove(0);
+    monthly.remove(0);
+    ArrayList<double[]> smaema50 = SMAEMA50(symbol);//2
+    ArrayList<double[]> smaema200 = SMAEMA200(symbol);//2
+    ArrayList<double[]> macd = MACD(symbol);//3
+    ArrayList<double[]> stoch = STOCH(symbol);//2
+    ArrayList<double[]> rsi = RSI50200(symbol);//2
+    ArrayList<double[]> adx = ADX50200(symbol);//2
+    ArrayList<double[]> aroon = AROON50200(symbol);//2
+    ArrayList<double[]> bbands = BBANDS50200(symbol);//2
+    ArrayList<double[]> adobv = ADOBV(symbol);//2
+
+    ArrayList<double[]> final = new ArrayList<double[]>();
+    double[] inputs = new double[22];
+    for(int i = 0; i<monthly.length; i++){
+      for(int j = 0; j<inputs.length; j++){
+        switch (j)
+        {
+          case 0: inputs[0] = monthly[i][0];
+                  break;
+          case 1: inpus[1] = monthly[i][1];
+                  break;
+          case 2: inputs[2] = monthly[i][2];
+                  break;
+          case 3: inputs[3] = smaema50[i][0];
+                  break;
+          case 4:inputs[4] = smaema50[i][1];
+                  break;
+          case 5:inputs[5] = smaema200[i][0];
+                  break;
+          case 6:inputs[6] = smaema200[i][1];
+                  break;
+          case 7:inputs[7] = macd[i][0];
+                  break;
+          case 8: inputs[8] = macd[i][1];
+                  break;
+          case 9: inputs[9] = macd[i][2];
+                  break;
+          case 10: inputs[10] = stoch[i][0];
+                  break;
+          case 11: inputs[11] = stoch[i][1];
+                  break;
+          case 12:  inputs[12] = rsi[i][0];
+                  break;
+          case 13: inputs[13] = rsi[i][1];
+                  break;
+          case 14: inputs[14] = adx[i][0];
+                  break;
+          case 15: inputs[15] = adx[i][1];
+                  break;
+          case 16: inputs[16] = aroon[i][0];
+                  break;
+          case 17: inputs[17] = aroon[i][1];
+                  break;
+          case 18: inputs[18] = bbands[i][0];
+                  break;
+          case 19: inputs[19] = bbands[i][1];
+                  break;
+          case 20: inputs[20] = adobv[i][0];
+                  break;
+          case 21: inputs[21] = adobv[i][1];
+                  break;
+        }
+      }
+    }
+
+
+
+  }
+
 }
