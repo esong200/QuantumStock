@@ -1,20 +1,28 @@
-import java.io.PrintStream;
+import java.util.ArrayList;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.patriques.*;
+import org.patriques.input.technicalindicators.Interval;
 import org.patriques.input.technicalindicators.SeriesType;
 import org.patriques.input.technicalindicators.TimePeriod;
-//import org.patriques.input.timeseries.Interval;
+import org.patriques.input.timeseries.Interval;
 import org.patriques.output.AlphaVantageException;
 import org.patriques.output.technicalindicators.MACD;
 import org.patriques.output.technicalindicators.SMA;
 import org.patriques.output.technicalindicators.data.IndicatorData;
 import org.patriques.output.timeseries.IntraDay;
 import org.patriques.output.timeseries.Monthly;
-import org.patriques.input.technicalindicators.Interval;
+import org.patriques.output.timeseries.data.StockData;
+import java.util.List;
+
+import org.patriques.input.technicalindicators.SeriesType;
+//import org.patriques.output.AlphaVantageException;
+import org.patriques.output.technicalindicators.MACD;
+import org.patriques.output.technicalindicators.data.IndicatorData;
+import org.patriques.output.timeseries.Monthly;
 import org.patriques.output.timeseries.data.StockData;
 
 
@@ -60,8 +68,9 @@ public class AlphaVantageCollector{
     return data;
   }
 
-  public ArrayList<Double[]> SMAEMA50 (String symbol){
-	  ArrayList<Double[]> returnArrayList = new ArrayList<Double>();
+  public ArrayList<double[]> SMAEMA50 (String symbol){
+    //returns SMA,EMA
+	  ArrayList<double[]> returnArrayList = new ArrayList<double[2]>();
 	  SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
     EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
     try {
@@ -89,8 +98,9 @@ public class AlphaVantageCollector{
 	  return returnArrayList;
   }
 
-  public ArrayList<Double> SMAEMA200 (String symbol){
-	  ArrayList<Double> returnArrayList = new ArrayList<Double>();
+  public ArrayList<double[]> SMAEMA200 (String symbol){
+    //returns SMA,EMA
+	  ArrayList<double[]> returnArrayList = new ArrayList<double[2]>();
 	  SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
     EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
     try {
