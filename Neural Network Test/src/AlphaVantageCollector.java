@@ -216,7 +216,76 @@ public class AlphaVantageCollector{
    return returnArrayList;
   }
 
+  public ArrayList<double[]> AROON50200 (String symbol){
+    //returns {50,200} for AROON
+    ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
+    AROON rsi50 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+    AROON rsi200 = technicalIndicators.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+    try {
+       List<IndicatorData> data50 = rsi50.getData();
+        List<IndicatorData> data200 = rsi200.getData();
+       data50.forEach(data -> {
+          double[] dataArr = {data.getData, 0};
+          returnArrayList.add(dataArr);
+       });
+        int dataPoint = 0;
+        data200.forEach(data ->{
+          returnArrayList[dataPoint][1] = data.getData();
+        })
+     } catch (AlphaVantageException e) {
+       System.out.println("something went wrong AROON");
+     }
+   returnArrayList.remove(0);
+   returnArrayList.remove(0);
+   return returnArrayList;
+  }
 
+  public ArrayList<double[]> BBANDS50200 (String symbol){
+    //returns {50,200} for BBANDS
+    ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
+    BBANDS rsi50 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+    BBANDS rsi200 = technicalIndicators.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+    try {
+       List<IndicatorData> data50 = rsi50.getData();
+        List<IndicatorData> data200 = rsi200.getData();
+       data50.forEach(data -> {
+          double[] dataArr = {data.getData, 0};
+          returnArrayList.add(dataArr);
+       });
+        int dataPoint = 0;
+        data200.forEach(data ->{
+          returnArrayList[dataPoint][1] = data.getData();
+        })
+     } catch (AlphaVantageException e) {
+       System.out.println("something went wrong ADX");
+     }
+   returnArrayList.remove(0);
+   returnArrayList.remove(0);
+   return returnArrayList;
+  }
+
+  public ArrayList<double[]> ADOBV (String symbol){
+    //returns arraylist of just doubles
+    ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
+    AD rsi50 = technicalIndicators.ad(symbol, Interval.MONTHLY);
+    OBV rsi200 = technicalIndicators.obv(symbol, Interval.MONTHLY);
+    try {
+       List<IndicatorData> data50 = rsi50.getData();
+        List<IndicatorData> data200 = rsi200.getData();
+       data50.forEach(data -> {
+          double[] dataArr = {data.getData, 0};
+          returnArrayList.add(dataArr);
+       });
+        int dataPoint = 0;
+        data200.forEach(data ->{
+          returnArrayList[dataPoint][1] = data.getData();
+        })
+     } catch (AlphaVantageException e) {
+       System.out.println("something went wrong AD OBV");
+     }
+   returnArrayList.remove(0);
+   returnArrayList.remove(0);
+   return returnArrayList;
   }
 
 }
