@@ -353,11 +353,105 @@ public class AlphaVantageCollector{
           case 21: inputs[21] = adobv[i][1];
                   break;
         }
+        final.add(inputs);
       }
+
     }
 
-
-
+    return final;
   }
 
+  public ArrayList<double[]> answerCompile (String symbol){
+    ArrayList<double[]> monthly = monthlyData(symbol);
+    monthly.remove(0);
+    ArrayList<double[]> answers = new ArrayList<double[]>();
+    double[] answer = new double[]
+    for(int i = 0; i < monthly.length -1; i++){
+      double percentChange = (monthly[i][0] - monthly[i+1][0])/monthly[i+1][0];
+      if(percentChange <= -10){
+         answer[0]= 1;
+         answer[1]= 0;
+         answer[2]= 0;
+         answer[3]= 0;
+         answer[4]= 0;
+         answer[5]= 0;
+         answer[6]= 0;
+         answer[7]= 0;
+      }
+      elseif(percentChange <=-5){
+        answer[0]= 0;
+        answer[1]= 1;
+        answer[2]= 0;
+        answer[3]= 0;
+        answer[4]= 0;
+        answer[5]= 0;
+        answer[6]= 0;
+        answer[7]= 0;
+      }
+      elseif(percentChange <= -2){
+        answer[0]= 0;
+        answer[1]= 0;
+        answer[2]= 1;
+        answer[3]= 0;
+        answer[4]= 0;
+        answer[5]= 0;
+        answer[6]= 0;
+        answer[7]= 0;
+      }
+      elseif(percentChange <= 0){
+        answer[0]= 0;
+        answer[1]= 0;
+        answer[2]= 0;
+        answer[3]= 1;
+        answer[4]= 0;
+        answer[5]= 0;
+        answer[6]= 0;
+        answer[7]= 0;
+      }
+      elseif(percentChange <=2){
+        answer[0]= 0;
+        answer[1]= 0;
+        answer[2]= 0;
+        answer[3]= 0;
+        answer[4]= 1;
+        answer[5]= 0;
+        answer[6]= 0;
+        answer[7]= 0;
+      }
+      elseif(percentChange <=5){
+        answer[0]= 0;
+        answer[1]= 0;
+        answer[2]= 0;
+        answer[3]= 0;
+        answer[4]= 0;
+        answer[5]= 1;
+        answer[6]= 0;
+        answer[7]= 0;
+      }
+      elseif(percentChange <=10){
+        answer[0]= 0;
+        answer[1]= 0;
+        answer[2]= 0;
+        answer[3]= 0;
+        answer[4]= 0;
+        answer[5]= 0;
+        answer[6]= 1;
+        answer[7]= 0;
+      }
+      elseif(i>10){
+        answer[0]= 0;
+        answer[1]= 0;
+        answer[2]= 0;
+        answer[3]= 0;
+        answer[4]= 0;
+        answer[5]= 0;
+        answer[6]= 0;
+        answer[7]= 1;
+      }
+
+      answers.add(answers);
+    }
+
+    return answers;
+  }
 }
