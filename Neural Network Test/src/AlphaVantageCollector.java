@@ -55,23 +55,32 @@ public class AlphaVantageCollector{
 
     } catch (AlphaVantageException e) {
       System.out.println("something went wrong");
-  }
-  return data;
+    }
+    data.remove(0);
+    return data;
   }
 
-  public ArrayList<Double> SMA50 (String symbol){
-	  ArrayList<Double> returnArrayList = new ArrayList<Double>();
+  public ArrayList<Double[]> SMAEMA50 (String symbol){
+	  ArrayList<Double[]> returnArrayList = new ArrayList<Double>();
 	  SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
-	  try {
-	      Map<String, String> metaData = smaTest.getMetaData();
-	      System.out.println("Symbol: " + metaData.get("1: Symbol"));
+    EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+    try {
+	      Map<String, String> metaDataS = smaTest.getMetaData();
+        Map<String, String> metaDataE = emaTest.getMetaData();
+        System.out.println("Symbol: " + metaData.get("1: Symbol"));
 	      System.out.println("Indicator: " + metaData.get("2: Indicator"));
 
 	      List<IndicatorData> smaData = smaTest.getData();
+        List<IndicatorData> emaData = emaTest.getData();
 	      smaData.forEach(data -> {
 	        System.out.println("SMA:            " + data.getData());
-	        returnArrayList.add(data.getData());
+	        double[] dataArr = {data.getData, 0};
+          returnArrayList.add(dataArr);
 	      });
+        int dataPoint = 0;
+        emaData.forEach(data ->{
+          returnArrayList[dataPoint][1] = data.getData();
+        })
 	    } catch (AlphaVantageException e) {
 	      System.out.println("something went wrong");
 	    }
@@ -79,4 +88,33 @@ public class AlphaVantageCollector{
 	  returnArrayList.remove(0);
 	  return returnArrayList;
   }
+
+  public ArrayList<Double> SMAEMA200 (String symbol){
+	  ArrayList<Double> returnArrayList = new ArrayList<Double>();
+	  SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+    EMA emaTest = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+    try {
+	      Map<String, String> metaData = smaTest.getMetaData();
+	      System.out.println("Symbol: " + metaData.get("1: Symbol"));
+	      System.out.println("Indicator: " + metaData.get("2: Indicator"));
+
+        List<IndicatorData> smaData = smaTest.getData();
+        List<IndicatorData> emaData = emaTest.getData();
+	      smaData.forEach(data -> {
+	        System.out.println("SMA:            " + data.getData());
+	        double[] dataArr = {data.getData, 0};
+          returnArrayList.add(dataArr);
+	      });
+        int dataPoint = 0;
+        emaData.forEach(data ->{
+          returnArrayList[dataPoint][1] = data.getData();
+        })
+	    } catch (AlphaVantageException e) {
+	      System.out.println("something went wrong");
+	    }
+	  returnArrayList.remove(0);
+	  returnArrayList.remove(0);
+	  return returnArrayList;
+  }
+
 }
