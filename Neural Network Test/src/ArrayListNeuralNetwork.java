@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class ArrayListNeuralNetwork extends functions {
 	public static void main(String[] args) {
@@ -15,16 +16,25 @@ public class ArrayListNeuralNetwork extends functions {
 		double[][] delta0 = new double[35][35];
 		double[][] prevSynapticWeights0 = new double[synapticWeights0.length][synapticWeights0[0].length];
 		double[] prevSynapticWeights1 = new double[synapticWeights1.length];
-		int numOfIterations = 50;
+		int numOfIterations = 2;
 		double[] times = new double[numOfIterations];
+		ArrayList<double[]> data = new ArrayList<double[]>();
 
-		System.out.println(DataCollection("MSFT").size());
+		DataCollection("MSFT");
+		data = answerCompile("MSFT");
+		for(int i=0; i<data.size(); i++) {
+			System.out.println();
+			for(int j=0; j<data.get(i).length; j++)
+			System.out.println(data.get(i)[j] + "\t");
+		}
 
-		System.out.println(answerCompile("MSFT").size());
+
+		/*for(int i=0; i<answerCompile("MSFT").size();i++) {
+
+		}*/
 
 
-
-		System.out.print("Enter data: ");
+		/*System.out.print("Enter data: ");
 		Scanner scan = new Scanner (System.in);
 		if(scan.hasNext()) {
 			for(int i=0; i<55; i++) {
@@ -36,15 +46,11 @@ public class ArrayListNeuralNetwork extends functions {
 				}
 			}
 		}
-		if(averageArrayValue(prevSynapticWeights1)==0) {
+		*/
+
 			for (int i=0; i<synapticWeights1.length; i++) {
 				synapticWeights1[i] = (2*Math.random()) -1;
 			}
-		}else {
-			synapticWeights0 = prevSynapticWeights0;
-			synapticWeights1 = prevSynapticWeights1;
-		}
-
 		for(int m = 0; m<numOfIterations; m++) {
 			long start = System.currentTimeMillis();
 			intermediateAnswer = sigmoid(dotMultiplyFastest(inputs, synapticWeights0), false);
@@ -103,7 +109,6 @@ public class ArrayListNeuralNetwork extends functions {
 
 		}
 		*/
-		scan.close();
 
 	}
 }
