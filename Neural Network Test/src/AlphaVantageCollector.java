@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -92,20 +93,35 @@ public class AlphaVantageCollector{
 	SMA sma = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
 	EMA ema = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
 	SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
-  EMA emaTest = technicalIndicators1.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
-  System.out.println("Internet Works");
+	  System.out.println("Internet Works");
+	try {
+		Thread.sleep(60000);
+	} catch (InterruptedException e1) {
+		e1.printStackTrace();
+	}
+	EMA emaTest = technicalIndicators1.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
 
   STOCH stoch = technicalIndicators1.stoch(symbol, Interval.MONTHLY, FastKPeriod.of(5), SlowKPeriod.of(3), SlowDPeriod.of(3),
 		  null, null);
   RSI rsi50 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
   RSI rsi200 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
   ADX adx50 = technicalIndicators1.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
+  try {
+		Thread.sleep(60000);
+	} catch (InterruptedException e1) {
+		e1.printStackTrace();
+	}
   ADX adx200 = technicalIndicators2.adx(symbol, Interval.MONTHLY, TimePeriod.of(200));
 
   AROON aroon50 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50));
   AROON aroon200 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200));
   BBANDS bbands50 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
   BBANDS bbands200 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN, null, null, null);
+  try {
+		Thread.sleep(60000);
+	} catch (InterruptedException e1) {
+		e1.printStackTrace();
+	}
   AD ad = technicalIndicators3.ad(symbol, Interval.MONTHLY);
 
   OBV obv = technicalIndicators3.obv(symbol, Interval.MONTHLY);
