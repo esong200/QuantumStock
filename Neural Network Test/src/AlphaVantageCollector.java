@@ -128,6 +128,7 @@ public class AlphaVantageCollector{
   }
 
   public ArrayList<double[]> MACD (String symbol){
+    //returns arraylist w/ double[3]'s
     ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
     MACD macd = technicalIndicators.macd(symbol, Interval.MONTHLY, SeriesType.OPEN);
     try{
@@ -146,4 +147,22 @@ public class AlphaVantageCollector{
     return returnArrayList;
   }
 
+  public ArrayList<double[]> STOCH (String symbol){
+    ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
+    STOCH stoch = technicalIndicators.stoch(symbol, Interval.MONTHLY);
+    try{
+      Map<String, String> metaData = stoch.getMetaData();
+
+      List<IndicatorData> stochData = stoch.getData();
+      stochData.forEach(data ->{
+        double[] dataArr = {data.getslowD(), data.getslowK()}
+        returnArrayList.add(dataArr)
+      });
+
+    }
+    catch(AlphaVantageException e){
+      System.out.println("something went wrong STOCH");
+    }
+    return returnArrayList;
+  }
 }
