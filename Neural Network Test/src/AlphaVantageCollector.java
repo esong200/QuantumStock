@@ -143,7 +143,7 @@ public class AlphaVantageCollector{
 	  return returnArrayList;
   }
 
-  public ArrayList<double[]> answerCompile (String symbol){
+  public static ArrayList<double[]> answerCompile (String symbol){
     ArrayList<double[]> monthly = monthlyData(symbol);
     monthly.remove(0);
     ArrayList<double[]> answers = new ArrayList<double[]>();
