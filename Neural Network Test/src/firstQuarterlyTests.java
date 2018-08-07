@@ -14,6 +14,9 @@ public class largeArray extends functions {
 		double[] error1 = new double[desiredOutcome.length];
 		double[] delta1 = new double[desiredOutcome.length];
 		double[][] delta0 = new double[35][35];
+		int numOfIterations = 50;
+		double[] times = new double[numOfIterations];
+
 
 		System.out.print("Enter data: ");
 		Scanner scan = new Scanner (System.in);
@@ -30,7 +33,7 @@ public class largeArray extends functions {
 		for (int i=0; i<synapticWeights1.length; i++) {
 			synapticWeights1[i] = (2*Math.random()) -1;
 		}
-		for(int m = 0; m<1000; m++) {
+		for(int m = 0; m<numOfIterations; m++) {
 			long start = System.currentTimeMillis();
 			intermediateAnswer = sigmoid(dotMultiplyFastest(inputs, synapticWeights0), false);
 			finalAnsArr = sigmoid(dotMultiply(synapticWeights1, intermediateAnswer), false);
@@ -41,7 +44,7 @@ public class largeArray extends functions {
 				delta1[i]= error1[i]*sigmoid(finalAnsArr[i],true);
 			}
 			double[][] error0 =  rotateMultiply(synapticWeights1,delta1);
-            rotateMultiply(synapticWeights1,delta1);
+            //rotateMultiply(synapticWeights1,delta1);
 
 			for(int i = 0; i<delta0.length; i++) {
 				for(int j=0; j<delta0[0].length; j++) {
@@ -59,11 +62,17 @@ public class largeArray extends functions {
 			}
 			long stop = System.currentTimeMillis();
 			double elapsed = (stop - start) / 1000.0;
+			times[m]=elapsed;
 			//System.out.println(m);
 			System.out.println("Time:" + elapsed);
 
 		}
 		System.out.println();
+		double total = 0;
+		for(int i=0; i<times.length; i++) {
+			total += times[i];
+		}
+		System.out.println("Average time per iteration: "+ (total/times.length));
 		/*System.out.println("Synaptic Weights1:");
 		for(double i: synapticWeights1) {
 			System.out.println(i);
