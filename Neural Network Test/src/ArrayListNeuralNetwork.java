@@ -11,6 +11,8 @@ public class ArrayListNeuralNetwork extends functions {
 		while(ans.size()>maxSize){
 			ans.remove(ans.size()-1);
 		}//make arrays the same size
+		double[][] desiredOutcome = new double[ans.size()][ans.get(0).length];
+		
 
 		/*System.out.print("Enter data: ");
 		Scanner scan = new Scanner (System.in);
