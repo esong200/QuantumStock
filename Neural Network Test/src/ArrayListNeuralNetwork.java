@@ -4,29 +4,13 @@ import java.util.ArrayList;
 public class ArrayListNeuralNetwork extends functions {
 	public static void main(String[] args) {
 		String rawData="";
-		double[][] inputs = new double[35][55];
-		String[][] inputStrings  = new String[35][55];
-		double[][]synapticWeights0 = new double[55][35] ;
-		double[][]intermediateAnswer = new double[35][35];
-		double[] synapticWeights1 = new double[35];
-		double[]finalAnsArr = new double[35];
-		double[] desiredOutcome = {0,0,1,1,1,1,0,1,1,0,1,0,1,0,0,1,1,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,1};
-		double[] error1 = new double[desiredOutcome.length];
-		double[] delta1 = new double[desiredOutcome.length];
-		double[][] delta0 = new double[35][35];
-		int numOfIterations = 2;
-		double[] times = new double[numOfIterations];
-		ArrayList<double[]> data = new ArrayList<double[]>();
 
-		DataCollection("MSFT");
-		data = answerCompile("MSFT");
-		int num = Integer.valueOf((int) Math.round(5*Math.random()));
-		for(int i=0; i<data.size(); i++) {
-			System.out.println();
-			for(int j=0; j<data.get(i).length; j++)
-			System.out.println(data.get(i)[j] + "\t");
-		}
-		System.out.println(data.get(3)[num]);
+		ArrayList<double[]> data = DataCollection("MSFT");
+		ArrayList<double[]> ans = answerCompile("MSFT");
+		int maxSize = data.size();
+		while(ans.size()>maxsize){
+			ans.remove(ans.size()-1);
+		}//make arrays the same size
 
 
 		/*System.out.print("Enter data: ");
