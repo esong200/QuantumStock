@@ -27,9 +27,9 @@ public class ArrayListNeuralNetwork extends functions {
 		}
 		*/
 
-			for (int i=0; i<synapticWeights1.length; i++) {
+		for (int i=0; i<synapticWeights1.length; i++) {
 				synapticWeights1[i] = (2*Math.random()) -1;
-			}
+		}
 		for(int m = 0; m<numOfIterations; m++) {
 			long start = System.currentTimeMillis();
 			intermediateAnswer = sigmoid(dotMultiplyFastest(inputs, synapticWeights0), false);
@@ -40,6 +40,7 @@ public class ArrayListNeuralNetwork extends functions {
 				error1[i]=desiredOutcome[i]-finalAnsArr[i];
 				delta1[i]= error1[i]*sigmoid(finalAnsArr[i],true);
 			}
+		}
 			double[][] error0 =  rotateMultiply(synapticWeights1,delta1);
             //rotateMultiply(synapticWeights1,delta1);
 
