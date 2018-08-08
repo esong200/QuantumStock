@@ -11,14 +11,20 @@ public class ArrayListNeuralNetwork extends functions {
 		while(ans.size()>maxSize){
 			ans.remove(ans.size()-1);
 		}//make arrays the same size
-		double[][] desiredOutcome = new double[ans.size()][ans.get(0).length];
-		for(int i=0; i<ans.size(); i++) {
-			System.out.println();
-			for(int j=0; j<ans.get(i).length; j++) {
-				System.out.print(ans.get(i)[j] + "\t");
-				desiredOutcome[i][j] = ans.get(i)[j];
-			}
+		for(int i=0; i<data.size(); i++) {
+		System.out.println();
+		for(int j=0; j<data.get(i).length; j++) {
+			System.out.print(data.get(i)[j] + "\t");
+			inputs[i][j] = data.get(i)[j];
 		}
+	}
+	for(int i=0; i<ans.size(); i++) {
+		System.out.println();
+		for(int j=0; j<ans.get(i).length; j++) {
+			System.out.print(ans.get(i)[j] + "\t");
+			desiredOutcome[i][j] = ans.get(i)[j];
+		}
+	}
 
 
 		/*System.out.print("Enter data: ");
