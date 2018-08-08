@@ -60,13 +60,13 @@ public class AlphaVantageCollector{
       List<StockData> stockData = response.getStockData();
       stockData.forEach(stock -> {
         inputData[0] = stock.getOpen();
-        System.out.println("high:   " + stock.getHigh());
+        //System.out.println("high:   " + stock.getHigh());
         inputData[1] = stock.getHigh();
-        System.out.println("low:    " + stock.getLow());
+        //System.out.println("low:    " + stock.getLow());
         inputData[2] = stock.getLow();
-        System.out.println("close:  " + stock.getClose());
+        //System.out.println("close:  " + stock.getClose());
         inputData[3] = stock.getClose();
-        System.out.println("volume: " + stock.getVolume());
+        //System.out.println("volume: " + stock.getVolume());
         inputData[4] = stock.getVolume();
         data.add(inputData);
 
@@ -95,6 +95,7 @@ public class AlphaVantageCollector{
 	SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
 	  System.out.println("Internet Works");
 	try {
+		System.out.println("sleeping");
 		Thread.sleep(60000);
 	} catch (InterruptedException e1) {
 		e1.printStackTrace();
@@ -105,52 +106,86 @@ public class AlphaVantageCollector{
 		  null, null);
   RSI rsi50 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
   RSI rsi200 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
-  ADX adx50 = technicalIndicators1.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
   try {
+	  	System.out.println("sleeping");
 		Thread.sleep(60000);
+
 	} catch (InterruptedException e1) {
 		e1.printStackTrace();
 	}
+  ADX adx50 = technicalIndicators1.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
   ADX adx200 = technicalIndicators2.adx(symbol, Interval.MONTHLY, TimePeriod.of(200));
 
   AROON aroon50 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50));
   AROON aroon200 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200));
-  BBANDS bbands50 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
-  BBANDS bbands200 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN, null, null, null);
+
   try {
+	  	System.out.println("sleeping");
 		Thread.sleep(60000);
+
 	} catch (InterruptedException e1) {
 		e1.printStackTrace();
 	}
+  BBANDS bbands50 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
+  BBANDS bbands200 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN, null, null, null);
   AD ad = technicalIndicators3.ad(symbol, Interval.MONTHLY);
 
   OBV obv = technicalIndicators3.obv(symbol, Interval.MONTHLY);
+  try {
+	  	System.out.println("sleeping");
+		Thread.sleep(60000);
+
+	} catch (InterruptedException e1) {
+		e1.printStackTrace();
+	}
   Monthly response = stockTimeSeries.monthly(symbol);
 
     try {
     	List<IndicatorData> smaData50 = sma.getData();
+    //	System.out.println(smaData50.size());
     	List<IndicatorData> emaData50 = ema.getData();
+    	//System.out.println(emaData50.size());
+
       List<IndicatorData> smaData = smaTest.getData();
+  	//System.out.println(smaData.size());
+
       List<IndicatorData> emaData = emaTest.getData();
+  	//System.out.println(emaData.size());
+
       List<MACDData> macdData = macd.getData();
+  	//System.out.println(macdData.size());
+
       List<STOCHDataSlow> stochData = stoch.getData();
+    //	System.out.println(stochData.size());
       List<IndicatorData> data50 = rsi50.getData();
+    //	System.out.println(data50.size());
       List<IndicatorData> data200 = rsi200.getData();
+    	//System.out.println(data200.size());
       List<IndicatorData> adxdata50 = adx50.getData();
-      List<IndicatorData> adxdata200 = adx200.getData();
+    //	System.out.println(adxdata50.size());
+     // List<IndicatorData> adxdata200 = adx200.getData();
+   // 	System.out.println(adxdata200.size());
       List<AROONData> aroondata50 = aroon50.getData();
+
+    //	System.out.println(aroondata50.size());
       List<AROONData> aroondata200 = aroon200.getData();
+    //	System.out.println(aroondata200.size());
       List<BBANDSData> bband50 = bbands50.getData();
+    	//System.out.println(bband50.size());
       List<BBANDSData> bband200 = bbands200.getData();
+    //	System.out.println(bband200.size());
       List<IndicatorData> addata = ad.getData();
+    //	System.out.println(addata.size());
       List<IndicatorData> obvdata = obv.getData();
+    //	System.out.println(obvdata.size());
       List<StockData> stockData = response.getStockData();
+    	//System.out.println(stockData.size());
 
         int index = 0;
 	    for(IndicatorData data: smaData50) {
-        if(!(index == stockData.size() || index == smaData50.size() || index == emaData50.size() || index == smaData.size() || index == emaData.size() ||
+        if((index == stockData.size() || index == smaData50.size() || index == emaData50.size() || index == smaData.size() || index == emaData.size() ||
           index == macdData.size() || index == stochData.size() || index == data50.size() || index == data200.size()
-          || index == adxdata50.size() || index == adxdata200.size() || index == aroondata50.size() || index == aroondata200.size()
+          || index == adxdata50.size() || /*index == adxdata200.size() ||*/ index == aroondata50.size() || index == aroondata200.size()
           || index == bband50.size() || index == bband200.size() || index == addata.size() || index == obvdata.size())){
             break;
           }
@@ -160,7 +195,7 @@ public class AlphaVantageCollector{
            emaData.get(index).getData(),macdData.get(index).getHist(), macdData.get(index).getSignal(),
            macdData.get(index).getMacd(),stochData.get(index).getSlowD(), stochData.get(index).getSlowK(),
            data50.get(index).getData(),data200.get(index).getData(),adxdata50.get(index).getData(),
-           adxdata200.get(index).getData(),aroondata50.get(index).getAroonDown(), aroondata50.get(index).getAroonUp(),
+           /*adxdata200.get(index).getData(),*/aroondata50.get(index).getAroonDown(), aroondata50.get(index).getAroonUp(),
            aroondata200.get(index).getAroonDown(), aroondata200.get(index).getAroonUp(),
            bband50.get(index).getLowerBand(), bband50.get(index).getMidBand(), bband50.get(index).getUpperBand(),
            bband200.get(index).getLowerBand(), bband200.get(index).getMidBand(), bband200.get(index).getUpperBand(),
@@ -185,10 +220,15 @@ public class AlphaVantageCollector{
     for(int i = 0; i < monthly.size() -1; i++){
       double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
       int percent = (int) percentChange;
-      switch (percent)
-      {
-      case -10:
-    	  answer[0]= 0;
+      for(int j=0; j<monthly.get(i).length; j++) {
+    	  	System.out.println(monthly.get(i)[j]);
+      }
+      System.out.println(percentChange);
+      System.out.println(percent);
+      System.out.println();
+      switch (percent) {
+
+      case -10: answer[0]= 0;
           answer[1]= 1;
           answer[2]= 0;
           answer[3]= 0;
@@ -196,8 +236,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case -9:
-    	  answer[0]= 0;
+      case -9: answer[0]= 0;
           answer[1]= 1;
           answer[2]= 0;
           answer[3]= 0;
@@ -205,8 +244,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case -8:
-    	  answer[0]= 0;
+      case -8: answer[0]= 0;
           answer[1]= 1;
           answer[2]= 0;
           answer[3]= 0;
@@ -214,8 +252,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case -7:
-    	  answer[0]= 0;
+      case -7: answer[0]= 0;
           answer[1]= 1;
           answer[2]= 0;
           answer[3]= 0;
@@ -223,8 +260,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case -6:
-    	  answer[0]= 0;
+      case -6: answer[0]= 0;
           answer[1]= 1;
           answer[2]= 0;
           answer[3]= 0;
@@ -232,8 +268,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case -5:
-    	  answer[0]= 0;
+      case -5: answer[0]= 0;
           answer[1]= 1;
           answer[2]= 0;
           answer[3]= 0;
@@ -241,8 +276,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case -4:
-    	  answer[0]= 0;
+      case -4: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 1;
           answer[3]= 0;
@@ -250,8 +284,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case -3:
-    	  answer[0]= 0;
+      case -3: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 1;
           answer[3]= 0;
@@ -259,8 +292,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case -2:
-    	  answer[0]= 0;
+      case -2: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 1;
           answer[3]= 0;
@@ -268,8 +300,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case -1:
-    	  answer[0]= 0;
+      case -1: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 1;
@@ -277,8 +308,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case 0:
-    	  answer[0]= 0;
+      case 0: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 1;
@@ -286,8 +316,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case 1:
-    	  answer[0]= 0;
+      case 1: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 0;
@@ -295,8 +324,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case 2:
-    	  answer[0]= 0;
+      case 2: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 0;
@@ -304,8 +332,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 0;
           answer[7]= 0;
-      case 3:
-    	  answer[0]= 0;
+      case 3: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 0;
@@ -313,8 +340,7 @@ public class AlphaVantageCollector{
           answer[5]= 1;
           answer[6]= 0;
           answer[7]= 0;
-      case 4:
-    	  answer[0]= 0;
+      case 4: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 0;
@@ -322,8 +348,7 @@ public class AlphaVantageCollector{
           answer[5]= 1;
           answer[6]= 0;
           answer[7]= 0;
-      case 5:
-    	  answer[0]= 0;
+      case 5: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 0;
@@ -331,8 +356,7 @@ public class AlphaVantageCollector{
           answer[5]= 1;
           answer[6]= 0;
           answer[7]= 0;
-      case 6:
-    	  answer[0]= 0;
+      case 6: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 0;
@@ -340,8 +364,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 1;
           answer[7]= 0;
-      case 7:
-    	  answer[0]= 0;
+      case 7: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 0;
@@ -349,8 +372,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 1;
           answer[7]= 0;
-      case 8:
-    	  answer[0]= 0;
+      case 8: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 0;
@@ -358,8 +380,7 @@ public class AlphaVantageCollector{
           answer[5]= 0;
           answer[6]= 1;
           answer[7]= 0;
-      case 9:
-    	  answer[0]= 0;
+      case 9: answer[0]= 0;
           answer[1]= 0;
           answer[2]= 0;
           answer[3]= 0;
