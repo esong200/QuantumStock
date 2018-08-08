@@ -12,33 +12,33 @@ public class functions extends DataReader {
 	public static double[][] dotMultiplyFastest(double[][] a, double[][] b){
 		double[][]returnArr = new double[a.length][b[0].length];
 		/*for (int i = 0; i < a.length; i++) {
-            for (int k = 0; k < a[0].length; k++) {
-                for (int j = 0; j < b[0].length; j++) {
-                    returnArr[i][j] += a[i][k] * b[k][j];
-                	}
-            }
+						for (int k = 0; k < a[0].length; k++) {
+								for (int j = 0; j < b[0].length; j++) {
+										returnArr[i][j] += a[i][k] * b[k][j];
+									}
+						}
 		}*/
 		for (int i = 0; i < a.length; i++) {
-            double[] arowi = a[i];
-            double[] crowi = returnArr[i];
-            for (int k = 0; k < a[0].length; k++) {
-                double[] browk = b[k];
-                double aik = arowi[k];
-                for (int j = 0; j < b[0].length; j++) {
-                    crowi[j] += aik * browk[j];
-                }
-            }
-        }
+						double[] arowi = a[i];
+						double[] crowi = returnArr[i];
+						for (int k = 0; k < a[0].length; k++) {
+								double[] browk = b[k];
+								double aik = arowi[k];
+								for (int j = 0; j < b[0].length; j++) {
+										crowi[j] += aik * browk[j];
+								}
+						}
+				}
 		return returnArr;
 	}
 	/*public static double[][] dotMultiply(double[][] a, double[][]b){
 		double[][]returnArr = new double[a.length][b[0].length];
 		for (int i = 0; i < a.length; i++) {
-            for (int k = 0; k < a[0].length; k++) {
-                for (int j = 0; j < b[0].length; j++) {
-                    returnArr[i][j] += a[i][k] * b[k][j];
-                	}
-            }
+						for (int k = 0; k < a[0].length; k++) {
+								for (int j = 0; j < b[0].length; j++) {
+										returnArr[i][j] += a[i][k] * b[k][j];
+									}
+						}
 		}
 		return returnArr;
 	}
