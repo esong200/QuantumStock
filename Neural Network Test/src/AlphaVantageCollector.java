@@ -220,6 +220,7 @@ public class AlphaVantageCollector{
     for(int i = 0; i < monthly.size() -1; i++){
       double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
       int percent = (int) percentChange;
+      System.out.println("Monthly" + i + "Length: " + monthly.get(i).length);
       for(int j=0; j<monthly.get(i).length; j++) {
     	  	System.out.println(monthly.get(i)[j]);
       }
