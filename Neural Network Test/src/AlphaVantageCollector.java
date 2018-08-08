@@ -50,7 +50,7 @@ public class AlphaVantageCollector{
 
     //returns montly oepn high low close volume
     ArrayList<double[]> data = new ArrayList<double[]>();
-    double[] inputData = {0,0,0,0,0};
+
     try {
       Monthly response = stockTimeSeries.monthly(symbol);
       Map<String, String> metaData = response.getMetaData();
@@ -59,6 +59,7 @@ public class AlphaVantageCollector{
 
       List<StockData> stockData = response.getStockData();
       stockData.forEach(stock -> {
+        double[] inputData = {0,0,0,0,0};
         inputData[0] = stock.getOpen();
         //System.out.println("high:   " + stock.getHigh());
         inputData[1] = stock.getHigh();
@@ -214,203 +215,74 @@ public class AlphaVantageCollector{
 
   public static ArrayList<double[]> answerCompile (String symbol){
     ArrayList<double[]> monthly = monthlyData(symbol);
+    /*monthly.forEach(arr ->{
+    	System.out.println(arr[0]);
+    });*/
     monthly.remove(0);
     ArrayList<double[]> answers = new ArrayList<double[]>();
-    double[] answer = new double[8];
     for(int i = 0; i < monthly.size() -1; i++){
+
       double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
       int percent = (int) percentChange;
-      for(int j=0; j<monthly.get(i).length; j++) {
-    	  	System.out.println(monthly.get(i)[j]);
-      }
-      System.out.println(percentChange);
-      System.out.println(percent);
-      System.out.println();
-      switch (percent) {
-
-      case -10: answer[0]= 0;
-          answer[1]= 1;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case -9: answer[0]= 0;
-          answer[1]= 1;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case -8: answer[0]= 0;
-          answer[1]= 1;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case -7: answer[0]= 0;
-          answer[1]= 1;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case -6: answer[0]= 0;
-          answer[1]= 1;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case -5: answer[0]= 0;
-          answer[1]= 1;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case -4: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 1;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case -3: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 1;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case -2: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 1;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case -1: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 1;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case 0: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 1;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case 1: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 1;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case 2: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 1;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
-      case 3: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 1;
-          answer[6]= 0;
-          answer[7]= 0;
-      case 4: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 1;
-          answer[6]= 0;
-          answer[7]= 0;
-      case 5: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 1;
-          answer[6]= 0;
-          answer[7]= 0;
-      case 6: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 1;
-          answer[7]= 0;
-      case 7: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 1;
-          answer[7]= 0;
-      case 8: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 1;
-          answer[7]= 0;
-      case 9: answer[0]= 0;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 1;
-          answer[7]= 0;
+      double[] one = {0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0};
+      double[] two = {0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0};
+      double[] three = {0.0,0,0.0,1.0,0.0,0.0,0.0,0.0};
+      double[] four = {0,0,0,0,1,0,0,0};
+      double[] five = {0,0,0,0,0,1,0,0};
+      double[] six = {0,0,0,0,0,0,1,0};
+      double[] seven = {0,0,0,0,0,0,0,1};
+      double[] zero = {1,0,0,0,0,0,0,0};
+      switch (percent)
+      {
+      case -10:
+    	  answers.add(one);
+      case -9:
+    	  answers.add(one);
+      case -8:
+    	  answers.add(one);
+      case -7:
+    	  answers.add(one);
+      case -6:
+    	  answers.add(one);
+      case -5:
+    	  answers.add(one);
+      case -4:
+    	  answers.add(two);
+      case -3:
+    	  answers.add(two);
+      case -2:
+    	  answers.add(two);
+      case -1:
+    	  answers.add(three);
+      case 0:
+    	  answers.add(three);
+      case 1:
+    	  answers.add(four);
+      case 2:
+    	  answers.add(four);
+      case 3:
+    	  answers.add(five);
+      case 4:
+    	  answers.add(five);
+      case 5:
+    	  answers.add(five);
+      case 6:
+    	  answers.add(six);
+      case 7:
+    	  answers.add(six);
+      case 8:
+    	  answers.add(six);
+      case 9:
+    	  answers.add(six);
       default:
     	  if(percent < -10){
-          answer[0]= 1;
-          answer[1]= 0;
-          answer[2]= 0;
-          answer[3]= 0;
-          answer[4]= 0;
-          answer[5]= 0;
-          answer[6]= 0;
-          answer[7]= 0;
+    		  answers.add(zero);
        }
     	 else if(percent>=10){
-    	       answer[0]= 0;
-    	       answer[1]= 0;
-    	       answer[2]= 0;
-    	       answer[3]= 0;
-    	       answer[4]= 0;
-    	       answer[5]= 0;
-    	       answer[6]= 0;
-    	       answer[7]= 1;
+    		 answers.add(seven);
     	     };
       }
-      answers.add(answer);
+
     }
 
     return answers;
