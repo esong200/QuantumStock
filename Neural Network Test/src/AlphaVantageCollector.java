@@ -224,6 +224,7 @@ public class AlphaVantageCollector{
 
       double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
       int percent = (int) percentChange;
+<<<<<<< HEAD
       double[] one = {0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0};
       double[] two = {0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0};
       double[] three = {0.0,0,0.0,1.0,0.0,0.0,0.0,0.0};
@@ -274,19 +275,8 @@ public class AlphaVantageCollector{
     	  answers.add(six);
       case 9:
     	  answers.add(six);
-      default:
-    	  if(percent < -10){
-    		  answers.add(zero);
-       }
-    	 else if(percent>=10){
-    		 answers.add(seven);
-    	     };
-      }
-
-    }
-
-    return answers;
-  }
+=======
+    
 
 
 }
