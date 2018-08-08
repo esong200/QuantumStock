@@ -24,7 +24,7 @@ import org.patriques.output.timeseries.Monthly;
 import org.patriques.output.timeseries.data.StockData;
 import java.util.List;
 
-//import org.patriques.output.AlphaVantageException;
+
 import org.patriques.output.technicalindicators.MACD;
 
 public class AlphaVantageCollector{
@@ -59,13 +59,9 @@ public class AlphaVantageCollector{
 			stockData.forEach(stock -> {
 				double[] inputData = {0,0,0,0,0};
 				inputData[0] = stock.getOpen();
-				//System.out.println("high:   " + stock.getHigh());
 				inputData[1] = stock.getHigh();
-				//System.out.println("low:    " + stock.getLow());
 				inputData[2] = stock.getLow();
-				//System.out.println("close:  " + stock.getClose());
 				inputData[3] = stock.getClose();
-				//System.out.println("volume: " + stock.getVolume());
 				inputData[4] = stock.getVolume();
 				data.add(inputData);
 
@@ -141,46 +137,23 @@ public class AlphaVantageCollector{
 
 		try {
 			List<IndicatorData> smaData50 = sma.getData();
-		//	System.out.println(smaData50.size());
 			List<IndicatorData> emaData50 = ema.getData();
-			//System.out.println(emaData50.size());
-
 			List<IndicatorData> smaData = smaTest.getData();
-		//System.out.println(smaData.size());
-
 			List<IndicatorData> emaData = emaTest.getData();
-		//System.out.println(emaData.size());
-
 			List<MACDData> macdData = macd.getData();
-		//System.out.println(macdData.size());
-
 			List<STOCHDataSlow> stochData = stoch.getData();
-		//	System.out.println(stochData.size());
 			List<IndicatorData> data50 = rsi50.getData();
-		//	System.out.println(data50.size());
 			List<IndicatorData> data200 = rsi200.getData();
-			//System.out.println(data200.size());
 			List<IndicatorData> adxdata50 = adx50.getData();
-		//	System.out.println(adxdata50.size());
-		 // List<IndicatorData> adxdata200 = adx200.getData();
-	 // 	System.out.println(adxdata200.size());
 			List<AROONData> aroondata50 = aroon50.getData();
-
-		//	System.out.println(aroondata50.size());
 			List<AROONData> aroondata200 = aroon200.getData();
-		//	System.out.println(aroondata200.size());
 			List<BBANDSData> bband50 = bbands50.getData();
-			//System.out.println(bband50.size());
 			List<BBANDSData> bband200 = bbands200.getData();
-		//	System.out.println(bband200.size());
 			List<IndicatorData> addata = ad.getData();
-		//	System.out.println(addata.size());
 			List<IndicatorData> obvdata = obv.getData();
-		//	System.out.println(obvdata.size());
 			List<StockData> stockData = response.getStockData();
-			//System.out.println(stockData.size());
 
-				int index = 0;
+			int index = 0;
 			for(IndicatorData data: smaData50) {
 				if((index == stockData.size() || index == smaData50.size() || index == emaData50.size() || index == smaData.size() || index == emaData.size() ||
 					index == macdData.size() || index == stochData.size() || index == data50.size() || index == data200.size()
@@ -213,9 +186,6 @@ public class AlphaVantageCollector{
 
 	public static ArrayList<double[]> answerCompile (String symbol){
 		ArrayList<double[]> monthly = monthlyData(symbol);
-		/*monthly.forEach(arr ->{
-			System.out.println(arr[0]);
-		});*/
 		monthly.remove(0);
 		ArrayList<double[]> answers = new ArrayList<double[]>();
 		for(int i = 0; i < monthly.size() -1; i++){
