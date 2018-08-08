@@ -224,9 +224,9 @@ public class AlphaVantageCollector{
 
       double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
       int percent = (int) percentChange;
-      double[] one = {0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0};
-      double[] two = {0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0};
-      double[] three = {0.0,0,0.0,1.0,0.0,0.0,0.0,0.0};
+      double[] one = {0,1,0,0,0,0,0,0};
+      double[] two = {0,0,1,0,0,0,0,0};
+      double[] three = {0,0,0,1,0,0,0,0};
       double[] four = {0,0,0,0,1,0,0,0};
       double[] five = {0,0,0,0,0,1,0,0};
       double[] six = {0,0,0,0,0,0,1,0};
