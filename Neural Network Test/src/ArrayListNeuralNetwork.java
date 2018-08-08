@@ -14,24 +14,19 @@ public class ArrayListNeuralNetwork extends functions {
 		double[] error1 = new double[desiredOutcome.length];
 		double[] delta1 = new double[desiredOutcome.length];
 		double[][] delta0 = new double[35][35];
-		double[][] prevSynapticWeights0 = new double[synapticWeights0.length][synapticWeights0[0].length];
-		double[] prevSynapticWeights1 = new double[synapticWeights1.length];
 		int numOfIterations = 2;
 		double[] times = new double[numOfIterations];
 		ArrayList<double[]> data = new ArrayList<double[]>();
 
 		DataCollection("MSFT");
 		data = answerCompile("MSFT");
+		int num = Integer.valueOf((int) Math.round(5*Math.random()));
 		for(int i=0; i<data.size(); i++) {
 			System.out.println();
 			for(int j=0; j<data.get(i).length; j++)
 			System.out.println(data.get(i)[j] + "\t");
 		}
-
-
-		/*for(int i=0; i<answerCompile("MSFT").size();i++) {
-
-		}*/
+		System.out.println(data.get(3)[num]);
 
 
 		/*System.out.print("Enter data: ");
@@ -91,8 +86,6 @@ public class ArrayListNeuralNetwork extends functions {
 			total += times[i];
 		}
 		System.out.println("Average time per iteration: "+ (total/times.length));
-		prevSynapticWeights0=synapticWeights0;
-		prevSynapticWeights1=synapticWeights1;
 		/*System.out.println("Synaptic Weights1:");
 		for(double i: synapticWeights1) {
 			System.out.println(i);
