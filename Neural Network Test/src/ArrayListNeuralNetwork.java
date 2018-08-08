@@ -8,7 +8,7 @@ public class ArrayListNeuralNetwork extends functions {
 		ArrayList<double[]> data = DataCollection("MSFT");
 		ArrayList<double[]> ans = answerCompile("MSFT");
 		int maxSize = data.size();
-		while(ans.size()>maxsize){
+		while(ans.size()>maxSize){
 			ans.remove(ans.size()-1);
 		}//make arrays the same size
 
