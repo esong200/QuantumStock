@@ -1,4 +1,5 @@
 
+
 public class SingleLayer extends functions {
 	// single layer machine learning test one
 	public static void main(String[] args) {
