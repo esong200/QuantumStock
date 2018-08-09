@@ -21,7 +21,7 @@ public class sermaster
 		}
 	}
 
-	public static void ser(int[][] a, String filename)
+	public static void ser(double[][] a, String filename)
 	{
 		serializationtest object = new serializationtest(a);
 		try
@@ -43,7 +43,7 @@ public class sermaster
 	{
 		serializationtest object1 = null;
         try
-        {   
+        {
             FileInputStream file = new FileInputStream(filename);
             ObjectInputStream in = new ObjectInputStream(file);
             object1 = (serializationtest)in.readObject();
