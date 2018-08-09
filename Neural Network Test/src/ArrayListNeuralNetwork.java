@@ -29,7 +29,7 @@ public class ArrayListNeuralNetwork extends functions {
 		double[] error0 = new double[intermediateAnswer.length];
 		double[] delta0 = new double[intermediateAnswer.length];
 		int numOfOuterIterations = 1000;
-		double[] times = new double[numOfOuterIterations];
+		double[] times = new double[data.size()];
 			for (int i=0; i<synapticWeights1.length; i++) {
 				for(int j=0; j<synapticWeights1[0].length; j++) {
 					synapticWeights1[i][j] = (2*Math.random()) -1;
@@ -47,13 +47,14 @@ public class ArrayListNeuralNetwork extends functions {
 		}
 		double[] ansArr = new double[3];
 		ansArr = dotMultiply(testArr1, testArr2);
+		long outermostStart = System.currentTimeMillis();
 		for(int k=0; k<data.size(); k++) {
 			long start = System.currentTimeMillis();
 			for(int m = 0; m<50; m++) {
 				intermediateAnswer/*1x18*/ = sigmoid1d(dotMultiply(inputs/*1x29*/, synapticWeights0/*29x18*/), false);
 				finalAnsArr = sigmoid1d(dotMultiply(synapticWeights1, intermediateAnswer), false);
-
-				System.out.println("Training Answer "+m+":");
+				System.out.println();
+				System.out.println("Training Answers "+m+" inside outer iteration "+k+":");
 				for(int i=0; i<delta1.length; i++) {
 					System.out.println(finalAnsArr[i]);
 					error1[i]=desiredOutcome[i]-finalAnsArr[i];
@@ -77,6 +78,7 @@ public class ArrayListNeuralNetwork extends functions {
 					}
 				}
 			}
+			System.out.println();
 			for(int i=0; i<data.get(k).length; i++) {
 				inputs[i]=data.get(k)[i];
 			}
@@ -90,29 +92,27 @@ public class ArrayListNeuralNetwork extends functions {
 			System.out.println("Time:" + elapsed);
 			//inputs
 		}
+		long outermostStop = System.currentTimeMillis();
+		double outermostElapsed = (outermostStop-outermostStart)/1000.0;
 		System.out.println();
 		double total = 0;
 		for(int i=0; i<times.length; i++) {
 			total += times[i];
 		}
-		System.out.println("Average time per iteration: "+ (total/times.length));
-
-		/*System.out.println("Synaptic Weights1:");
-		for(double i: synapticWeights1) {
-			System.out.println(i);
-			System.out.println();
+		System.out.println("Average time per outer loop iteration: "+ (total/times.length));
+		System.out.println("Total time for outer and inner for loop iterations: "+ outermostElapsed);
+		System.out.println("Synaptic Weights0:");
+		for(int i=0; i<synapticWeights0.length; i++) {
+			for(double j: synapticWeights0[0]) {
+				System.out.println(j);
+			}
 		}
 		System.out.println();
-		System.out.println("Synaptic Weights0:");
-		for(double i[]: synapticWeights0) {
-			System.out.println();
-			for(double x: i) {
-				System.out.print(x + "\t");
+		for(int i=0; i<synapticWeights1.length; i++) {
+			for(double j: synapticWeights1[0]) {
+				System.out.println(j);
 			}
-			System.out.println();
-
 		}
-		*/
 
 	}
 }
