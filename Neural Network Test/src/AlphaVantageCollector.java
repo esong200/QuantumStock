@@ -76,9 +76,9 @@ public class AlphaVantageCollector{
 
 
 	public static ArrayList<double[]> DataCollection (String symbol){
-		/*returns data in form Open High Low close volume sma50 ema50 sma200 ema200 macdHist macdSig
-		* macd stochd stochk rsi50 rsi200 adx50 adx200 aroon50down aroon50up aroon200down aroon200up
-		* bband50Low bband50Mid bband50Hi bband200Low bband200Mid bband200Hi ad obv
+		/*returns data in form Open High Low close volume sma50 ema50 sma100 ema100 macdHist macdSig
+		* macd stochd stochk rsi50 rsi100 adx50 aroon50down aroon50up aroon100down aroon100up
+		* bband50Low bband50Mid bband50Hi bband100Low bband100Mid bband100Hi ad obv
 		*/
 
 	ArrayList<double[]> returnArrayList = new ArrayList<double[]>();
@@ -87,7 +87,7 @@ public class AlphaVantageCollector{
 					TimePeriod.of(10), SeriesType.OPEN, null, null, null);
 	SMA sma = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
 	EMA ema = technicalIndicators.ema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
-	SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+	SMA smaTest = technicalIndicators.sma(symbol, Interval.MONTHLY, TimePeriod.of(100), SeriesType.OPEN);
 		System.out.println("Internet Works");
 	try {
 		System.out.println("sleeping");
@@ -95,12 +95,12 @@ public class AlphaVantageCollector{
 	} catch (InterruptedException e1) {
 		e1.printStackTrace();
 	}
-	EMA emaTest = technicalIndicators1.ema(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+	EMA emaTest = technicalIndicators1.ema(symbol, Interval.MONTHLY, TimePeriod.of(100), SeriesType.OPEN);
 
 	STOCH stoch = technicalIndicators1.stoch(symbol, Interval.MONTHLY, FastKPeriod.of(5), SlowKPeriod.of(3), SlowDPeriod.of(3),
 			null, null);
 	RSI rsi50 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
-	RSI rsi200 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN);
+	RSI rsi100 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(100), SeriesType.OPEN);
 	try {
 			System.out.println("sleeping");
 		Thread.sleep(60000);
@@ -109,10 +109,10 @@ public class AlphaVantageCollector{
 		e1.printStackTrace();
 	}
 	ADX adx50 = technicalIndicators1.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
-	ADX adx200 = technicalIndicators2.adx(symbol, Interval.MONTHLY, TimePeriod.of(200));
+	ADX adx100 = technicalIndicators2.adx(symbol, Interval.MONTHLY, TimePeriod.of(100));
 
 	AROON aroon50 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50));
-	AROON aroon200 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(200));
+	AROON aroon100 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(100));
 
 	try {
 			System.out.println("sleeping");
@@ -122,7 +122,7 @@ public class AlphaVantageCollector{
 		e1.printStackTrace();
 	}
 	BBANDS bbands50 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
-	BBANDS bbands200 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(200), SeriesType.OPEN, null, null, null);
+	BBANDS bbands100 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(100), SeriesType.OPEN, null, null, null);
 	AD ad = technicalIndicators3.ad(symbol, Interval.MONTHLY);
 
 	OBV obv = technicalIndicators3.obv(symbol, Interval.MONTHLY);
@@ -143,12 +143,12 @@ public class AlphaVantageCollector{
 			List<MACDData> macdData = macd.getData();
 			List<STOCHDataSlow> stochData = stoch.getData();
 			List<IndicatorData> data50 = rsi50.getData();
-			List<IndicatorData> data200 = rsi200.getData();
+			List<IndicatorData> data100 = rsi100.getData();
 			List<IndicatorData> adxdata50 = adx50.getData();
 			List<AROONData> aroondata50 = aroon50.getData();
-			List<AROONData> aroondata200 = aroon200.getData();
+			List<AROONData> aroondata100 = aroon100.getData();
 			List<BBANDSData> bband50 = bbands50.getData();
-			List<BBANDSData> bband200 = bbands200.getData();
+			List<BBANDSData> bband100 = bbands100.getData();
 			List<IndicatorData> addata = ad.getData();
 			List<IndicatorData> obvdata = obv.getData();
 			List<StockData> stockData = response.getStockData();
@@ -156,9 +156,9 @@ public class AlphaVantageCollector{
 			int index = 0;
 			for(IndicatorData data: smaData50) {
 				if((index == stockData.size() || index == smaData50.size() || index == emaData50.size() || index == smaData.size() || index == emaData.size() ||
-					index == macdData.size() || index == stochData.size() || index == data50.size() || index == data200.size()
-					|| index == adxdata50.size() || /*index == adxdata200.size() ||*/ index == aroondata50.size() || index == aroondata200.size()
-					|| index == bband50.size() || index == bband200.size() || index == addata.size() || index == obvdata.size())){
+					index == macdData.size() || index == stochData.size() || index == data50.size() || index == data100.size()
+					|| index == adxdata50.size() || /*index == adxdata100.size() ||*/ index == aroondata50.size() || index == aroondata100.size()
+					|| index == bband50.size() || index == bband100.size() || index == addata.size() || index == obvdata.size())){
 						break;
 					}
 				double[] dataArr = {stockData.get(index).getOpen(), stockData.get(index).getHigh(), stockData.get(index).getLow(),
@@ -166,11 +166,11 @@ public class AlphaVantageCollector{
 					 data.getData(), emaData50.get(index).getData(), smaData.get(index).getData(),
 					 emaData.get(index).getData(),macdData.get(index).getHist(), macdData.get(index).getSignal(),
 					 macdData.get(index).getMacd(),stochData.get(index).getSlowD(), stochData.get(index).getSlowK(),
-					 data50.get(index).getData(),data200.get(index).getData(),adxdata50.get(index).getData(),
-					 /*adxdata200.get(index).getData(),*/aroondata50.get(index).getAroonDown(), aroondata50.get(index).getAroonUp(),
-					 aroondata200.get(index).getAroonDown(), aroondata200.get(index).getAroonUp(),
+					 data50.get(index).getData(),data100.get(index).getData(),adxdata50.get(index).getData(),
+					 /*adxdata100.get(index).getData(),*/aroondata50.get(index).getAroonDown(), aroondata50.get(index).getAroonUp(),
+					 aroondata100.get(index).getAroonDown(), aroondata100.get(index).getAroonUp(),
 					 bband50.get(index).getLowerBand(), bband50.get(index).getMidBand(), bband50.get(index).getUpperBand(),
-					 bband200.get(index).getLowerBand(), bband200.get(index).getMidBand(), bband200.get(index).getUpperBand(),
+					 bband100.get(index).getLowerBand(), bband100.get(index).getMidBand(), bband100.get(index).getUpperBand(),
 					 addata.get(index).getData(), obvdata.get(index).getData()};
 			 returnArrayList.add(dataArr);
 			 index++;
