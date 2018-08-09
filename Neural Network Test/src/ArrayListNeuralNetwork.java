@@ -102,17 +102,23 @@ public class ArrayListNeuralNetwork extends functions {
 		System.out.println("Average time per outer loop iteration: "+ (total/times.length));
 		System.out.println("Total time for outer and inner for loop iterations: "+ outermostElapsed);
 		System.out.println("Synaptic Weights0:");
+		System.out.println();
 		for(int i=0; i<synapticWeights0.length; i++) {
 			for(double j: synapticWeights0[0]) {
 				System.out.println(j);
 			}
 		}
 		System.out.println();
+		System.out.println("Synaptic Weights1:");
 		for(int i=0; i<synapticWeights1.length; i++) {
 			for(double j: synapticWeights1[0]) {
 				System.out.println(j);
 			}
 		}
+		String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
+		String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
+		writeCsv(synapticWeights0, file1);
+		writeCsv(synapticWeights1, file2);
 
 	}
 }
