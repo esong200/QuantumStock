@@ -35,18 +35,6 @@ public class ArrayListNeuralNetwork extends functions {
 					synapticWeights1[i][j] = (2*Math.random()) -1;
 				}
 			}
-		double[] testArr1 = new double[2];
-		double[][] testArr2 = new double[2][3];
-		for(int i=0; i<testArr1.length; i++) {
-			testArr1[i] = (2*Math.random()) -1;
-		}
-		for(int i=0; i<testArr2.length; i++) {
-			for(int j=0; j<testArr2[0].length; j++) {
-				testArr2[i][j] = (2*Math.random()) -1;
-			}
-		}
-		double[] ansArr = new double[3];
-		ansArr = dotMultiply(testArr1, testArr2);
 		long outermostStart = System.currentTimeMillis();
 		for(int k=0; k<data.size(); k++) {
 			long start = System.currentTimeMillis();
