@@ -76,7 +76,7 @@ public class ArrayListNeuralNetwork extends functions {
 				long innermostStop = System.currentTimeMillis();
 				innermostTime = (innermostStop-innermostStart) / 1000.0;
 				System.out.println();
-				System.out.println("Innermost Time" +innermostTime);
+				System.out.println("Innermost Time: " +innermostTime);
 			}
 			System.out.println();
 			for(int i=0; i<dataTaylored.get(k).length; i++) {
