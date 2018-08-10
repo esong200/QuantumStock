@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 public class TripleLayerTest extends functions{
 	public static void main(String[] args) {
 		ArrayList<double[]> data = readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\ANDVDataAdjst.csv");
