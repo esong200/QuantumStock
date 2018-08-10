@@ -61,6 +61,7 @@ public class CSVReadWrite {
 			}
 		}
 	}
+
 	public static void writeCsv(double[] matrix, String file) {
 		FileWriter fw = null;
 		try {
@@ -87,6 +88,7 @@ public class CSVReadWrite {
 			}
 		}
 	}
+
 	public static ArrayList<double[]> readCsv(String file){
 		BufferedReader br = null;
 		ArrayList<double[]> returnArr = new ArrayList<double[]>();
@@ -116,6 +118,7 @@ public class CSVReadWrite {
 		  }
 		return returnArr;
 	}
+
 	public static String combine(String file1, String file2, String finalName) {
 		ArrayList<double[]> first = readCsv(file1);
 		ArrayList<double[]> second = readCsv(file2);
@@ -129,4 +132,5 @@ public class CSVReadWrite {
 		writeCsv(combine, finalName);
 		return finalName;
 	}
+
 }
