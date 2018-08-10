@@ -1,8 +1,26 @@
 
 public class TripleLayerTest extends functions{
 	public static void main(String[] args) {
-		double[]inputs = new double[39];
-		double[] desiredOutcome = {0,1,0,0,0,1,1};
+		ArrayList<double[]> data = readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\ANDVDataAdjst.csv");
+		ArrayList<double[]> ans = readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\ANDVAns.csv");
+		ArrayList<double[]> dataTaylored = data;
+		double[][] dataTayloredMatrix = new double[dataTaylored.size()][dataTaylored.get(0).length];
+		int maxSize = data.size();
+		while(ans.size()>maxSize){
+			ans.remove(ans.size()-1);
+		}
+		double[] inputs = new double[data.get(0).length];
+		double[] desiredOutcome = new double[ans.get(0).length];
+		for(int i=0; i<data.size(); i++) {
+			for(int j=0; j<data.get(i).length; j++) {
+				dataTaylored.get(i)[j] *= 10;
+				dataTayloredMatrix[i][j]=dataTaylored.get(i)[j];
+			}
+		}
+
+		for(int i=0; i<data.get(0).length; i++) {
+			inputs[i]=(dataTaylored.get(0)[i]);
+		}
 		double[][]synapticWeights0 = new double[inputs.length][23];
 		double[]	intermediateAnswer0 = new double[synapticWeights0[0].length];
 		double[][] synapticWeights1 = new double[intermediateAnswer0.length][18];
@@ -39,15 +57,8 @@ public class TripleLayerTest extends functions{
 		for(int m = 0; m<1000; m++) {
 			long start = System.currentTimeMillis();
 			intermediateAnswer0 = sigmoid1d(dotMultiply(inputs/*1x29*/, synapticWeights0/*29x18*/), false);
-			/*System.out.println("intermediateAnswers0 " + m + ":");
-			for(double i: intermediateAnswer0) {
-				System.out.println(i);
-			}*/
+
 			intermediateAnswer1/*1x18*/ = sigmoid1d(dotMultiply(intermediateAnswer0/*1x29*/, synapticWeights1/*29x18*/), false);
-			/*System.out.println("intermediateAnswers1 " + m + ":");
-			for(double i: intermediateAnswer1) {
-				System.out.println(i);
-			}*/
 			finalAnsArr = sigmoid1d(dotMultiply(intermediateAnswer1, synapticWeights2), false);
 			System.out.println();
 			System.out.println("Training Answers "+m+" inside outer iteration :");
