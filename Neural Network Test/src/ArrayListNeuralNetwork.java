@@ -4,18 +4,28 @@ import java.util.ArrayList;
 public class ArrayListNeuralNetwork extends functions {
 	//array specs: input array: 1x29, desiredOutcome: 1x8
 	public static void main(String[] args) {
-		ArrayList<double[]> data = DataCollection("AAPL");
-		ArrayList<double[]> ans = answerCompile("AAPL");
-
+		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/Stock Data/ANDVDataAdjst.csv");
+		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/Stock Data/ANDVAns.csv");
+		ArrayList<double[]> dataTaylored = data;
+		double[][] dataTayloredMatrix = new double[dataTaylored.size()][dataTaylored.get(0).length];
 		int maxSize = data.size();
 		while(ans.size()>maxSize){
 			ans.remove(ans.size()-1);
 		}
 		double[] inputs = new double[data.get(0).length];
 		double[] desiredOutcome = new double[ans.get(0).length];
-		for(int i=0; i<data.get(0).length; i++) {
-			inputs[i]=data.get(0)[i];
+		for(int i=0; i<data.size(); i++) {
+			for(int j=0; j<data.get(i).length; j++) {
+				dataTaylored.get(i)[j] *= 10;
+				dataTayloredMatrix[i][j]=dataTaylored.get(i)[j];
+			}
 		}
+
+		for(int i=0; i<data.get(0).length; i++) {
+			inputs[i]=(dataTaylored.get(0)[i]);
+		}
+		writeCsv(dataTayloredMatrix, "/Users/ethansong/Documents/Stock Data/stockData10xBigger.csv");
+		//writeCsv(inputs, "/Users/ethansong/Documents/Stock Data/10xANDVDataAdjst.csv");
 		for(int i=0; i<ans.get(0).length; i++) {
 			desiredOutcome[i] = ans.get(0)[i];
 		}
@@ -32,16 +42,26 @@ public class ArrayListNeuralNetwork extends functions {
 		double[] times = new double[data.size()];
 			for (int i=0; i<synapticWeights1.length; i++) {
 				for(int j=0; j<synapticWeights1[0].length; j++) {
-					synapticWeights1[i][j] = (2*Math.random()) -1;
+					synapticWeights1[i][j] = Math.random() - 0.5;
 				}
 			}
 		long outermostStart = System.currentTimeMillis();
-		for(int k=0; k<data.size(); k++) {
+		for(int k=0; k<1; k++) {
 			long start = System.currentTimeMillis();
-			for(int m = 0; m<50; m++) {
+			for(int m = 0; m<1000; m++) {
 				intermediateAnswer/*1x18*/ = sigmoid1d(dotMultiply(inputs/*1x29*/, synapticWeights0/*29x18*/), false);
+				int countIA = 0;
+				for(double i: dotMultiply(inputs, synapticWeights0)) {
+					System.out.println("Dot Multiplied IA results"+countIA);
+					System.out.println(i);
+					countIA++;
+				}
+				int countFA = 0;
 				finalAnsArr = sigmoid1d(dotMultiply(synapticWeights1, intermediateAnswer), false);
-				System.out.println();
+				for(double i: dotMultiply(synapticWeights1, intermediateAnswer)) {
+					System.out.println("Dot Multiplied FA results"+ countFA);
+					System.out.println(i);
+				}
 				System.out.println("Training Answers "+m+" inside outer iteration "+k+":");
 				for(int i=0; i<delta1.length; i++) {
 					System.out.println(finalAnsArr[i]);
@@ -67,8 +87,8 @@ public class ArrayListNeuralNetwork extends functions {
 				}
 			}
 			System.out.println();
-			for(int i=0; i<data.get(k).length; i++) {
-				inputs[i]=data.get(k)[i];
+			for(int i=0; i<dataTaylored.get(k).length; i++) {
+				inputs[i]=dataTaylored.get(k)[i];
 			}
 			for(int i=0; i<ans.get(k).length; i++) {
 				desiredOutcome[i] = ans.get(k)[i];
@@ -107,6 +127,5 @@ public class ArrayListNeuralNetwork extends functions {
 		String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
 		writeCsv(synapticWeights0, file1);
 		writeCsv(synapticWeights1, file2);
-
 	}
 }
