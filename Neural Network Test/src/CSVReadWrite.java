@@ -33,6 +33,32 @@ public class CSVReadWrite {
 			}
 		}
 	}
+	public static void writeCsv(double[] matrix, String file) {
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(file);
+
+
+				for(double d: matrix) {
+					fw.append(String.valueOf(d));
+					fw.append(",");
+				}
+
+
+
+		}
+		catch (Exception ex) {
+			   ex.printStackTrace();
+			  }
+		finally {
+			try {
+				fw.flush();
+				fw.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	public static ArrayList<double[]> readCsv(String file){
 		BufferedReader br = null;
 		ArrayList<double[]> returnArr = new ArrayList<double[]>();
