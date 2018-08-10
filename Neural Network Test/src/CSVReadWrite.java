@@ -7,6 +7,34 @@ import java.util.List;
 
 public class CSVReadWrite {
 
+	public static void writeCsv(ArrayList<double[]> matrix, String file) {
+		FileWriter fw = null;
+
+		try {
+			fw = new FileWriter(file);
+
+			for(double[] doub: matrix) {
+				for(double d: doub) {
+					fw.append(String.valueOf(d));
+					fw.append(",");
+				}
+				fw.append("\n");
+			}
+
+		}
+		catch (Exception ex) {
+			   ex.printStackTrace();
+			  }
+		finally {
+			try {
+				fw.flush();
+				fw.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public static void writeCsv(double[][] matrix, String file) {
 		FileWriter fw = null;
 		try {
@@ -88,5 +116,17 @@ public class CSVReadWrite {
 		  }
 		return returnArr;
 	}
-
+	public static String combine(String file1, String file2, String finalName) {
+		ArrayList<double[]> first = readCsv(file1);
+		ArrayList<double[]> second = readCsv(file2);
+		ArrayList<double[]> combine = new ArrayList<double[]>();;
+		first.forEach(arr ->{
+			combine.add(arr);
+		});
+		second.forEach(arr ->{
+			combine.add(arr);
+		});
+		writeCsv(combine, finalName);
+		return finalName;
+	}
 }
