@@ -1,8 +1,8 @@
 
 public class TripleLayerTest extends functions{
 	public static void main(String[] args) {
-		double[]inputs = new double[29];
-		double[] desiredOutcome = {0,0,0,0,0,0,0};
+		double[]inputs = new double[39];
+		double[] desiredOutcome = {0,1,0,0,0,1,1};
 		double[][]synapticWeights0 = new double[inputs.length][23];
 		double[]	intermediateAnswer0 = new double[synapticWeights0[0].length];
 		double[][] synapticWeights1 = new double[intermediateAnswer0.length][18];
@@ -15,6 +15,8 @@ public class TripleLayerTest extends functions{
 		double[] delta1 = new double[intermediateAnswer1.length];
 		double[] error0 = new double[intermediateAnswer0.length];
 		double[] delta0 = new double[intermediateAnswer0.length];
+		double totalTime = 0;
+		double elapsed = 0;
 		for (int i=0; i<synapticWeights0.length; i++) {
 			for(int j=0; j<synapticWeights0[0].length; j++) {
 				synapticWeights0[i][j] = (2*Math.random()) -1;
@@ -35,6 +37,7 @@ public class TripleLayerTest extends functions{
 			inputs[i]=(2*Math.random())-1;
 		}
 		for(int m = 0; m<1000; m++) {
+			long start = System.currentTimeMillis();
 			intermediateAnswer0 = sigmoid1d(dotMultiply(inputs/*1x29*/, synapticWeights0/*29x18*/), false);
 			/*System.out.println("intermediateAnswers0 " + m + ":");
 			for(double i: intermediateAnswer0) {
@@ -79,10 +82,16 @@ public class TripleLayerTest extends functions{
 					synapticWeights0[i][j] +=  rotateMultiply(delta0 , inputs)[i][j];
 				}
 			}
+			long stop = System.currentTimeMillis();
+			elapsed = (stop - start) / 1000.0;
+			//System.out.println(m);
+			totalTime+=elapsed;
+			System.out.println("Average time per iteration: "+ (elapsed));
 		}
-		for(double i: inputs){
+		System.out.println("Total Time:" + totalTime);
+		/*for(double i: inputs){
 			System.out.println(i);
-		}
+		}*/
 
 
 	}
