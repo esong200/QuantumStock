@@ -47,8 +47,8 @@ public class CSVReadWrite {
 					double[] data = new double[length];
 					for(int i = 0; i<fields.length; i++) {
 						data[i] = Double.parseDouble(fields[i]);
-						returnArr.add(data);
 					}
+					returnArr.add(data);
 				}
 			}
 		}catch (Exception ex) {
