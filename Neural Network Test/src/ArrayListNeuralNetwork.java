@@ -58,10 +58,6 @@ public class ArrayListNeuralNetwork extends functions {
 				}
 				int countFA = 0;
 				finalAnsArr = sigmoid1d(dotMultiply(intermediateAnswer, synapticWeights1), false);
-				for(double i: dotMultiply(synapticWeights1, intermediateAnswer)) {
-					System.out.println("Dot Multiplied FA results"+ countFA);
-					System.out.println(i);
-				}
 				System.out.println("Training Answers "+m+" inside outer iteration "+k+":");
 				for(int i=0; i<delta1.length; i++) {
 					System.out.println(finalAnsArr[i]);
