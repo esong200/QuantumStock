@@ -57,7 +57,7 @@ public class ArrayListNeuralNetwork extends functions {
 					countIA++;
 				}
 				int countFA = 0;
-				finalAnsArr = sigmoid1d(dotMultiply(synapticWeights1, intermediateAnswer), false);
+				finalAnsArr = sigmoid1d(dotMultiply(intermediateAnswer, synapticWeights1), false);
 				for(double i: dotMultiply(synapticWeights1, intermediateAnswer)) {
 					System.out.println("Dot Multiplied FA results"+ countFA);
 					System.out.println(i);
