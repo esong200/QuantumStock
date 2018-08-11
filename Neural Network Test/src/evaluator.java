@@ -1,3 +1,4 @@
+ArrayList<Integer> correct = new ArrayList<Integer>();
 double largest = 0;
 			int index = 0;
 			int index2 = 0;
