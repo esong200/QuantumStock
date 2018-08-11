@@ -40,20 +40,20 @@ public class TripleLayerTest extends functions{
 		double elapsed = 0;
 
 		for (int i=0; i<synapticWeights0.length; i++) {
-			for(int j=0; j<synapticWeights0[0].length; j++) {
-				synapticWeights0[i][j] = (2*Math.random()) -1;
+				for(int j=0; j<synapticWeights0[0].length; j++) {
+					synapticWeights0[i][j] = (Math.random()) -0.5;
+				}
 			}
-		}
-		for (int i=0; i<synapticWeights1.length; i++) {
-			for(int j=0; j<synapticWeights1[0].length; j++) {
-				synapticWeights1[i][j] = (2*Math.random()) -1;
+			for (int i=0; i<synapticWeights1.length; i++) {
+				for(int j=0; j<synapticWeights1[0].length; j++) {
+					synapticWeights1[i][j] = (Math.random()) -0.5;
+				}
 			}
-		}
-		for (int i=0; i<synapticWeights2.length; i++) {
-			for(int j=0; j<synapticWeights2[0].length; j++) {
-				synapticWeights2[i][j] = (2*Math.random()) -1;
+			for (int i=0; i<synapticWeights2.length; i++) {
+				for(int j=0; j<synapticWeights2[0].length; j++) {
+					synapticWeights2[i][j] = (Math.random()) -0.5;
+				}
 			}
-		}
 
 
 		for(int m = 0; m<1000000; m++) {
