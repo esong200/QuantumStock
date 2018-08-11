@@ -1,9 +1,12 @@
 import java.util.ArrayList;
+import java.io.File;
+
 
 public class TripleLayerTest extends functions{
 	public static void main(String[] args) {
-		ArrayList<double[]> data = readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\PEPDataAdjst.csv");
-		ArrayList<double[]> ans = readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\PEPAns.csv");
+		String comp = "";
+		ArrayList<double[]> data = readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\"+ comp + "Adjst.csv");
+		ArrayList<double[]> ans = readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\"+ comp + "Ans.csv");
 		ArrayList<double[]> dataTaylored = data;
 		ArrayList<Integer> correct = new ArrayList<Integer>();
 		double[][] dataTayloredMatrix = new double[dataTaylored.size()][dataTaylored.get(0).length];
@@ -39,22 +42,28 @@ public class TripleLayerTest extends functions{
 		double totalTime = 0;
 		double elapsed = 0;
 
-		for (int i=0; i<synapticWeights0.length; i++) {
-				for(int j=0; j<synapticWeights0[0].length; j++) {
-					synapticWeights0[i][j] = (Math.random()) -0.5;
+		if(new File("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\"+ comp + "synapticWeights2.csv").exists()) {
+			synapticWeights0 = csvRead("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\KSSsynapticWeights0.csv");
+			synapticWeights1 = csvRead("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\KSSsynapticWeights1.csv");
+			synapticWeights2 = csvRead("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\KSSsynapticWeights2.csv");
+		}
+		else {
+			for (int i=0; i<synapticWeights0.length; i++) {
+					for(int j=0; j<synapticWeights0[0].length; j++) {
+						synapticWeights0[i][j] = (Math.random()) -0.5;
+					}
+				}
+				for (int i=0; i<synapticWeights1.length; i++) {
+					for(int j=0; j<synapticWeights1[0].length; j++) {
+						synapticWeights1[i][j] = (Math.random()) -0.5;
+					}
+				}
+				for (int i=0; i<synapticWeights2.length; i++) {
+					for(int j=0; j<synapticWeights2[0].length; j++) {
+						synapticWeights2[i][j] = (Math.random()) -0.5;
+					}
 				}
 			}
-			for (int i=0; i<synapticWeights1.length; i++) {
-				for(int j=0; j<synapticWeights1[0].length; j++) {
-					synapticWeights1[i][j] = (Math.random()) -0.5;
-				}
-			}
-			for (int i=0; i<synapticWeights2.length; i++) {
-				for(int j=0; j<synapticWeights2[0].length; j++) {
-					synapticWeights2[i][j] = (Math.random()) -0.5;
-				}
-			}
-
 
 		for(int m = 0; m<1000000; m++) {
 			int rand = (int) ((int) dataTaylored.size()*Math.random());
