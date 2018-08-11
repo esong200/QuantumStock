@@ -71,6 +71,7 @@ public class CSVReadWrite {
 				for(double d: matrix) {
 					fw.append(String.valueOf(d));
 					fw.append(",");
+					fw.append("\n");
 				}
 
 
