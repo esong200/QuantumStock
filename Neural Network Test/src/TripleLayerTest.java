@@ -166,6 +166,12 @@ public class TripleLayerTest extends functions{
 		/*for(double i: inputs){
 			System.out.println(i);
 		}*/
+		String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
+		String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
+		String file3 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights2.csv";
+		writeCsv(synapticWeights0, file1);
+		writeCsv(synapticWeights1, file2);
+		writeCsv(synapticWeights2, file3);
 
 
 	}
