@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class ArrayListNeuralNetwork extends functions {
 	//array specs: input array: 1x29, desiredOutcome: 1x8
 	public static void main(String[] args) {
-		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/Stock Data/stockData10xBigger.csv");
+		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/Stock Data/ANDVDataAdjst.csv");
 		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/Stock Data/ANDVAns.csv");
 		ArrayList<double[]> dataTaylored = data;
 		double[][] dataTayloredMatrix = new double[dataTaylored.size()][dataTaylored.get(0).length];
@@ -17,40 +17,46 @@ public class ArrayListNeuralNetwork extends functions {
 		for(int i=0; i<data.size(); i++) {
 			for(int j=0; j<data.get(i).length; j++) {
 				dataTaylored.get(i)[j] *= 10;
-				//dataTayloredMatrix[i][j]=dataTaylored.get(i)[j];
+				dataTayloredMatrix[i][j]=dataTaylored.get(i)[j];
 			}
 		}
 
 		for(int i=0; i<data.get(0).length; i++) {
 			inputs[i]=(dataTaylored.get(0)[i]);
 		}
+		writeCsv(dataTayloredMatrix, "/Users/ethansong/Documents/Stock Data/stockData10xBigger.csv");
 		//writeCsv(inputs, "/Users/ethansong/Documents/Stock Data/10xANDVDataAdjst.csv");
 		for(int i=0; i<ans.get(0).length; i++) {
 			desiredOutcome[i] = ans.get(0)[i];
 		}
 		//double[] inputs = new double[];
 		double[][]synapticWeights0 = new double[inputs.length][18];
-		double[]intermediateAnswer = new double[18];
-		double[][] synapticWeights1 = new double[18][desiredOutcome.length];
+		double[]intermediateAnswer = new double[synapticWeights0[0].length];
+		double[][] synapticWeights1 = new double[intermediateAnswer.length][desiredOutcome.length];
 		double[]finalAnsArr = new double[desiredOutcome.length];
 		double[] error1 = new double[desiredOutcome.length];
 		double[] delta1 = new double[desiredOutcome.length];
 		double[] error0 = new double[intermediateAnswer.length];
 		double[] delta0 = new double[intermediateAnswer.length];
-		double totalTime = 0;
-		double innermostTime = 0;
-
+		int numOfOuterIterations = 1000;
+		double[] times = new double[data.size()];
 			for (int i=0; i<synapticWeights1.length; i++) {
 				for(int j=0; j<synapticWeights1[0].length; j++) {
 					synapticWeights1[i][j] = Math.random() - 0.5;
 				}
 			}
 		long outermostStart = System.currentTimeMillis();
-		for(int k=0; k<dataTaylored.size(); k++) {
+		for(int k=0; k<1; k++) {
 			long start = System.currentTimeMillis();
-			for(int m = 0; m<50; m++) {
-				long innermostStart = System.currentTimeMillis();
+			for(int m = 0; m<1000; m++) {
 				intermediateAnswer/*1x18*/ = sigmoid1d(dotMultiply(inputs/*1x29*/, synapticWeights0/*29x18*/), false);
+				int countIA = 0;
+				for(double i: dotMultiply(inputs, synapticWeights0)) {
+		//			System.out.println("Dot Multiplied IA results"+countIA);
+		//			System.out.println(i);
+					countIA++;
+				}
+				int countFA = 0;
 				finalAnsArr = sigmoid1d(dotMultiply(intermediateAnswer, synapticWeights1), false);
 				System.out.println("Training Answers "+m+" inside outer iteration "+k+":");
 				for(int i=0; i<delta1.length; i++) {
@@ -66,17 +72,15 @@ public class ArrayListNeuralNetwork extends functions {
 					for(int j=0; j<synapticWeights1[0].length; j++) {
 						synapticWeights1[i][j] +=  rotateMultiply(delta1 , intermediateAnswer)[i][j];
 					}
+
 				}
+
 				for (int i = 0; i<synapticWeights0.length; i++) {
 					for(int j = 0; j<synapticWeights0[0].length; j++) {
 						double[][] debugger = rotateMultiply(delta0, inputs);
 						synapticWeights0[i][j] += debugger[i][j];
 					}
 				}
-				long innermostStop = System.currentTimeMillis();
-				innermostTime = (innermostStop-innermostStart) / 1000.0;
-				System.out.println();
-				System.out.println("Innermost Time: " +innermostTime);
 			}
 			System.out.println();
 			for(int i=0; i<dataTaylored.get(k).length; i++) {
@@ -86,33 +90,38 @@ public class ArrayListNeuralNetwork extends functions {
 				desiredOutcome[i] = ans.get(k)[i];
 			}
 			long stop = System.currentTimeMillis();
-			double time = (stop - start) / 1000.0;
+			double elapsed = (stop - start) / 1000.0;
+			times[k]=elapsed;
 			//System.out.println(m);
-			System.out.println("Time:" + time);
+			System.out.println("Time:" + elapsed);
 			//inputs
 		}
 		long outermostStop = System.currentTimeMillis();
-		totalTime = (outermostStop-outermostStart)/1000.0;
-		System.out.println();
+		double outermostElapsed = (outermostStop-outermostStart)/1000.0;
+		//System.out.println();
+		double total = 0;
+		for(int i=0; i<times.length; i++) {
+			total += times[i];
+		}
 		System.out.println("Synaptic Weights0:");
 		System.out.println();
 		for(int i=0; i<synapticWeights0.length; i++) {
 			for(double j: synapticWeights0[0]) {
-				System.out.println(j);
+		//		System.out.println(j);
 			}
 		}
 		System.out.println();
 		System.out.println("Synaptic Weights1:");
 		for(int i=0; i<synapticWeights1.length; i++) {
 			for(double j: synapticWeights1[0]) {
-				System.out.println(j);
+		//		System.out.println(j);
 			}
 		}
-		System.out.println("Average time per outer loop iteration: "+ totalTime/data.size());
-		System.out.println("Total time for outer and inner for loop iterations: "+ totalTime);
-		String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
-		String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
-		writeCsv(synapticWeights0, file1);
-		writeCsv(synapticWeights1, file2);
+		System.out.println("Average time per outer loop iteration: "+ (total/times.length));
+		System.out.println("Total time for outer and inner for loop iterations: "+ outermostElapsed);
+		//String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
+		//String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
+		//writeCsv(synapticWeights0, file1);
+		//writeCsv(synapticWeights1, file2);
 	}
 }
