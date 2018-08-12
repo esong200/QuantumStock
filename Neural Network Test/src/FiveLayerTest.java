@@ -4,11 +4,16 @@ import java.util.ArrayList;
 public class FiveLayerTest extends functions {
 	//array specs: input array: 1x29, desiredOutcome: 1x8
 	public static void main(String[] args) {
+<<<<<<< HEAD
 
 		String company = "AAPL";
 		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"DataAdjst.csv");
 		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"Ans.csv");
 
+=======
+		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/PEPDataAdjst.csv");
+		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/PEPAns.csv");
+>>>>>>> parent of 66ca810... added modular company support
 		ArrayList<double[]> dataTaylored = data;
 		int count = 0;
 		int greatestAccuracy = 0;
