@@ -197,7 +197,7 @@ public class TripleLayerTest extends functions{
 					test = 0;
 					break;
 				}
-				best200 \= right;
+				best200 = right;
 				bestComplete = test;
 				String file1 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\" + comp + "synapticWeights0.csv";
 				String file2 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\"+ comp +"synapticWeights1.csv";
@@ -208,6 +208,7 @@ public class TripleLayerTest extends functions{
 
 				System.out.println("Saved Correct:" + bestComplete);
 				System.out.println("Best200" + best200);
+				break;
 			}
 			if(m%200 == 0) {
 				System.out.println(m+"th iteration. Last 200 correct:" + right);
