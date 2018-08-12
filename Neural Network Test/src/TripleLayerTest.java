@@ -12,6 +12,8 @@ public class TripleLayerTest extends functions{
 		int count = 0;
 		int greatestAccuracy = 0;
 		int greatestAccuracyIndex = 0;
+		int best200 = 0;
+		int bestComplete = 0;
 		while(ans.size()>maxSize){
 			ans.remove(ans.size()-1);
 		}
@@ -44,19 +46,27 @@ public class TripleLayerTest extends functions{
 		double totalTime = 0;
 		double elapsed = 0;
 
-		for (int i=0; i<synapticWeights0.length; i++) {
-				for(int j=0; j<synapticWeights0[0].length; j++) {
-					synapticWeights0[i][j] = (Math.random()) -0.5;
-				}
+		try {
+				synapticWeights0 = listToArray(readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0/"+company+"synapticWeights0.csv"));
+				synapticWeights1 = listToArray(readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1/"+company+"synapticWeights1.csv"));
+				synapticWeights2 = listToArray(readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2/"+company+"synapticWeights2.csv"));
 			}
-			for (int i=0; i<synapticWeights1.length; i++) {
-				for(int j=0; j<synapticWeights1[0].length; j++) {
-					synapticWeights1[i][j] = (Math.random()) -0.5;
+			catch (Exception e){
+				System.out.println("Synaptic Weight not avaliable, using random ones.");
+				for (int i=0; i<synapticWeights0.length; i++) {
+					for(int j=0; j<synapticWeights0[0].length; j++) {
+						synapticWeights0[i][j] = (Math.random()) -0.5;
+					}
 				}
-			}
-			for (int i=0; i<synapticWeights2.length; i++) {
-				for(int j=0; j<synapticWeights2[0].length; j++) {
-					synapticWeights2[i][j] = (Math.random()) -0.5;
+				for (int i=0; i<synapticWeights1.length; i++) {
+					for(int j=0; j<synapticWeights1[0].length; j++) {
+						synapticWeights1[i][j] = (Math.random()) -0.5;
+					}
+				}
+				for (int i=0; i<synapticWeights2.length; i++) {
+					for(int j=0; j<synapticWeights2[0].length; j++) {
+						synapticWeights2[i][j] = (Math.random()) -0.5;
+					}
 				}
 			}
 
@@ -138,13 +148,13 @@ public class TripleLayerTest extends functions{
 				}
 			}
 			if(desiredOutcome[index]==1 || desiredOutcome[index2]==1 /*|| desiredOutcome[index3]==1*/) {
-				if(correct.size() == 100) {
+				if(correct.size() == 200) {
 					correct.remove(0);
 				}
 				correct.add(1);
 			}
 			else {
-				if(correct.size() == 100) {
+				if(correct.size() == 200) {
 					correct.remove(0);
 				}
 				correct.add(0);
@@ -187,7 +197,7 @@ public class TripleLayerTest extends functions{
 					test = 0;
 					break;
 				}
-				best200 = right;
+				best200 \= right;
 				bestComplete = test;
 				String file1 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\" + comp + "synapticWeights0.csv";
 				String file2 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\"+ comp +"synapticWeights1.csv";
@@ -199,8 +209,8 @@ public class TripleLayerTest extends functions{
 				System.out.println("Saved Correct:" + bestComplete);
 				System.out.println("Best200" + best200);
 			}
-				if(m%200 == 0) {
-				System.out.println("Last 200 correct:" + right);
+			if(m%200 == 0) {
+				System.out.println(m+"th iteration. Last 200 correct:" + right);
 			}
 		}
 		System.out.println("Total Time:" + totalTime);

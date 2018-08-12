@@ -133,5 +133,19 @@ public class CSVReadWrite {
 		writeCsv(combine, finalName);
 		return finalName;
 	}
+	
+	public static double[][] listToArray(ArrayList<double[]> a){
+		double[][] returnArray = new double[a.size()][a.get(0).length];
+		try {
+			for(int i=0; i<a.size();i++) {
+				for(int j=0; j<a.get(i).length; j++) {
+					returnArray[i][j]=a.get(i)[j];
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return returnArray;
+	}
 
 }
