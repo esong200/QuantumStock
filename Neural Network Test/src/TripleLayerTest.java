@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class TripleLayerTest extends functions{
 	public static void main(String[] args) {
-		String company = "AAPL";
+		String company = "All";
 		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"DataAdjst.csv");
 		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"Ans.csv");
 		ArrayList<double[]> dataTaylored = data;
@@ -62,7 +62,7 @@ public class TripleLayerTest extends functions{
 
 
 
-		for(int m = 0; m<1000; m++) {
+		for(int m = 0; m<100000; m++) {
 			int rand = (int) ((int) dataTaylored.size()*Math.random());
 			for(int i=0; i<data.get(0).length; i++) {
 				inputs[i]=(dataTaylored.get(rand))[i];
@@ -138,32 +138,33 @@ public class TripleLayerTest extends functions{
 				}
 			}
 			if(desiredOutcome[index]==1 || desiredOutcome[index2]==1 /*|| desiredOutcome[index3]==1*/) {
-				if(correct.size() == 200) {
+				if(correct.size() == 100) {
 					correct.remove(0);
 				}
 				correct.add(1);
 			}
 			else {
-				if(correct.size() == 200) {
+				if(correct.size() == 100) {
 					correct.remove(0);
 				}
 				correct.add(0);
 			}
-			if(m%200 == 0) {
+			if(m%100 == 0) {
 				int right = 0;
 				for(double i:correct) {
 					if(i == 1) {
 						right++;
 					}
 				}
-				System.out.println("Last 200 correct:" + right);
+				System.out.println("Last 100 correct:" + right);
 				correctPercentageArray[count]=right;
 				if(correctPercentageArray[count]>greatestAccuracy) {
 					greatestAccuracy = (int)correctPercentageArray[count];
 					greatestAccuracyIndex = m;
-					String file1 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights0.csv";
-					String file2 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights1.csv";
-					String file3 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights2.csv";
+					System.out.println("The biggest so far: "+ greatestAccuracy);
+					String file1 = "/Users/ethansong/Documents/Matrix Saves/snW3L/"+company+"synapticWeights0.csv";
+					String file2 = "/Users/ethansong/Documents/Matrix Saves/snW3L/"+company+"synapticWeights1.csv";
+					String file3 = "/Users/ethansong/Documents/Matrix Saves/snW3L/"+company+"synapticWeights2.csv";
 
 
 					writeCsv(synapticWeights0, file1);
@@ -182,12 +183,12 @@ public class TripleLayerTest extends functions{
 
 			}
 		}
-		writeCsv(correctPercentageArray, "/Users/ethansong/Documents/Matrix Saves/snW3L/"+company+"accuracyTable.csv");
 		System.out.println("Total Time:" + totalTime);
 		/*for(double i: inputs){
 			System.out.println(i);
 		}*/
 		System.out.println("The greatest correct rate: "+greatestAccuracy);
+		writeCsv(correctPercentageArray, "/Users/ethansong/Documents/Matrix Saves/snW3L/"+company+"accuracyTable.csv");
 		/*String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
 		String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
 		String file3 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights2.csv";
