@@ -211,7 +211,7 @@ public class TripleLayerTest extends functions{
 			}
 			if(m%200 == 0) {
 				System.out.println(m+"th iteration. Last 200 correct:" + right);
-			} 
+			}
 		}
 		System.out.println("Total Time:" + totalTime);
 		/*for(double i: inputs){
