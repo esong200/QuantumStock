@@ -44,19 +44,27 @@ public class TripleLayerTest extends functions{
 		double totalTime = 0;
 		double elapsed = 0;
 
-		for (int i=0; i<synapticWeights0.length; i++) {
-				for(int j=0; j<synapticWeights0[0].length; j++) {
-					synapticWeights0[i][j] = (Math.random()) -0.5;
-				}
+		try {
+				synapticWeights0 = listToArray(readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0/"+company+"synapticWeights0.csv"));
+				synapticWeights1 = listToArray(readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1/"+company+"synapticWeights1.csv"));
+				synapticWeights2 = listToArray(readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2/"+company+"synapticWeights2.csv"));
 			}
-			for (int i=0; i<synapticWeights1.length; i++) {
-				for(int j=0; j<synapticWeights1[0].length; j++) {
-					synapticWeights1[i][j] = (Math.random()) -0.5;
+			catch (Exception e){
+				System.out.println("Synaptic Weight not avaliable, using random ones.");
+				for (int i=0; i<synapticWeights0.length; i++) {
+					for(int j=0; j<synapticWeights0[0].length; j++) {
+						synapticWeights0[i][j] = (Math.random()) -0.5;
+					}
 				}
-			}
-			for (int i=0; i<synapticWeights2.length; i++) {
-				for(int j=0; j<synapticWeights2[0].length; j++) {
-					synapticWeights2[i][j] = (Math.random()) -0.5;
+				for (int i=0; i<synapticWeights1.length; i++) {
+					for(int j=0; j<synapticWeights1[0].length; j++) {
+						synapticWeights1[i][j] = (Math.random()) -0.5;
+					}
+				}
+				for (int i=0; i<synapticWeights2.length; i++) {
+					for(int j=0; j<synapticWeights2[0].length; j++) {
+						synapticWeights2[i][j] = (Math.random()) -0.5;
+					}
 				}
 			}
 
