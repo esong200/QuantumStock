@@ -149,13 +149,18 @@ public class TripleLayerTest extends functions{
 				}
 				correct.add(0);
 			}
+<<<<<<< HEAD
 			if(m%100 == 0) {
+=======
+			if(m%200 == 0) {
+>>>>>>> parent of e513507... autosave
 				int right = 0;
 				for(double i:correct) {
 					if(i == 1) {
 						right++;
 					}
 				}
+<<<<<<< HEAD
 				System.out.println("Last 100 correct:" + right);
 				correctPercentageArray[count]=right;
 				if(correctPercentageArray[count]>greatestAccuracy) {
@@ -172,6 +177,9 @@ public class TripleLayerTest extends functions{
 					writeCsv(synapticWeights2, file3);
 				}
 				count++;
+=======
+				System.out.println("Last 200 correct:" + right);
+>>>>>>> parent of e513507... autosave
 			}
 			if(m%1000 == 0) {
 				double  avg = 0;
