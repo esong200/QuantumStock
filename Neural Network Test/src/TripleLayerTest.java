@@ -149,23 +149,58 @@ public class TripleLayerTest extends functions{
 				}
 				correct.add(0);
 			}
-			if(m%200 == 0) {
-				int right = 0;
-				for(double i:correct) {
-					if(i == 1) {
-						right++;
-					}
+			int right = 0;
+			for(double i:correct) {
+				if(i == 1) {
+					right++;
 				}
-				System.out.println("Last 200 correct:" + right);
 			}
-			if(m%1000 == 0) {
-				double  avg = 0;
-				for(double i: error2) {
-					avg+=i;
-				}
-				avg= avg/error2.length;
-				System.out.println("error " + m + " :" + avg);
+			while(right > best200) {
+				int test = 0;
+				for(double[] x: dataTaylored) {
+					double[] test0, test1, testfinal;
+					double testBest = 0, testSecond = 0;
+					int bestind = 0, secondind = 0;
+					test0 = sigmoid1d(dotMultiply(x/*1x29*/, synapticWeights0/*29x18*/), false);
+					test1/*1x18*/ = sigmoid1d(dotMultiply(test0/*1x29*/, synapticWeights1/*29x18*/), false);
+					testfinal = sigmoid1d(dotMultiply(test1, synapticWeights2), false);
+					double[] actualAns = ans.get(dataTaylored.indexOf(x));
+					for(int i = 0; i < testfinal.length; i++) {
+						if(testfinal[i]>largest) {
+							testBest = testfinal[i];
+							bestind = i;
+						}
+					}
+					for(int i = 0; i<testfinal.length; i++) {
+						if(testfinal[i]>testSecond && testfinal[i]<testBest) {
+							testSecond = testfinal[i];
+							secondind = i;
+						}
+					}
+					if(actualAns[bestind]==1 || actualAns[secondind]==1 /*|| desiredOutcome[index3]==1*/) {
+						test++;
+					}
 
+					//System.out.println("test:" + test);
+				}
+				if(test <= bestComplete) {
+					test = 0;
+					break;
+				}
+				best200 = right;
+				bestComplete = test;
+				String file1 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\" + comp + "synapticWeights0.csv";
+				String file2 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\"+ comp +"synapticWeights1.csv";
+				String file3 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\"+ comp +"synapticWeights2.csv";
+				writeCsv(synapticWeights0, file1);
+				writeCsv(synapticWeights1, file2);
+				writeCsv(synapticWeights2, file3);
+
+				System.out.println("Saved Correct:" + bestComplete);
+				System.out.println("Best200" + best200);
+			}
+				if(m%200 == 0) {
+				System.out.println("Last 200 correct:" + right);
 			}
 		}
 		System.out.println("Total Time:" + totalTime);
