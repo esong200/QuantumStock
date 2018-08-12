@@ -12,6 +12,8 @@ public class TripleLayerTest extends functions{
 		int count = 0;
 		int greatestAccuracy = 0;
 		int greatestAccuracyIndex = 0;
+		int best200 = 0;
+		int bestComplete = 0;
 		while(ans.size()>maxSize){
 			ans.remove(ans.size()-1);
 		}
@@ -209,6 +211,9 @@ public class TripleLayerTest extends functions{
 			}
 			if(m%200 == 0) {
 				System.out.println("Last 200 correct:" + right);
+			}
+			if(m%5000 ==0) {
+				System.out.println(m + "th iteration");
 			}
 		}
 		System.out.println("Total Time:" + totalTime);
