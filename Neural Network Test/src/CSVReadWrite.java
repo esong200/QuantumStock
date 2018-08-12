@@ -133,7 +133,7 @@ public class CSVReadWrite {
 		writeCsv(combine, finalName);
 		return finalName;
 	}
-	
+
 	public static double[][] listToArray(ArrayList<double[]> a){
 		double[][] returnArray = new double[a.size()][a.get(0).length];
 		try {
