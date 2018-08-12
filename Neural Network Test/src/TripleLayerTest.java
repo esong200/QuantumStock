@@ -206,7 +206,7 @@ public class TripleLayerTest {
 				CSVReadWrite.writeCsv(synapticWeights1, file2);
 				CSVReadWrite.writeCsv(synapticWeights2, file3);
 
-				System.out.println("Saved Correct:" + bestComplete);
+				System.out.println("Saved Correct:" + bestComplete + " out of " + data.size());
 				System.out.println("Best200:" + best200);
 				}
 			if(m%200 == 0) {
