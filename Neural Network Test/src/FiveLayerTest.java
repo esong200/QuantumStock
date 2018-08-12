@@ -4,8 +4,9 @@ import java.util.ArrayList;
 public class FiveLayerTest extends functions {
 	//array specs: input array: 1x29, desiredOutcome: 1x8
 	public static void main(String[] args) {
-		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/PEPDataAdjst.csv");
-		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/PEPAns.csv");
+    String company = "AAPL";
+		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"DataAdjst.csv");
+		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"Ans.csv");
 		ArrayList<double[]> dataTaylored = data;
 		ArrayList<Integer> correct = new ArrayList<Integer>();
 		double[][] dataTayloredMatrix = new double[dataTaylored.size()][dataTaylored.get(0).length];
