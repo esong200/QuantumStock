@@ -138,13 +138,13 @@ public class TripleLayerTest extends functions{
 				}
 			}
 			if(desiredOutcome[index]==1 || desiredOutcome[index2]==1 /*|| desiredOutcome[index3]==1*/) {
-				if(correct.size() == 100) {
+				if(correct.size() == 200) {
 					correct.remove(0);
 				}
 				correct.add(1);
 			}
 			else {
-				if(correct.size() == 100) {
+				if(correct.size() == 200) {
 					correct.remove(0);
 				}
 				correct.add(0);
@@ -187,7 +187,7 @@ public class TripleLayerTest extends functions{
 					test = 0;
 					break;
 				}
-				best200 = right;
+				best200 \= right;
 				bestComplete = test;
 				String file1 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\" + comp + "synapticWeights0.csv";
 				String file2 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\"+ comp +"synapticWeights1.csv";
