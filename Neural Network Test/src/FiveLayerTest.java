@@ -4,10 +4,13 @@ import java.util.ArrayList;
 public class FiveLayerTest extends functions {
 	//array specs: input array: 1x29, desiredOutcome: 1x8
 	public static void main(String[] args) {
-    String company = "AAPL";
+		String company = "AAPL";
 		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"DataAdjst.csv");
 		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"Ans.csv");
 		ArrayList<double[]> dataTaylored = data;
+		int count = 0;
+		int greatestAccuracy = 0;
+		int greatestAccuracyIndex = 0;
 		ArrayList<Integer> correct = new ArrayList<Integer>();
 		double[][] dataTayloredMatrix = new double[dataTaylored.size()][dataTaylored.get(0).length];
 		int maxSize = data.size();
@@ -161,6 +164,24 @@ public class FiveLayerTest extends functions {
 				}
 				System.out.println("Last 200 correct:" + right);
 				correctPercentageArray[count]=right;
+				if(correctPercentageArray[count]>greatestAccuracy) {
+					greatestAccuracy = (int)correctPercentageArray[count];
+					greatestAccuracyIndex = m;
+					System.out.println("The biggest so far: "+ greatestAccuracy);
+					String file1 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights0.csv";
+					String file2 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights1.csv";
+					String file3 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights2.csv";
+					String file4 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights3.csv";
+					String file5 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights4.csv";
+
+
+					writeCsv(synapticWeights0, file1);
+					writeCsv(synapticWeights1, file2);
+					writeCsv(synapticWeights2, file3);
+					writeCsv(synapticWeights3, file4);
+					writeCsv(synapticWeights4, file5);
+				}
+				correctPercentageArray[count]=right;
 				count++;
 			}
 			if(m%1000 == 0) {
@@ -206,17 +227,17 @@ public class FiveLayerTest extends functions {
 		}
 		System.out.println("Average time per outer loop iteration: "+ totalTime/data.size());
 		System.out.println("Total time for outer and inner for loop iterations: "+ totalTime);
-		String file1 = "/Users/ethansong/Documents/Matrix Saves/snW5L/synapticWeights0.csv";
-		String file2 = "/Users/ethansong/Documents/Matrix Saves/snW5L/synapticWeights1.csv";
-		String file3 = "/Users/ethansong/Documents/Matrix Saves/snW5L/synapticWeights2.csv";
-		String file4 = "/Users/ethansong/Documents/Matrix Saves/snW5L/synapticWeights3.csv";
-		String file5 = "/Users/ethansong/Documents/Matrix Saves/snW5L/synapticWeights4.csv";
+		/*String file1 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights0.csv";
+		String file2 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights1.csv";
+		String file3 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights2.csv";
+		String file4 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights3.csv";
+		String file5 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights4.csv";
 
 
 		writeCsv(synapticWeights0, file1);
 		writeCsv(synapticWeights1, file2);
 		writeCsv(synapticWeights2, file3);
 		writeCsv(synapticWeights3, file4);
-		writeCsv(synapticWeights4, file5);
+		writeCsv(synapticWeights4, file5);*/
 	}
 }
