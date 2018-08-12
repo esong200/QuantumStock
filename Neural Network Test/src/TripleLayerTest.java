@@ -182,6 +182,7 @@ public class TripleLayerTest extends functions{
 
 			}
 		}
+		writeCsv(correctPercentageArray, "/Users/ethansong/Documents/Matrix Saves/snW3L/"+company+"accuracyTable.csv");
 		System.out.println("Total Time:" + totalTime);
 		/*for(double i: inputs){
 			System.out.println(i);
