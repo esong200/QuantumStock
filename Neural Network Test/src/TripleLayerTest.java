@@ -40,7 +40,7 @@ public class TripleLayerTest extends functions{
 		double[] delta1 = new double[intermediateAnswer1.length];
 		double[] error0 = new double[intermediateAnswer0.length];
 		double[] delta0 = new double[intermediateAnswer0.length];
-		double[] correctPercentageArray = new double[520];
+		double[] correctPercentageArray = new double[5020];
 		double totalTime = 0;
 		double elapsed = 0;
 
@@ -61,7 +61,8 @@ public class TripleLayerTest extends functions{
 			}
 
 
-		for(int m = 0; m<1000000; m++) {
+
+		for(int m = 0; m<1000; m++) {
 			int rand = (int) ((int) dataTaylored.size()*Math.random());
 			for(int i=0; i<data.get(0).length; i++) {
 				inputs[i]=(dataTaylored.get(rand))[i];
@@ -160,12 +161,14 @@ public class TripleLayerTest extends functions{
 				if(correctPercentageArray[count]>greatestAccuracy) {
 					greatestAccuracy = (int)correctPercentageArray[count];
 					greatestAccuracyIndex = m;
-					/*String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
-					String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
-					String file3 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights2.csv";
+					String file1 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights0.csv";
+					String file2 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights1.csv";
+					String file3 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights2.csv";
+
+
 					writeCsv(synapticWeights0, file1);
 					writeCsv(synapticWeights1, file2);
-					writeCsv(synapticWeights2, file3);*/
+					writeCsv(synapticWeights2, file3);
 				}
 				count++;
 			}
@@ -183,12 +186,13 @@ public class TripleLayerTest extends functions{
 		/*for(double i: inputs){
 			System.out.println(i);
 		}*/
-		String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
+		System.out.println("The greatest correct rate: "+greatestAccuracy);
+		/*String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
 		String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
 		String file3 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights2.csv";
 		writeCsv(synapticWeights0, file1);
 		writeCsv(synapticWeights1, file2);
-		writeCsv(synapticWeights2, file3);
+		writeCsv(synapticWeights2, file3);*/
 
 
 	}
