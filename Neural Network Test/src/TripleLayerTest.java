@@ -1,16 +1,17 @@
 import java.util.ArrayList;
-import java.io.File;
-
 
 public class TripleLayerTest extends functions{
 	public static void main(String[] args) {
-		String comp = "";
-		ArrayList<double[]> data = readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\"+ comp + "Adjst.csv");
-		ArrayList<double[]> ans = readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\"+ comp + "Ans.csv");
+		String company = "AAPL";
+		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"DataAdjst.csv");
+		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"Ans.csv");
 		ArrayList<double[]> dataTaylored = data;
 		ArrayList<Integer> correct = new ArrayList<Integer>();
 		double[][] dataTayloredMatrix = new double[dataTaylored.size()][dataTaylored.get(0).length];
 		int maxSize = data.size();
+		int count = 0;
+		int greatestAccuracy = 0;
+		int greatestAccuracyIndex = 0;
 		while(ans.size()>maxSize){
 			ans.remove(ans.size()-1);
 		}
@@ -39,31 +40,26 @@ public class TripleLayerTest extends functions{
 		double[] delta1 = new double[intermediateAnswer1.length];
 		double[] error0 = new double[intermediateAnswer0.length];
 		double[] delta0 = new double[intermediateAnswer0.length];
+		double[] correctPercentageArray = new double[520];
 		double totalTime = 0;
 		double elapsed = 0;
 
-		if(new File("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\"+ comp + "synapticWeights2.csv").exists()) {
-			synapticWeights0 = csvRead("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\KSSsynapticWeights0.csv");
-			synapticWeights1 = csvRead("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\KSSsynapticWeights1.csv");
-			synapticWeights2 = csvRead("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\KSSsynapticWeights2.csv");
-		}
-		else {
-			for (int i=0; i<synapticWeights0.length; i++) {
-					for(int j=0; j<synapticWeights0[0].length; j++) {
-						synapticWeights0[i][j] = (Math.random()) -0.5;
-					}
-				}
-				for (int i=0; i<synapticWeights1.length; i++) {
-					for(int j=0; j<synapticWeights1[0].length; j++) {
-						synapticWeights1[i][j] = (Math.random()) -0.5;
-					}
-				}
-				for (int i=0; i<synapticWeights2.length; i++) {
-					for(int j=0; j<synapticWeights2[0].length; j++) {
-						synapticWeights2[i][j] = (Math.random()) -0.5;
-					}
+		for (int i=0; i<synapticWeights0.length; i++) {
+				for(int j=0; j<synapticWeights0[0].length; j++) {
+					synapticWeights0[i][j] = (Math.random()) -0.5;
 				}
 			}
+			for (int i=0; i<synapticWeights1.length; i++) {
+				for(int j=0; j<synapticWeights1[0].length; j++) {
+					synapticWeights1[i][j] = (Math.random()) -0.5;
+				}
+			}
+			for (int i=0; i<synapticWeights2.length; i++) {
+				for(int j=0; j<synapticWeights2[0].length; j++) {
+					synapticWeights2[i][j] = (Math.random()) -0.5;
+				}
+			}
+
 
 		for(int m = 0; m<1000000; m++) {
 			int rand = (int) ((int) dataTaylored.size()*Math.random());
@@ -152,58 +148,26 @@ public class TripleLayerTest extends functions{
 				}
 				correct.add(0);
 			}
-			int right = 0;
-			for(double i:correct) {
-				if(i == 1) {
-					right++;
-				}
-			}
-			while(right > best200) {
-				int test = 0;
-				for(double[] x: dataTaylored) {
-					double[] test0, test1, testfinal;
-					double testBest = 0, testSecond = 0;
-					int bestind = 0, secondind = 0;
-					test0 = sigmoid1d(dotMultiply(x/*1x29*/, synapticWeights0/*29x18*/), false);
-					test1/*1x18*/ = sigmoid1d(dotMultiply(test0/*1x29*/, synapticWeights1/*29x18*/), false);
-					testfinal = sigmoid1d(dotMultiply(test1, synapticWeights2), false);
-					double[] actualAns = ans.get(dataTaylored.indexOf(x));
-					for(int i = 0; i < testfinal.length; i++) {
-						if(testfinal[i]>largest) {
-							testBest = testfinal[i];
-							bestind = i;
-						}
+			if(m%200 == 0) {
+				int right = 0;
+				for(double i:correct) {
+					if(i == 1) {
+						right++;
 					}
-					for(int i = 0; i<testfinal.length; i++) {
-						if(testfinal[i]>testSecond && testfinal[i]<testBest) {
-							testSecond = testfinal[i];
-							secondind = i;
-						}
-					}
-					if(actualAns[bestind]==1 || actualAns[secondind]==1 /*|| desiredOutcome[index3]==1*/) {
-						test++;
-					}
-
-					//System.out.println("test:" + test);
 				}
-				if(test <= bestComplete) {
-					test = 0;
-					break;
-				}
-				best200 = right;
-				bestComplete = test;
-				String file1 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\" + comp + "synapticWeights0.csv";
-				String file2 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\"+ comp +"synapticWeights1.csv";
-				String file3 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\"+ comp +"synapticWeights2.csv";
-				writeCsv(synapticWeights0, file1);
-				writeCsv(synapticWeights1, file2);
-				writeCsv(synapticWeights2, file3);
-
-				System.out.println("Saved Correct:" + bestComplete);
-				System.out.println("Best200:" + best200);
-			}
-				if(m%200 == 0) {
 				System.out.println("Last 200 correct:" + right);
+				correctPercentageArray[count]=right;
+				if(correctPercentageArray[count]>greatestAccuracy) {
+					greatestAccuracy = (int)correctPercentageArray[count];
+					greatestAccuracyIndex = m;
+					/*String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
+					String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
+					String file3 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights2.csv";
+					writeCsv(synapticWeights0, file1);
+					writeCsv(synapticWeights1, file2);
+					writeCsv(synapticWeights2, file3);*/
+				}
+				count++;
 			}
 			if(m%1000 == 0) {
 				double  avg = 0;
@@ -219,9 +183,9 @@ public class TripleLayerTest extends functions{
 		/*for(double i: inputs){
 			System.out.println(i);
 		}*/
-		String file1 = "/Users/ethansong/Documents/Matrix Saves/" + comp+ "synapticWeights0.csv";
-		String file2 = "/Users/ethansong/Documents/Matrix Saves/" + comp+ "synapticWeights1.csv";
-		String file3 = "/Users/ethansong/Documents/Matrix Saves/" + comp+ "synapticWeights2.csv";
+		String file1 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights0.csv";
+		String file2 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights1.csv";
+		String file3 = "/Users/ethansong/Documents/Matrix Saves/synapticWeights2.csv";
 		writeCsv(synapticWeights0, file1);
 		writeCsv(synapticWeights1, file2);
 		writeCsv(synapticWeights2, file3);
