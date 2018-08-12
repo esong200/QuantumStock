@@ -149,37 +149,14 @@ public class TripleLayerTest extends functions{
 				}
 				correct.add(0);
 			}
-<<<<<<< HEAD
-			if(m%100 == 0) {
-=======
 			if(m%200 == 0) {
->>>>>>> parent of e513507... autosave
 				int right = 0;
 				for(double i:correct) {
 					if(i == 1) {
 						right++;
 					}
 				}
-<<<<<<< HEAD
-				System.out.println("Last 100 correct:" + right);
-				correctPercentageArray[count]=right;
-				if(correctPercentageArray[count]>greatestAccuracy) {
-					greatestAccuracy = (int)correctPercentageArray[count];
-					greatestAccuracyIndex = m;
-					System.out.println("The biggest so far: "+ greatestAccuracy);
-					String file1 = "/Users/ethansong/Documents/Matrix Saves/snW3L/"+company+"synapticWeights0.csv";
-					String file2 = "/Users/ethansong/Documents/Matrix Saves/snW3L/"+company+"synapticWeights1.csv";
-					String file3 = "/Users/ethansong/Documents/Matrix Saves/snW3L/"+company+"synapticWeights2.csv";
-
-
-					writeCsv(synapticWeights0, file1);
-					writeCsv(synapticWeights1, file2);
-					writeCsv(synapticWeights2, file3);
-				}
-				count++;
-=======
 				System.out.println("Last 200 correct:" + right);
->>>>>>> parent of e513507... autosave
 			}
 			if(m%1000 == 0) {
 				double  avg = 0;
