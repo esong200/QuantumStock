@@ -209,7 +209,7 @@ public class FiveLayerTest extends functions {
 		}
 		long outermostStop = System.currentTimeMillis();
 		totalTime = (outermostStop-outermostStart)/1000.0;
-		writeCsv(correctPercentageArray, "/Users/ethansong/Documents/Matrix Saves/correctAnswerPercentages10k5L.csv");
+		writeCsv(correctPercentageArray, "/Users/ethansong/Documents/Matrix Saves/snW5L"+company+"correctAnswerTable.csv");
 		System.out.println();
 		System.out.println("Synaptic Weights0:");
 		System.out.println();
