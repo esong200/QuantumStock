@@ -165,7 +165,7 @@ public class TripleLayerTest extends functions{
 					right++;
 				}
 			}
-			while(right > best200) {
+			while(right > (bestComplete/data.size())*200) {
 				int test = 0;
 				for(double[] x: dataTaylored) {
 					double[] test0, test1, testfinal;
