@@ -210,11 +210,8 @@ public class TripleLayerTest extends functions{
 				System.out.println("Best200" + best200);
 			}
 			if(m%200 == 0) {
-				System.out.println("Last 200 correct:" + right);
-			}
-			if(m%5000 ==0) {
-				System.out.println(m + "th iteration");
-			}
+				System.out.println(m+"th iteration. Last 200 correct:" + right);
+			} 
 		}
 		System.out.println("Total Time:" + totalTime);
 		/*for(double i: inputs){
