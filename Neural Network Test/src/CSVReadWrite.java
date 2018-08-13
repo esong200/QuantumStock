@@ -34,7 +34,6 @@ public class CSVReadWrite {
 			}
 		}
 	}
-
 	public static void writeCsv(double[][] matrix, String file) {
 		FileWriter fw = null;
 		try {
@@ -61,7 +60,6 @@ public class CSVReadWrite {
 			}
 		}
 	}
-
 	public static void writeCsv(double[] matrix, String file) {
 		FileWriter fw = null;
 		try {
@@ -73,9 +71,6 @@ public class CSVReadWrite {
 					fw.append(",");
 					fw.append("\n");
 				}
-
-
-
 		}
 		catch (Exception ex) {
 			   ex.printStackTrace();
@@ -89,7 +84,6 @@ public class CSVReadWrite {
 			}
 		}
 	}
-
 	public static ArrayList<double[]> readCsv(String file){
 		BufferedReader br = null;
 		ArrayList<double[]> returnArr = new ArrayList<double[]>();
@@ -104,9 +98,11 @@ public class CSVReadWrite {
 					double[] data = new double[length];
 					for(int i = 0; i<fields.length; i++) {
 						data[i] = Double.parseDouble(fields[i]);
+
 					}
 					returnArr.add(data);
 				}
+
 			}
 		}catch (Exception ex) {
 			   ex.printStackTrace();
@@ -119,21 +115,6 @@ public class CSVReadWrite {
 		  }
 		return returnArr;
 	}
-
-	public static String combine(String file1, String file2, String finalName) {
-		ArrayList<double[]> first = readCsv(file1);
-		ArrayList<double[]> second = readCsv(file2);
-		ArrayList<double[]> combine = new ArrayList<double[]>();;
-		first.forEach(arr ->{
-			combine.add(arr);
-		});
-		second.forEach(arr ->{
-			combine.add(arr);
-		});
-		writeCsv(combine, finalName);
-		return finalName;
-	}
-
 	public static double[][] listToArray(ArrayList<double[]> a){
 		double[][] returnArray = new double[a.size()][a.get(0).length];
 		try {
