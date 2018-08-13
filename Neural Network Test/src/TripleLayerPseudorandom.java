@@ -74,6 +74,7 @@ public class TripleLayerPseudorandom {
 
 		for(int m = 0; m<1000000; m++) {
 			if(pseudorandomData.size()==0) {
+				System.out.println("Data arrays replenished.");
 				for(double[] x: dataTaylored) {
 					pseudorandomData.add(x);
 				}
