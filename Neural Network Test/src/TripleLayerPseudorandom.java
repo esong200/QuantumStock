@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class TripleLayerPseudorandom {
 	public static void main(String[] args) {
-		String comp = "AAPL";
+		String comp = "HAS";
 		ArrayList<double[]> data = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "DataAdjst.csv");
 		ArrayList<double[]> ans = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "Ans.csv");
 		ArrayList<double[]> dataTaylored = data;
@@ -52,7 +52,7 @@ public class TripleLayerPseudorandom {
 			double[] sizeTest3 = functions.dotMultiply(inputs, synapticWeights2);
 		}
 		catch (Exception e) {
-			System.out.println("weights do not exist");
+			System.out.println("Weights do not exist or are incorrect.");
 			for (int i=0; i<synapticWeights0.length; i++) {
 				for(int j=0; j<synapticWeights0[0].length; j++) {
 					synapticWeights0[i][j] = (2*Math.random()) -1;
