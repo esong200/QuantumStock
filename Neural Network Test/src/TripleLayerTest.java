@@ -41,28 +41,29 @@ public class TripleLayerTest extends functions{
 		double[] delta0 = new double[intermediateAnswer0.length];
 		double totalTime = 0;
 		double elapsed = 0;
-		if(false/*new File("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\"+ comp + "synapticWeights2.csv").exists()*/) {
-	//		synapticWeights0 = readCsvD("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\KSSsynapticWeights0.csv");
-	//		synapticWeights1 = readCsvD("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\KSSsynapticWeights1.csv");
-	//		synapticWeights2 = readCsvD("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights2\\KSSsynapticWeights2.csv");
-		}
-		else {
-		for (int i=0; i<synapticWeights0.length; i++) {
-			for(int j=0; j<synapticWeights0[0].length; j++) {
-				synapticWeights0[i][j] = (2*Math.random()) -1;
+		try {
+				synapticWeights0 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0"+comp+"synapticWeights0.csv"));
+				synapticWeights1 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1"+comp+"synapticWeights1.csv"));
+				synapticWeights2 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2"+comp+"synapticWeights2.csv"));
 			}
-		}
-		for (int i=0; i<synapticWeights1.length; i++) {
-			for(int j=0; j<synapticWeights1[0].length; j++) {
-				synapticWeights1[i][j] = (2*Math.random()) -1;
+			catch (Exception e) {
+				System.out.println("weights do not exist");
+				for (int i=0; i<synapticWeights0.length; i++) {
+					for(int j=0; j<synapticWeights0[0].length; j++) {
+						synapticWeights0[i][j] = (2*Math.random()) -1;
+					}
+				}
+				for (int i=0; i<synapticWeights1.length; i++) {
+					for(int j=0; j<synapticWeights1[0].length; j++) {
+						synapticWeights1[i][j] = (2*Math.random()) -1;
+					}
+				}
+				for (int i=0; i<synapticWeights2.length; i++) {
+					for(int j=0; j<synapticWeights2[0].length; j++) {
+						synapticWeights2[i][j] = (2*Math.random()) -1;
+					}
+				}
 			}
-		}
-		for (int i=0; i<synapticWeights2.length; i++) {
-			for(int j=0; j<synapticWeights2[0].length; j++) {
-				synapticWeights2[i][j] = (2*Math.random()) -1;
-			}
-		}
-		}
 
 
 		for(int m = 0; m<1000000; m++) {
