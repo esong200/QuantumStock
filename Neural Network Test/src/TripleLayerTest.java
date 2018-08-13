@@ -45,12 +45,9 @@ public class TripleLayerTest {
 			synapticWeights0 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0/"+comp+"synapticWeights0.csv"));
 			synapticWeights1 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1/"+comp+"synapticWeights1.csv"));
 			synapticWeights2 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2/"+comp+"synapticWeights2.csv"));
-			double[] sizeTest1 = functions.dotMultiply(inputs, synapticWeights0);
-			double[] sizeTest2 = functions.dotMultiply(inputs, synapticWeights1);
-			double[] sizeTest3 = functions.dotMultiply(inputs, synapticWeights2);
-		}
-		catch (Exception e) {
-			System.out.println("weights do not exist");
+		} catch (Exception e) {
+			System.out.println("Weights do not exist. Generating from random seed.");
+		} finally {
 			for (int i=0; i<synapticWeights0.length; i++) {
 				for(int j=0; j<synapticWeights0[0].length; j++) {
 					synapticWeights0[i][j] = (2*Math.random()) -1;
@@ -67,6 +64,35 @@ public class TripleLayerTest {
 				}
 			}
 		}
+
+		try {
+			double[] sizeTest1 = functions.dotMultiply(inputs, synapticWeights0);
+			double[] sizeTest2 = functions.dotMultiply(inputs, synapticWeights1);
+			double[] sizeTest3 = functions.dotMultiply(inputs, synapticWeights2);
+		}
+		catch (Exception e) {
+			System.out.println("Weights are incorrect dimentions. Generating from random seed.");
+		}
+		finally {
+			synapticWeights0 =new double[inputs.length][23];
+			synapticWeights1 = new double[intermediateAnswer0.length][18];
+			synapticWeights2 = new double[intermediateAnswer1.length][desiredOutcome.length];
+
+			for (int i=0; i<synapticWeights0.length; i++) {
+				for(int j=0; j<synapticWeights0[0].length; j++) {
+					synapticWeights0[i][j] = (2*Math.random()) -1;
+				}
+			}
+			for (int i=0; i<synapticWeights1.length; i++) {
+				for(int j=0; j<synapticWeights1[0].length; j++) {
+					synapticWeights1[i][j] = (2*Math.random()) -1;
+				}
+			}
+			for (int i=0; i<synapticWeights2.length; i++) {
+				for(int j=0; j<synapticWeights2[0].length; j++) {
+					synapticWeights2[i][j] = (2*Math.random()) -1;
+				}
+			}
 
 
 		for(int m = 0; m<1000000; m++) {
