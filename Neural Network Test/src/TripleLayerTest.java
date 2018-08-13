@@ -45,6 +45,9 @@ public class TripleLayerTest extends functions{
 				synapticWeights0 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0"+comp+"synapticWeights0.csv"));
 				synapticWeights1 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1"+comp+"synapticWeights1.csv"));
 				synapticWeights2 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2"+comp+"synapticWeights2.csv"));
+				double[] sizeTest1 = functions.dotMultiply(inputs, synapticWeights0);
+				double[] sizeTest2 = functions.dotMultiply(inputs, synapticWeights1);
+				double[] sizeTest3 = functions.dotMultiply(inputs, synapticWeights2);
 			}
 			catch (Exception e) {
 				System.out.println("weights do not exist");
