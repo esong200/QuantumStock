@@ -195,19 +195,19 @@ public class TripleLayerTest extends functions{
 				}
 				best200 = right;
 				bestComplete = test;
-				String file1 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\TripleLayer\\Weights0\\"+ comp + "synapticWeights0.csv";
-				String file2 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\TripleLayer\\Weights1\\"+ comp + "synapticWeights1.csv";
-				String file3 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\TripleLayer\\Weights2\\"+ comp + "synapticWeights2.csv";
-				writeCsv(synapticWeights0, file1);
-				writeCsv(synapticWeights1, file2);
-				writeCsv(synapticWeights2, file3);
+				String file1 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0/"+ comp + "synapticWeights0.csv";
+				String file2 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1/"+ comp + "synapticWeights1.csv";
+				String file3 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2/"+ comp + "synapticWeights2.csv";
+				CSVReadWrite.writeCsv(synapticWeights0, file1);
+				CSVReadWrite.writeCsv(synapticWeights1, file2);
+				CSVReadWrite.writeCsv(synapticWeights2, file3);
 
 				System.out.println("New Saved Correct:" + bestComplete + " out of " + data.size());
-				System.out.println("Best200: " + best200 + ", Best Saved Correct so far: " +bestComplete);
+				System.out.println("Best200: " + best200);
 				break;
 			}
 				if(m%200 == 0) {
-				System.out.println("Last 200 correct:" + right);
+				System.out.println("Last 200 correct:" + right + ", Best Saved Correct so far: " +bestComplete);
 			}
 			if(m%1000 == 0) {
 				double  avg = 0;
