@@ -207,7 +207,7 @@ public class TripleLayerTest extends functions{
 				break;
 			}
 				if(m%200 == 0) {
-				System.out.println("Last 200 correct:" + right + ", Best Saved Correct so far: " +bestComplete);
+				System.out.println("Last 200 correct:" + right + ", Best Saved Correct so far: " +bestComplete + " out of "+ data.size());
 			}
 			if(m%1000 == 0) {
 				double  avg = 0;
