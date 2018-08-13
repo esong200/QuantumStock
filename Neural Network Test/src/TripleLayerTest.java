@@ -202,7 +202,7 @@ public class TripleLayerTest extends functions{
 				writeCsv(synapticWeights1, file2);
 				writeCsv(synapticWeights2, file3);
 
-				System.out.println("Saved Correct:" + bestComplete + " out of " + data.size());
+				System.out.println("New Saved Correct:" + bestComplete + " out of " + data.size());
 				System.out.println("Best200: " + best200 + ", Best Saved Correct so far: " +bestComplete);
 				break;
 			}
