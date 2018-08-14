@@ -64,11 +64,11 @@ public class TripleLayerTest {
 				}
 			}
 		}
-
+		System.out.println("Weight retrieval successful. Testing for proper size.");
 		try {
 			double[] sizeTest1 = functions.dotMultiply(inputs, synapticWeights0);
-			double[] sizeTest2 = functions.dotMultiply(inputs, synapticWeights1);
-			double[] sizeTest3 = functions.dotMultiply(inputs, synapticWeights2);
+			double[] sizeTest2 = functions.dotMultiply(intermediateAnswer0, synapticWeights1);
+			double[] sizeTest3 = functions.dotMultiply(intermediateAnswer1, synapticWeights2);
 		}
 		catch (Exception e) {
 			System.out.println("Weights are incorrect dimentions. Generating from random seed.");
@@ -93,6 +93,8 @@ public class TripleLayerTest {
 					synapticWeights2[i][j] = (2*Math.random()) -1;
 				}
 			}
+		}
+		System.out.println("Retrieved weights are the correct dimensions.");
 
 
 		for(int m = 0; m<1000000; m++) {
@@ -230,12 +232,12 @@ public class TripleLayerTest {
 				CSVReadWrite.writeCsv(synapticWeights1, file2);
 				CSVReadWrite.writeCsv(synapticWeights2, file3);
 
-				System.out.println("Saved Correct:" + bestComplete + " out of " + data.size());
+				System.out.println("Saved Correct:" + bestComplete + " out of " + data.size() + " ("+ (Math.round((((double)(bestComplete)*100)/(double)(data.size()))*100.0))/100.0 + "%)");
 				System.out.println("Best200: " + best200);
 				break;
 			}
 				if(m%200 == 0) {
-					System.out.println("Last 200 correct:" + right + ", Best Saved Correct so far: " +bestComplete + " out of "+ data.size());
+					System.out.println("Last 200 correct:" + right + ", Best Saved Correct so far: " +bestComplete + " out of "+ data.size() + " ("+ (Math.round((((double)(bestComplete)*100)/(double)(data.size()))*100.0))/100.0 + "%)");
 			}
 			if(m%1000 == 0) {
 				double  avg = 0;

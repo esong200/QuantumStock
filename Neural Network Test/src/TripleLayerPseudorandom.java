@@ -255,12 +255,12 @@ public class TripleLayerPseudorandom {
 				CSVReadWrite.writeCsv(synapticWeights1, file2);
 				CSVReadWrite.writeCsv(synapticWeights2, file3);
 
-				System.out.println("New Saved Correct:" + bestComplete + " out of " + data.size());
+				System.out.println("New Saved Correct:" + bestComplete + " out of " + data.size() + " ("+ (Math.round((((double)(bestComplete)*100)/(double)(data.size()))*100.0))/100.0 + "%)");
 				System.out.println("Best200: " + best200);
 				break;
 			}
 				if(m%200 == 0) {
-				System.out.println("Last 200 correct:" + right + ", Best Saved Correct so far: " +bestComplete + " out of "+ data.size());
+				System.out.println("Last 200 correct:" + right + ", Best Saved Correct so far: " +bestComplete + " out of "+ data.size() + " ("+ (Math.round((((double)(bestComplete)*100)/(double)(data.size()))*100.0))/100.0 + "%)");
 			}
 			if(m%1000 == 0) {
 				double  avg = 0;
