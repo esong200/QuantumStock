@@ -27,7 +27,7 @@ import java.util.List;
 
 import org.patriques.output.technicalindicators.MACD;
 
-public class AlphaVantageCollector{
+public class AlphaVantageCollector extends CSVReadWrite{
 		static String apiKey = "EL09735SU2ZIYXW5";
 		static String apiKey1 = "W7JYK9UWBIO9X75G";
 		static String apiKey2 = "356GGMBFYQWEUOFR";
@@ -73,7 +73,6 @@ public class AlphaVantageCollector{
 		return data;
 	}
 
-
 	public static ArrayList<double[]> DataCollection (String symbol){
 		/*returns data in form Open High Low close volume sma50 ema50 sma100 ema100 macdHist macdSig
 		* macd stochd stochk rsi50 rsi100 adx50 aroon50down aroon50up aroon100down aroon100up
@@ -108,8 +107,8 @@ public class AlphaVantageCollector{
 		e1.printStackTrace();
 	}
 	ADX adx50 = technicalIndicators1.adx(symbol, Interval.MONTHLY, TimePeriod.of(50));
-	ADX adx100 = technicalIndicators2.adx(symbol, Interval.MONTHLY, TimePeriod.of(100));
-
+	//ADX adx100 = technicalIndicators2.adx(symbol, Interval.MONTHLY, TimePeriod.of(100));
+	CMO cmo = technicalIndicators.cmo(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
 	AROON aroon50 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(50));
 	AROON aroon100 = technicalIndicators2.aroon(symbol, Interval.MONTHLY, TimePeriod.of(100));
 
@@ -133,8 +132,14 @@ public class AlphaVantageCollector{
 		e1.printStackTrace();
 	}
 	Monthly response = stockTimeSeries.monthly(symbol);
-
+	CCI cci50 = technicalIndicators2.cci(symbol, Interval.MONTHLY, TimePeriod.of(50));
+	MOM mom = technicalIndicators.mom(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+	TRIX trix = technicalIndicators.trix(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
 		try {
+			List<IndicatorData> trixData = trix.getData();
+			List<IndicatorData> momData = mom.getData();
+			List<IndicatorData> cmoData = cmo.getData();
+			List<IndicatorData> cci = cci50.getData();
 			List<IndicatorData> smaData50 = sma.getData();
 			List<IndicatorData> emaData50 = ema.getData();
 			List<IndicatorData> smaData = smaTest.getData();
@@ -157,7 +162,8 @@ public class AlphaVantageCollector{
 				if((index == stockData.size() || index == smaData50.size() || index == emaData50.size() || index == smaData.size() || index == emaData.size() ||
 					index == macdData.size() || index == stochData.size() || index == data50.size() || index == data100.size()
 					|| index == adxdata50.size() || /*index == adxdata100.size() ||*/ index == aroondata50.size() || index == aroondata100.size()
-					|| index == bband50.size() || index == bband100.size() || index == addata.size() || index == obvdata.size())){
+					|| index == bband50.size() || index == bband100.size() || index == addata.size() || index == obvdata.size())
+					|| index == cci.size() || index == cmoData.size() || index == momData.size() || index == trixData.size()){
 						break;
 					}
 				double[] dataArr = {stockData.get(index).getOpen(), stockData.get(index).getHigh(), stockData.get(index).getLow(),
@@ -170,7 +176,8 @@ public class AlphaVantageCollector{
 					 aroondata100.get(index).getAroonDown(), aroondata100.get(index).getAroonUp(),
 					 bband50.get(index).getLowerBand(), bband50.get(index).getMidBand(), bband50.get(index).getUpperBand(),
 					 bband100.get(index).getLowerBand(), bband100.get(index).getMidBand(), bband100.get(index).getUpperBand(),
-					 addata.get(index).getData(), obvdata.get(index).getData()};
+					 addata.get(index).getData(), obvdata.get(index).getData(), cci.get(index).getData(), cmoData.get(index).getData(),
+					 momData.get(index).getData(), trixData.get(index).getData()};
 			 returnArrayList.add(dataArr);
 			 index++;
 				};
@@ -189,7 +196,7 @@ public class AlphaVantageCollector{
 		ArrayList<double[]> answers = new ArrayList<double[]>();
 		for(int i = 0; i < monthly.size() -1; i++){
 
-			double percentChange = (monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0];
+			double percentChange = ((monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0])*100;
 			int percent = (int) percentChange;
 			double[] one = {0,1,0,0,0,0,0,0};
 			double[] two = {0,0,1,0,0,0,0,0};
