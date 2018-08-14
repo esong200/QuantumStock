@@ -70,7 +70,6 @@ public class AlphaVantageCollector{
 		} catch (AlphaVantageException e) {
 			System.out.println("something went wrong");
 		}
-		data.remove(0);
 		return data;
 	}
 
