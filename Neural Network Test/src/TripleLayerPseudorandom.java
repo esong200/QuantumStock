@@ -66,11 +66,11 @@ public class TripleLayerPseudorandom {
 				}
 			}
 		}
-
+		System.out.println("Weight retrieval successful. Testing for proper size.");
 		try {
 			double[] sizeTest1 = functions.dotMultiply(inputs, synapticWeights0);
-			double[] sizeTest2 = functions.dotMultiply(inputs, synapticWeights1);
-			double[] sizeTest3 = functions.dotMultiply(inputs, synapticWeights2);
+			double[] sizeTest2 = functions.dotMultiply(intermediateAnswer0, synapticWeights1);
+			double[] sizeTest3 = functions.dotMultiply(intermediateAnswer1, synapticWeights2);
 		}
 		catch (Exception e) {
 			System.out.println("Weights are incorrect dimentions. Generating from random seed.");
@@ -96,6 +96,7 @@ public class TripleLayerPseudorandom {
 				}
 			}
 		}
+		System.out.println("Retrieved weights are the correct dimensions.");
 
 
 
