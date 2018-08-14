@@ -59,7 +59,7 @@ public class MultipleOutputs extends functions, DataReader {
 
 		for (int i = 0; i<synapticWeights0.length; i++) {
 			for(int j = 0; j<synapticWeights0[0].length; j++) {
-				synapticWeights0[i][j] += rotateMultiply(delta0, inputs )[i][j];
+				synapticWeights0[i][j] += rotateMultiply(delta0, inputs)[i][j];
 			}
 		}
 		System.out.println();
