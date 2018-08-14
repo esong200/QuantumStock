@@ -1,9 +1,9 @@
 import java.io.File;
 import java.util.ArrayList;
 
-public class TripleLayerPseudorandom {
+public class FiveLayerPseudorandom {
 	public static void main(String[] args) {
-		String comp = "HAS";
+		String comp = "AAPL";
 		ArrayList<double[]> data = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "DataAdjst.csv");
 		ArrayList<double[]> ans = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "Ans.csv");
 		ArrayList<double[]> dataTaylored = data;
@@ -29,27 +29,39 @@ public class TripleLayerPseudorandom {
 		}
 		int best200 = 80;
 		int bestComplete = 50;
-		double[][]synapticWeights0 = /*readCsvD("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\WYNNsynapticWeights0.csv");*/new double[inputs.length][23];
+
+		double[][]synapticWeights0 = new double[inputs.length][23];
 		double[]intermediateAnswer0 = new double[synapticWeights0[0].length];
-		double[][] synapticWeights1 = /*readCsvD("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\WYNNsynapticWeights1.csv");*/new double[intermediateAnswer0.length][18];
-		double[]intermediateAnswer1 = new double[synapticWeights1[0].length];
-		double[][] synapticWeights2 = /*readCsvD("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\WYNNsynapticWeights2.csv");*/new double[intermediateAnswer1.length][desiredOutcome.length];
+		double[][] synapticWeights1 = new double[synapticWeights0[0].length][16];
+		double[] intermediateAnswer1 = new double[synapticWeights1[0].length];
+		double[][] synapticWeights2 = new double[intermediateAnswer1.length][12];
+		double[] intermediateAnswer2 = new double[synapticWeights2[0].length];
+		double[][] synapticWeights3 = new double[intermediateAnswer2.length][10];
+		double[] intermediateAnswer3 = new double[synapticWeights3[0].length];
+		double[][] synapticWeights4 = new double[intermediateAnswer3.length][desiredOutcome.length];
 		double[]finalAnsArr = new double[desiredOutcome.length];
-		double[] error2 = new double[desiredOutcome.length];
-		double[] delta2 = new double[desiredOutcome.length];
+		double[] error4 = new double[desiredOutcome.length];
+		double[] delta4 = new double[desiredOutcome.length];
+		double[] error3 = new double[intermediateAnswer3.length];
+		double[] delta3 = new double[intermediateAnswer3.length];
+		double[] error2 = new double[intermediateAnswer2.length];
+		double[] delta2 = new double[intermediateAnswer2.length];
 		double[] error1 = new double[intermediateAnswer1.length];
 		double[] delta1 = new double[intermediateAnswer1.length];
 		double[] error0 = new double[intermediateAnswer0.length];
 		double[] delta0 = new double[intermediateAnswer0.length];
 		double totalTime = 0;
 		double elapsed = 0;
-		try {
-			synapticWeights0 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0/"+comp+"synapticWeights0.csv"));
-			synapticWeights1 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1/"+comp+"synapticWeights1.csv"));
-			synapticWeights2 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2/"+comp+"synapticWeights2.csv"));
+		/*try {
+			synapticWeights0 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights0/"+comp+"synapticWeights0.csv"));
+			synapticWeights1 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights1/"+comp+"synapticWeights1.csv"));
+			synapticWeights2 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights2/"+comp+"synapticWeights2.csv"));
+			synapticWeights3 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights3/"+comp+"synapticWeights3.csv"));
+			synapticWeights4 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights4/"+comp+"synapticWeights4.csv"));
+
 		} catch (Exception e) {
 			System.out.println("Weights do not exist. Generating from random seed.");
-		} finally {
+		} finally {*/
 			for (int i=0; i<synapticWeights0.length; i++) {
 				for(int j=0; j<synapticWeights0[0].length; j++) {
 					synapticWeights0[i][j] = (2*Math.random()) -1;
@@ -65,20 +77,34 @@ public class TripleLayerPseudorandom {
 					synapticWeights2[i][j] = (2*Math.random()) -1;
 				}
 			}
-		}
+			for (int i=0; i<synapticWeights3.length; i++) {
+				for(int j=0; j<synapticWeights3[0].length; j++) {
+					synapticWeights3[i][j] = (2*Math.random()) -1;
+				}
+			}
+			for (int i=0; i<synapticWeights4.length; i++) {
+				for(int j=0; j<synapticWeights4[0].length; j++) {
+					synapticWeights4[i][j] = (2*Math.random()) -1;
+				}
+			}
+		//}
 
-		try {
+		/*try {
 			double[] sizeTest1 = functions.dotMultiply(inputs, synapticWeights0);
 			double[] sizeTest2 = functions.dotMultiply(inputs, synapticWeights1);
 			double[] sizeTest3 = functions.dotMultiply(inputs, synapticWeights2);
+			double[] sizeTest4 = functions.dotMultiply(inputs, synapticWeights3);
+			double[] sizeTest5 = functions.dotMultiply(inputs, synapticWeights4);
 		}
 		catch (Exception e) {
 			System.out.println("Weights are incorrect dimentions. Generating from random seed.");
 		}
 		finally {
-			synapticWeights0 =new double[inputs.length][23];
-			synapticWeights1 = new double[intermediateAnswer0.length][18];
-			synapticWeights2 = new double[intermediateAnswer1.length][desiredOutcome.length];
+			synapticWeights0 =new double[inputs.length][33];
+			synapticWeights1 = new double[intermediateAnswer0.length][22];
+			synapticWeights2 = new double[intermediateAnswer1.length][18];
+			synapticWeights3 = new double[intermediateAnswer2.length][14];
+			synapticWeights4 = new double[intermediateAnswer3.length][desiredOutcome.length];
 
 			for (int i=0; i<synapticWeights0.length; i++) {
 				for(int j=0; j<synapticWeights0[0].length; j++) {
@@ -95,8 +121,17 @@ public class TripleLayerPseudorandom {
 					synapticWeights2[i][j] = (2*Math.random()) -1;
 				}
 			}
-		}
-
+			for (int i=0; i<synapticWeights3.length; i++) {
+				for(int j=0; j<synapticWeights3[0].length; j++) {
+					synapticWeights3[i][j] = (2*Math.random()) -1;
+				}
+			}
+			for (int i=0; i<synapticWeights4.length; i++) {
+				for(int j=0; j<synapticWeights4[0].length; j++) {
+					synapticWeights4[i][j] = (2*Math.random()) -1;
+				}
+			}
+		}*/
 
 
 		for(int m = 0; m<1000000; m++) {
@@ -127,18 +162,26 @@ public class TripleLayerPseudorandom {
 				desiredOutcome[i] = ans.get(rand)[i];
 			}*/
 			long start = System.currentTimeMillis();
-			intermediateAnswer0 = functions.sigmoid1d(functions.dotMultiply(inputs/*1x29*/, synapticWeights0/*29x18*/), false);
-
-			intermediateAnswer1/*1x18*/ = functions.sigmoid1d(functions.dotMultiply(intermediateAnswer0/*1x29*/, synapticWeights1/*29x18*/), false);
-			finalAnsArr = functions.sigmoid1d(functions.dotMultiply(intermediateAnswer1, synapticWeights2), false);
+			intermediateAnswer0 = functions.sigmoid1d(functions.dotMultiply(inputs/*1x29*/, synapticWeights0), false);
+			intermediateAnswer1 = functions.sigmoid1d(functions.dotMultiply(intermediateAnswer0, synapticWeights1), false);
+			intermediateAnswer2 = functions.sigmoid1d(functions.dotMultiply(intermediateAnswer1, synapticWeights2), false);
+			intermediateAnswer3 = functions.sigmoid1d(functions.dotMultiply(intermediateAnswer2, synapticWeights3), false);
+			finalAnsArr = functions.sigmoid1d(functions.dotMultiply(intermediateAnswer3, synapticWeights4), false);
 			//System.out.println();
 			//System.out.println("Training Answers "+m+" inside outer iteration :");
-			for(int i=0; i<delta2.length; i++) {
+			for(int i=0; i<delta4.length; i++) {
 				//System.out.println(finalAnsArr[i]);
-				error2[i]=desiredOutcome[i]-finalAnsArr[i];
-				delta2[i]= error2[i]*functions.sigmoid(finalAnsArr[i],true);
+				error4[i]=desiredOutcome[i]-finalAnsArr[i];
+				delta4[i]= error4[i]*functions.sigmoid(finalAnsArr[i],true);
 			}
-
+			error3 = functions.rotateMultiply(synapticWeights4, delta4);
+			for(int i = 0; i<delta3.length; i++) {
+				delta3[i]= error3[i] * (functions.sigmoid1d(intermediateAnswer3,true)[i]);
+			}
+			error2 = functions.rotateMultiply(synapticWeights3, delta3);
+			for(int i = 0; i<delta2.length; i++) {
+				delta2[i]= error2[i] * (functions.sigmoid1d(intermediateAnswer2,true)[i]);
+			}
 			error1 = functions.rotateMultiply(synapticWeights2,delta2);
 			for(int i = 0; i<delta1.length; i++) {
 				delta1[i]= error1[i] * (functions.sigmoid1d(intermediateAnswer1,true)[i]);
@@ -147,6 +190,17 @@ public class TripleLayerPseudorandom {
 			for(int i = 0; i<delta0.length; i++) {
 				delta0[i]= error0[i] * (functions.sigmoid1d(intermediateAnswer0,true)[i]);
 			}
+			for(int i=0; i<synapticWeights4.length; i++) {
+				for(int j=0; j<synapticWeights4[0].length; j++) {
+					synapticWeights4[i][j] +=  functions.rotateMultiply(delta4 , intermediateAnswer3)[i][j];
+				}
+			}
+			for(int i=0; i<synapticWeights3.length; i++) {
+				for(int j=0; j<synapticWeights3[0].length; j++) {
+					synapticWeights3[i][j] +=  functions.rotateMultiply(delta3 , intermediateAnswer2)[i][j];
+				}
+			}
+
 			for(int i=0; i<synapticWeights2.length; i++) {
 				for(int j=0; j<synapticWeights2[0].length; j++) {
 					synapticWeights2[i][j] +=  functions.rotateMultiply(delta2 , intermediateAnswer1)[i][j];
@@ -216,12 +270,14 @@ public class TripleLayerPseudorandom {
 				int test = 0;
 				//System.out.println("testing");
 				for(double[] x: dataTaylored) {
-					double[] test0, test1, testfinal;
+					double[] test0, test1, test2, test3, testfinal;
 					double testBest = 0, testSecond = 0;
 					int bestind = 0, secondind = 0;
 					test0 = functions.sigmoid1d(functions.dotMultiply(x/*1x29*/, synapticWeights0/*29x18*/), false);
 					test1/*1x18*/ = functions.sigmoid1d(functions.dotMultiply(test0/*1x29*/, synapticWeights1/*29x18*/), false);
-					testfinal = functions.sigmoid1d(functions.dotMultiply(test1, synapticWeights2), false);
+					test2 = functions.sigmoid1d(functions.dotMultiply(test1/*1x29*/, synapticWeights2/*29x18*/), false);
+					test3 = functions.sigmoid1d(functions.dotMultiply(test2, synapticWeights3), false);
+					testfinal = functions.sigmoid1d(functions.dotMultiply(test3, synapticWeights4), false);
 					double[] actualAns = ans.get(dataTaylored.indexOf(x));
 					for(int i = 0; i < testfinal.length; i++) {
 						if(testfinal[i]>largest) {
@@ -247,12 +303,17 @@ public class TripleLayerPseudorandom {
 				}
 				best200 = right;
 				bestComplete = test;
-				String file1 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0/"+ comp + "synapticWeights0.csv";
-				String file2 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1/"+ comp + "synapticWeights1.csv";
-				String file3 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2/"+ comp + "synapticWeights2.csv";
+				String file1 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights0/"+comp+"synapticWeights0.csv";
+				String file2 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights1/"+comp+"synapticWeights1.csv";
+				String file3 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights2/"+comp+"synapticWeights2.csv";
+				String file4 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights3/"+comp+"synapticWeights3.csv";
+				String file5 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights4/"+comp+"synapticWeights4.csv";
+				//synapticWeights4 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/FiveLayer/Weights4/"+comp+"synapticWeights4.csv"));
 				CSVReadWrite.writeCsv(synapticWeights0, file1);
 				CSVReadWrite.writeCsv(synapticWeights1, file2);
 				CSVReadWrite.writeCsv(synapticWeights2, file3);
+				CSVReadWrite.writeCsv(synapticWeights3, file4);
+				CSVReadWrite.writeCsv(synapticWeights4, file5);
 
 				System.out.println("New Saved Correct:" + bestComplete + " out of " + data.size());
 				System.out.println("Best200: " + best200);
