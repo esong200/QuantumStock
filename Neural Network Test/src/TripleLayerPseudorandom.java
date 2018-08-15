@@ -75,9 +75,15 @@ public class TripleLayerPseudorandom {
 		}
 		catch (Exception e) {
 			System.out.println("Weights are incorrect dimentions. Generating from random seed.");
-			synapticWeights0 =new double[inputs.length][23];
-			synapticWeights1 = new double[intermediateAnswer0.length][18];
-			synapticWeights2 = new double[intermediateAnswer1.length][desiredOutcome.length];
+				double[][] backwardsTest = synapticWeights0.clone();
+				double[] sizeTest1 = functions.dotMultiply(inputs, synapticWeights0);
+				double[] sizeTest2 = functions.dotMultiply(intermediateAnswer0, synapticWeights1);
+				double[] sizeTest3 = functions.dotMultiply(intermediateAnswer1, synapticWeights2);
+				for(int i=0; i<synapticWeights0.length; i++) {
+					for(int j=0; j<synapticWeights0[0].length; j++) {
+						backwardsTest[i][j] +=  functions.rotateMultiply(delta0 , inputs)[i][j];
+					}
+				}
 
 			for (int i=0; i<synapticWeights0.length; i++) {
 				for(int j=0; j<synapticWeights0[0].length; j++) {
