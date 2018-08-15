@@ -19,6 +19,7 @@ import org.patriques.output.technicalindicators.data.AROONData;
 import org.patriques.output.technicalindicators.data.BBANDSData;
 import org.patriques.output.technicalindicators.data.IndicatorData;
 import org.patriques.output.technicalindicators.data.MACDData;
+import org.patriques.output.technicalindicators.data.STOCHDataFast;
 import org.patriques.output.technicalindicators.data.STOCHDataSlow;
 import org.patriques.output.timeseries.Monthly;
 import org.patriques.output.timeseries.data.StockData;
@@ -94,7 +95,6 @@ public class AlphaVantageCollector extends CSVReadWrite{
 		e1.printStackTrace();
 	}
 	EMA emaTest = technicalIndicators1.ema(symbol, Interval.MONTHLY, TimePeriod.of(100), SeriesType.OPEN);
-
 	STOCH stoch = technicalIndicators1.stoch(symbol, Interval.MONTHLY, FastKPeriod.of(5), SlowKPeriod.of(3), SlowDPeriod.of(3),
 			null, null);
 	RSI rsi50 = technicalIndicators1.rsi(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
@@ -122,7 +122,6 @@ public class AlphaVantageCollector extends CSVReadWrite{
 	BBANDS bbands50 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN, null, null, null);
 	BBANDS bbands100 = technicalIndicators2.bbands(symbol, Interval.MONTHLY, TimePeriod.of(100), SeriesType.OPEN, null, null, null);
 	AD ad = technicalIndicators3.ad(symbol, Interval.MONTHLY);
-
 	OBV obv = technicalIndicators3.obv(symbol, Interval.MONTHLY);
 	try {
 			System.out.println("sleeping");
@@ -135,6 +134,29 @@ public class AlphaVantageCollector extends CSVReadWrite{
 	CCI cci50 = technicalIndicators2.cci(symbol, Interval.MONTHLY, TimePeriod.of(50));
 	MOM mom = technicalIndicators.mom(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
 	TRIX trix = technicalIndicators.trix(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+	try {
+		System.out.println("sleeping");
+		Thread.sleep(60000);
+
+	} catch (InterruptedException e1) {
+		e1.printStackTrace();
+	}
+	WMA wma = technicalIndicators1.wma(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+	DEMA dema = technicalIndicators1.dema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+	TEMA tema = technicalIndicators1.tema(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+	TRIMA trima = technicalIndicators1.trima(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+	try {
+		System.out.println("sleeping");
+		Thread.sleep(60000);
+
+	} catch (InterruptedException e1) {
+		e1.printStackTrace();
+	}
+	KAMA kama = technicalIndicators2.kama(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+	STOCHF stochf = technicalIndicators2.stochf(symbol, Interval.MONTHLY, null, null, null);
+	ROC roc = technicalIndicators2.roc(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+	ROCR rocr = technicalIndicators2.rocr(symbol, Interval.MONTHLY, TimePeriod.of(50), SeriesType.OPEN);
+
 		try {
 			List<IndicatorData> trixData = trix.getData();
 			List<IndicatorData> momData = mom.getData();
@@ -157,13 +179,24 @@ public class AlphaVantageCollector extends CSVReadWrite{
 			List<IndicatorData> obvdata = obv.getData();
 			List<StockData> stockData = response.getStockData();
 
+			List<IndicatorData> wmaData = wma.getData();
+			List<IndicatorData> demaData = dema.getData();
+			List<IndicatorData> temaData= tema.getData();
+			List<IndicatorData> trimaData = trima.getData();
+			List<IndicatorData> kamaData = kama.getData();
+			List<STOCHDataFast> stochfData = stochf.getData(); //2 gets
+			List<IndicatorData> rocData = roc.getData();
+			List<IndicatorData> rocrData = rocr.getData();
+
 			int index = 0;
 			for(IndicatorData data: smaData50) {
 				if((index == stockData.size() || index == smaData50.size() || index == emaData50.size() || index == smaData.size() || index == emaData.size() ||
 					index == macdData.size() || index == stochData.size() || index == data50.size() || index == data100.size()
 					|| index == adxdata50.size() || /*index == adxdata100.size() ||*/ index == aroondata50.size() || index == aroondata100.size()
 					|| index == bband50.size() || index == bband100.size() || index == addata.size() || index == obvdata.size())
-					|| index == cci.size() || index == cmoData.size() || index == momData.size() || index == trixData.size()){
+					|| index == cci.size() || index == cmoData.size() || index == momData.size() || index == trixData.size() || index == wmaData.size()
+					|| index == demaData.size() || index == temaData.size() || index == trimaData.size() || index == kamaData.size() || index == stochfData.size()
+					|| index == rocData.size() || index == rocData.size() || index == rocrData.size())  {
 						break;
 					}
 				double[] dataArr = {stockData.get(index).getOpen(), stockData.get(index).getHigh(), stockData.get(index).getLow(),
@@ -177,7 +210,9 @@ public class AlphaVantageCollector extends CSVReadWrite{
 					 bband50.get(index).getLowerBand(), bband50.get(index).getMidBand(), bband50.get(index).getUpperBand(),
 					 bband100.get(index).getLowerBand(), bband100.get(index).getMidBand(), bband100.get(index).getUpperBand(),
 					 addata.get(index).getData(), obvdata.get(index).getData(), cci.get(index).getData(), cmoData.get(index).getData(),
-					 momData.get(index).getData(), trixData.get(index).getData()};
+					 momData.get(index).getData(), trixData.get(index).getData(), wmaData.get(index).getData(), demaData.get(index).getData(),
+					 temaData.get(index).getData(), trimaData.get(index).getData(), kamaData.get(index).getData(), stochfData.get(index).getFastD(),
+					 stochfData.get(index).getFastD(), rocData.get(index).getData(), rocrData.get(index).getData()};
 			 returnArrayList.add(dataArr);
 			 index++;
 				};
