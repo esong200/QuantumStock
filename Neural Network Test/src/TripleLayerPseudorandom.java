@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class TripleLayerPseudorandom {
 	public static void main(String[] args) {
-		String comp = "AAPL";
+		String comp = "ATVI";
 		String runName = "";
 		ArrayList<double[]> data = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "DataAdjst.csv");
 		ArrayList<double[]> ans = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "Ans.csv");
@@ -51,7 +51,6 @@ public class TripleLayerPseudorandom {
 			synapticWeights2 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2/"+comp+"synapticWeights2.csv"));
 		} catch (Exception e) {
 			System.out.println("Weights do not exist. Generating from random seed.");
-		} finally {
 			for (int i=0; i<synapticWeights0.length; i++) {
 				for(int j=0; j<synapticWeights0[0].length; j++) {
 					synapticWeights0[i][j] = (2*Math.random()) -1;
@@ -76,8 +75,6 @@ public class TripleLayerPseudorandom {
 		}
 		catch (Exception e) {
 			System.out.println("Weights are incorrect dimentions. Generating from random seed.");
-		}
-		finally {
 			synapticWeights0 =new double[inputs.length][23];
 			synapticWeights1 = new double[intermediateAnswer0.length][18];
 			synapticWeights2 = new double[intermediateAnswer1.length][desiredOutcome.length];
