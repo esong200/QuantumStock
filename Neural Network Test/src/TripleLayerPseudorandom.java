@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 public class TripleLayerPseudorandom {
 	public static void main(String[] args) {
-		String comp = "HAS";
+		String comp = "AAPL";
+		String runName = "";
 		ArrayList<double[]> data = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "DataAdjst.csv");
 		ArrayList<double[]> ans = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "Ans.csv");
 		ArrayList<double[]> dataTaylored = data;
@@ -29,11 +30,12 @@ public class TripleLayerPseudorandom {
 		}
 		int best200 = 80;
 		int bestComplete = 50;
-		double[][]synapticWeights0 = /*readCsvD("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\WYNNsynapticWeights0.csv");*/new double[inputs.length][23];
+
+		double[][]synapticWeights0 =new double[inputs.length][23];
 		double[]intermediateAnswer0 = new double[synapticWeights0[0].length];
-		double[][] synapticWeights1 = /*readCsvD("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\WYNNsynapticWeights1.csv");*/new double[intermediateAnswer0.length][18];
+		double[][] synapticWeights1 = new double[intermediateAnswer0.length][18];
 		double[]intermediateAnswer1 = new double[synapticWeights1[0].length];
-		double[][] synapticWeights2 = /*readCsvD("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\Weights0\\WYNNsynapticWeights2.csv");*/new double[intermediateAnswer1.length][desiredOutcome.length];
+		double[][] synapticWeights2 = new double[intermediateAnswer1.length][desiredOutcome.length];
 		double[]finalAnsArr = new double[desiredOutcome.length];
 		double[] error2 = new double[desiredOutcome.length];
 		double[] delta2 = new double[desiredOutcome.length];
@@ -98,8 +100,6 @@ public class TripleLayerPseudorandom {
 		}
 		System.out.println("Retrieved weights are the correct dimensions.");
 
-
-
 		for(int m = 0; m<1000000; m++) {
 			if(pseudorandomData.size()==0) {
 				for(double[] x: dataTaylored) {
@@ -128,9 +128,8 @@ public class TripleLayerPseudorandom {
 				desiredOutcome[i] = ans.get(rand)[i];
 			}*/
 			long start = System.currentTimeMillis();
-			intermediateAnswer0 = functions.sigmoid1d(functions.dotMultiply(inputs/*1x29*/, synapticWeights0/*29x18*/), false);
-
-			intermediateAnswer1/*1x18*/ = functions.sigmoid1d(functions.dotMultiply(intermediateAnswer0/*1x29*/, synapticWeights1/*29x18*/), false);
+			intermediateAnswer0 = functions.sigmoid1d(functions.dotMultiply(inputs, synapticWeights0), false);
+			intermediateAnswer1 = functions.sigmoid1d(functions.dotMultiply(intermediateAnswer0, synapticWeights1), false);
 			finalAnsArr = functions.sigmoid1d(functions.dotMultiply(intermediateAnswer1, synapticWeights2), false);
 			//System.out.println();
 			//System.out.println("Training Answers "+m+" inside outer iteration :");
@@ -153,7 +152,6 @@ public class TripleLayerPseudorandom {
 					synapticWeights2[i][j] +=  functions.rotateMultiply(delta2 , intermediateAnswer1)[i][j];
 				}
 			}
-
 			for (int i = 0; i<synapticWeights1.length; i++) {
 				for(int j = 0; j<synapticWeights1[0].length; j++) {
 					double[][] debugger = functions.rotateMultiply(delta1, intermediateAnswer0);
@@ -248,14 +246,14 @@ public class TripleLayerPseudorandom {
 				}
 				best200 = right;
 				bestComplete = test;
-				String file1 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0/"+ comp + "synapticWeights0.csv";
-				String file2 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1/"+ comp + "synapticWeights1.csv";
-				String file3 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2/"+ comp + "synapticWeights2.csv";
+				String file1 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights0/"+ comp + runName+"synapticWeights0.csv";
+				String file2 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights1/"+ comp + runName+ "synapticWeights1.csv";
+				String file3 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Matrixes/TripleLayer/Weights2/"+ comp + runName+"synapticWeights2.csv";
 				CSVReadWrite.writeCsv(synapticWeights0, file1);
 				CSVReadWrite.writeCsv(synapticWeights1, file2);
 				CSVReadWrite.writeCsv(synapticWeights2, file3);
 
-				System.out.println("New Saved Correct:" + bestComplete + " out of " + data.size() + " " + (Math.round((((double)(bestComplete)*100)/(double)(data.size()))*100.0))/100.0 + "%)");
+				System.out.println("New Saved Correct:" + bestComplete + " out of " + data.size() + ", " + bestComplete + " out of "+ data.size() + " ("+ (Math.round((((double)(bestComplete)*100)/(double)(data.size()))*100.0))/100.0  + "%)");
 				System.out.println("Best200: " + best200);
 				break;
 			}
