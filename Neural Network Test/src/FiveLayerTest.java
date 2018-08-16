@@ -4,16 +4,9 @@ import java.util.ArrayList;
 public class FiveLayerTest extends functions {
 	//array specs: input array: 1x29, desiredOutcome: 1x8
 	public static void main(String[] args) {
-<<<<<<< HEAD
-
 		String company = "AAPL";
 		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"DataAdjst.csv");
 		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+company+"Ans.csv");
-
-=======
-		ArrayList<double[]> data = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/PEPDataAdjst.csv");
-		ArrayList<double[]> ans = readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/PEPAns.csv");
->>>>>>> parent of 66ca810... added modular company support
 		ArrayList<double[]> dataTaylored = data;
 		int count = 0;
 		int greatestAccuracy = 0;
@@ -32,20 +25,20 @@ public class FiveLayerTest extends functions {
 				//dataTayloredMatrix[i][j]=dataTaylored.get(i)[j];
 			}
 		}
-
+		
 		for(int i=0; i<data.get(0).length; i++) {
-			inputs[i]=(dataTaylored.get(0)[i]);
+			inputs[i]=(dataTaylored.get(0)[i]);	
 		}
 		//writeCsv(inputs, "/Users/ethansong/Documents/Stock Data/10xANDVDataAdjst.csv");
 		for(int i=0; i<ans.get(0).length; i++) {
 			desiredOutcome[i] = ans.get(0)[i];
 		}
 		//double[] inputs = new double[];
-		double[][]synapticWeights0 = new double[inputs.length][40];
+		double[][]synapticWeights0 = new double[inputs.length][25];
 		double[]intermediateAnswer0 = new double[synapticWeights0[0].length];
-		double[][] synapticWeights1 = new double[synapticWeights0[0].length][23];
+		double[][] synapticWeights1 = new double[synapticWeights0[0].length][20];
 		double[] intermediateAnswer1 = new double[synapticWeights1[0].length];
-		double[][] synapticWeights2 = new double[intermediateAnswer1.length][18];
+		double[][] synapticWeights2 = new double[intermediateAnswer1.length][16];
 		double[] intermediateAnswer2 = new double[synapticWeights2[0].length];
 		double[][] synapticWeights3 = new double[intermediateAnswer2.length][12];
 		double[] intermediateAnswer3 = new double[synapticWeights3[0].length];
@@ -62,11 +55,10 @@ public class FiveLayerTest extends functions {
 		double[] error0 = new double[intermediateAnswer0.length];
 		double[] delta0 = new double[intermediateAnswer0.length];
 		double[] correctPercentageArray = new double[520];
-		int count = 0;
-
+		
 		double totalTime = 0;
 		double innermostTime = 0;
-
+				
 			for (int i=0; i<synapticWeights1.length; i++) {
 				for(int j=0; j<synapticWeights1[0].length; j++) {
 					synapticWeights1[i][j] = Math.random() - 0.5;
@@ -180,8 +172,8 @@ public class FiveLayerTest extends functions {
 					String file3 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights2.csv";
 					String file4 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights3.csv";
 					String file5 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights4.csv";
-
-
+					
+					
 					writeCsv(synapticWeights0, file1);
 					writeCsv(synapticWeights1, file2);
 					writeCsv(synapticWeights2, file3);
@@ -239,8 +231,8 @@ public class FiveLayerTest extends functions {
 		String file3 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights2.csv";
 		String file4 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights3.csv";
 		String file5 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights4.csv";
-
-
+		
+		
 		writeCsv(synapticWeights0, file1);
 		writeCsv(synapticWeights1, file2);
 		writeCsv(synapticWeights2, file3);
