@@ -58,11 +58,11 @@ public class TripleLayerPseudorandom {
 		double[] delta0 = new double[intermediateAnswer0.length];
 		double totalTime = 0;
 		double elapsed = 0;
-	/*	try {
-			synapticWeights0 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigMatrixes/TripleLayer/Weights0/"+comp+"synapticWeights0.csv"));
-			synapticWeights1 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigMatrixes/TripleLayer/Weights1/"+comp+"synapticWeights1.csv"));
-			synapticWeights2 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigMatrixes/TripleLayer/Weights2/"+comp+"synapticWeights2.csv"));
-		} catch (Exception e) {*/
+		try {
+			synapticWeights0 = CSVReadWrite.listToArray(CSVReadWrite.readCsv(weights0Directory));
+			synapticWeights1 = CSVReadWrite.listToArray(CSVReadWrite.readCsv(weights1Directory));
+			synapticWeights2 = CSVReadWrite.listToArray(CSVReadWrite.readCsv(weights2Directory));
+		} catch (Exception e) {
 			System.out.println("Weights do not exist. Generating from random seed.");
 			for (int i=0; i<synapticWeights0.length; i++) {
 				for(int j=0; j<synapticWeights0[0].length; j++) {
