@@ -3,21 +3,32 @@ import java.util.ArrayList;
 
 public class TripleLayerPseudorandom {
 	public static void main(String[] args) {
-		String comp = "T";
-		String runName = "";
-		ArrayList<double[]> data = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigData/"+ comp + "BigDataAdjst.csv");
-		ArrayList<double[]> ans = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "Ans.csv");
+		String comp = "AAPL";
+		String runName = "ShortTime";
+		String dataDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "BigDataAdjst.csv";
+		String ansDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "Ans.csv";
+		String weights0Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/"+ comp + runName+"synapticWeights0.csv";
+		String weights1Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/"+ comp + runName+"synapticWeights1.csv";
+		String weights2Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/"+ comp + runName+"synapticWeights2.csv";
+		ArrayList<double[]> data = CSVReadWrite.readCsv(dataDirectory);
+		ArrayList<double[]> ans = CSVReadWrite.readCsv(ansDirectory);
 		ArrayList<double[]> dataTaylored = data;
-		ArrayList<double[]> pseudorandomData = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigData/"+ comp + "BigDataAdjst.csv");
-		ArrayList<double[]> pseudorandomAns = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "Ans.csv");
+		ArrayList<double[]> pseudorandomData = CSVReadWrite.readCsv(dataDirectory);
+		ArrayList<double[]> pseudorandomAns = CSVReadWrite.readCsv(ansDirectory);
+		System.out.println(data.size());
+		System.out.println(ans.size());
+		System.out.println(pseudorandomData.size());
+		System.out.println(pseudorandomAns.size());
 		ArrayList<Integer> correct = new ArrayList<Integer>();
 		double[][] dataTayloredMatrix = new double[dataTaylored.size()][dataTaylored.get(0).length];
 		int maxSize = data.size();
 		while(ans.size()>maxSize){
 			ans.remove(ans.size()-1);
 		}
+		System.out.println(ans.size());
 		double[] inputs = new double[data.get(0).length];
 		double[] desiredOutcome = new double[ans.get(0).length];
+		System.out.println(inputs.length);
 		for(int i=0; i<data.size(); i++) {
 			for(int j=0; j<data.get(i).length; j++) {
 				dataTaylored.get(i)[j] *= 1;
@@ -28,6 +39,7 @@ public class TripleLayerPseudorandom {
 		for(int i=0; i<data.get(0).length; i++) {
 			inputs[i]=(dataTaylored.get(0)[i]);
 		}
+		System.out.println(dataTaylored.size());
 		int best200 = 80;
 		int bestComplete = 50;
 
@@ -46,11 +58,11 @@ public class TripleLayerPseudorandom {
 		double[] delta0 = new double[intermediateAnswer0.length];
 		double totalTime = 0;
 		double elapsed = 0;
-		try {
+	/*	try {
 			synapticWeights0 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigMatrixes/TripleLayer/Weights0/"+comp+"synapticWeights0.csv"));
 			synapticWeights1 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigMatrixes/TripleLayer/Weights1/"+comp+"synapticWeights1.csv"));
 			synapticWeights2 = CSVReadWrite.listToArray(CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigMatrixes/TripleLayer/Weights2/"+comp+"synapticWeights2.csv"));
-		} catch (Exception e) {
+		} catch (Exception e) {*/
 			System.out.println("Weights do not exist. Generating from random seed.");
 			for (int i=0; i<synapticWeights0.length; i++) {
 				for(int j=0; j<synapticWeights0[0].length; j++) {
@@ -67,7 +79,7 @@ public class TripleLayerPseudorandom {
 					synapticWeights2[i][j] = (2*Math.random()) -1;
 				}
 			}
-		}
+		//}
 		System.out.println("Weight retrieval successful. Testing for proper size.");
 		try {
 			double[][] backwardsTest = synapticWeights0.clone();
@@ -115,7 +127,7 @@ public class TripleLayerPseudorandom {
 				for(double[] x: ans) {
 					pseudorandomAns.add(x);
 				}
-				ans = CSVReadWrite.readCsv("/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+comp+"Ans.csv");
+				ans = CSVReadWrite.readCsv(ansDirectory);
 			}
 			int rnd = (int) ((int) pseudorandomData.size()*Math.random());
 			/*for(int i=0; i<inputs.length; i++) {
@@ -170,6 +182,7 @@ public class TripleLayerPseudorandom {
 					synapticWeights0[i][j] +=  functions.rotateMultiply(delta0 , inputs)[i][j];
 				}
 			}
+
 			long stop = System.currentTimeMillis();
 			elapsed = (stop - start) / 1000.0;
 			//System.out.println(m);
@@ -218,7 +231,7 @@ public class TripleLayerPseudorandom {
 					right++;
 				}
 			}
-			while(right > (bestComplete/dataTaylored.size())*200) {
+			while(right > (bestComplete/dataTaylored.size())*230) {
 				int test = 0;
 				//System.out.println("testing");
 				for(double[] x: dataTaylored) {
@@ -253,9 +266,9 @@ public class TripleLayerPseudorandom {
 				}
 				best200 = right;
 				bestComplete = test;
-				String file1 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigMatrixes/TripleLayer/Weights0/"+ comp + runName+"synapticWeights0.csv";
-				String file2 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigMatrixes/TripleLayer/Weights1/"+ comp + runName+ "synapticWeights1.csv";
-				String file3 = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/BigMatrixes/TripleLayer/Weights2/"+ comp + runName+"synapticWeights2.csv";
+				String file1 = weights0Directory;
+				String file2 = weights1Directory;
+				String file3 = weights2Directory;
 				CSVReadWrite.writeCsv(synapticWeights0, file1);
 				CSVReadWrite.writeCsv(synapticWeights1, file2);
 				CSVReadWrite.writeCsv(synapticWeights2, file3);
