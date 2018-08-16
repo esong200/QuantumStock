@@ -7,9 +7,9 @@ public class TripleLayerPseudorandom {
 		String runName = "ShortTime";
 		String dataDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "BigDataAdjst.csv";
 		String ansDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "Ans.csv";
-		String weights0Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/"+ comp + runName+"synapticWeights0.csv";
-		String weights1Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/"+ comp + runName+"synapticWeights1.csv";
-		String weights2Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/"+ comp + runName+"synapticWeights2.csv";
+		String weights0Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/Weights0"+ comp + runName+"synapticWeights0.csv";
+		String weights1Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/Weights1"+ comp + runName+"synapticWeights1.csv";
+		String weights2Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/Weights2"+ comp + runName+"synapticWeights2.csv";
 		ArrayList<double[]> data = CSVReadWrite.readCsv(dataDirectory);
 		ArrayList<double[]> ans = CSVReadWrite.readCsv(ansDirectory);
 		ArrayList<double[]> dataTaylored = data;
