@@ -25,9 +25,9 @@ public class FiveLayerTest extends functions {
 				//dataTayloredMatrix[i][j]=dataTaylored.get(i)[j];
 			}
 		}
-		
+
 		for(int i=0; i<data.get(0).length; i++) {
-			inputs[i]=(dataTaylored.get(0)[i]);	
+			inputs[i]=(dataTaylored.get(0)[i]);
 		}
 		//writeCsv(inputs, "/Users/ethansong/Documents/Stock Data/10xANDVDataAdjst.csv");
 		for(int i=0; i<ans.get(0).length; i++) {
@@ -55,10 +55,10 @@ public class FiveLayerTest extends functions {
 		double[] error0 = new double[intermediateAnswer0.length];
 		double[] delta0 = new double[intermediateAnswer0.length];
 		double[] correctPercentageArray = new double[520];
-		
+
 		double totalTime = 0;
 		double innermostTime = 0;
-				
+
 			for (int i=0; i<synapticWeights1.length; i++) {
 				for(int j=0; j<synapticWeights1[0].length; j++) {
 					synapticWeights1[i][j] = Math.random() - 0.5;
@@ -172,8 +172,8 @@ public class FiveLayerTest extends functions {
 					String file3 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights2.csv";
 					String file4 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights3.csv";
 					String file5 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights4.csv";
-					
-					
+
+
 					writeCsv(synapticWeights0, file1);
 					writeCsv(synapticWeights1, file2);
 					writeCsv(synapticWeights2, file3);
@@ -231,8 +231,8 @@ public class FiveLayerTest extends functions {
 		String file3 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights2.csv";
 		String file4 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights3.csv";
 		String file5 = "/Users/ethansong/Documents/Matrix Saves/snW5L/"+company+"synapticWeights4.csv";
-		
-		
+
+
 		writeCsv(synapticWeights0, file1);
 		writeCsv(synapticWeights1, file2);
 		writeCsv(synapticWeights2, file3);
