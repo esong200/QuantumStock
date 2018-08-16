@@ -5,11 +5,11 @@ public class TripleLayerPseudorandom {
 	public static void main(String[] args) {
 		String comp = "AAPL";
 		String runName = "ShortTime";
-		String dataDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "BigDataAdjst.csv";
-		String ansDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/Data/"+ comp + "Ans.csv";
-		String weights0Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/Weights0"+ comp + runName+"synapticWeights0.csv";
-		String weights1Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/Weights1"+ comp + runName+"synapticWeights1.csv";
-		String weights2Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes/TripleLayer/Weights2"+ comp + runName+"synapticWeights2.csv";
+		String dataDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/ShortTimeBigData/"+ comp + "BigDataAdjst.csv";
+		String ansDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/ShortTimeBigData/"+ comp + "Ans.csv";
+		String weights0Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes50/TripleLayer/Weights0/"+ comp + runName+"synapticWeights0.csv";
+		String weights1Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes50/TripleLayer/Weights1/"+ comp + runName+"synapticWeights1.csv";
+		String weights2Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes50/TripleLayer/Weights2/"+ comp + runName+"synapticWeights2.csv";
 		ArrayList<double[]> data = CSVReadWrite.readCsv(dataDirectory);
 		ArrayList<double[]> ans = CSVReadWrite.readCsv(ansDirectory);
 		ArrayList<double[]> dataTaylored = data;
@@ -31,7 +31,7 @@ public class TripleLayerPseudorandom {
 		System.out.println(inputs.length);
 		for(int i=0; i<data.size(); i++) {
 			for(int j=0; j<data.get(i).length; j++) {
-				dataTaylored.get(i)[j] *= 1;
+				dataTaylored.get(i)[j] *= 10;
 				dataTayloredMatrix[i][j]=dataTaylored.get(i)[j];
 			}
 		}
@@ -41,11 +41,11 @@ public class TripleLayerPseudorandom {
 		}
 		System.out.println(dataTaylored.size());
 		int best200 = 80;
-		int bestComplete = 50;
+		int bestComplete = 5;
 
-		double[][]synapticWeights0 =new double[inputs.length][23];
+		double[][]synapticWeights0 =new double[inputs.length][35];
 		double[]intermediateAnswer0 = new double[synapticWeights0[0].length];
-		double[][] synapticWeights1 = new double[intermediateAnswer0.length][18];
+		double[][] synapticWeights1 = new double[intermediateAnswer0.length][12];
 		double[]intermediateAnswer1 = new double[synapticWeights1[0].length];
 		double[][] synapticWeights2 = new double[intermediateAnswer1.length][desiredOutcome.length];
 		double[]finalAnsArr = new double[desiredOutcome.length];
@@ -79,7 +79,7 @@ public class TripleLayerPseudorandom {
 					synapticWeights2[i][j] = (2*Math.random()) -1;
 				}
 			}
-		//}
+		}
 		System.out.println("Weight retrieval successful. Testing for proper size.");
 		try {
 			double[][] backwardsTest = synapticWeights0.clone();
@@ -95,9 +95,9 @@ public class TripleLayerPseudorandom {
 		}
 		catch (Exception e) {
 			System.out.println("Weights are incorrect dimentions. Generating from random seed.");
-			synapticWeights0 =new double[inputs.length][23];
+			synapticWeights0 =new double[inputs.length][35];
 			intermediateAnswer0 = new double[synapticWeights0[0].length];
-			synapticWeights1 = new double[intermediateAnswer0.length][18];
+			synapticWeights1 = new double[intermediateAnswer0.length][12];
 			intermediateAnswer1 = new double[synapticWeights1[0].length];
 			synapticWeights2 = new double[intermediateAnswer1.length][desiredOutcome.length];
 
@@ -287,7 +287,7 @@ public class TripleLayerPseudorandom {
 					avg+=i;
 				}
 				avg= avg/error2.length;
-				System.out.println("error " + m + " :" + avg);
+				System.out.println(comp+" error " + m + " :" + avg);
 
 			}
 		}
@@ -303,5 +303,6 @@ public class TripleLayerPseudorandom {
 		//writeCsv(synapticWeights0, file1);
 		//writeCsv(synapticWeights1, file2);
 		//writeCsv(synapticWeights2, file3);
+
 	}
 }
