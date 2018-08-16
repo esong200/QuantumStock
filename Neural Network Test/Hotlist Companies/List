@@ -6,18 +6,21 @@ ANDV: 64%, BigData: 84.1%
 ARLP: 93.5%, BigData: 90.9%
 ATVI: 71% BigData: 81.8%
 CTL: 66%, BigData: 69.7%
-DE: 70.5%
+Ethan:
+  DE: 70.5%
 EA:  81%, BigData: 80.3%
-FTI:
-HAS: 50%, BigData: 73.5%
-INTC:
-IVZ: 71.2%
-KSS:
+Tim:
+  FTI:
+  HAS: 50%, BigData: 73.5%
+  INTC:
+  IVZ: 71.2%
+  KSS:
 MO: 71.2%
 NVDA: 71% BigData: 82.1%
 PDLI: 55.6%, BigData: 72.73%
-PEP: 71%
-STT: 62%
-T: 76.5%
-TTWO:
-WYNN: 80%
+Ethan:
+  PEP: 71%
+  STT: 62%
+  T: 76.5%
+  TTWO:
+  WYNN: 80%
