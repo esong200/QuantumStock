@@ -5,26 +5,22 @@ AAPL: 83.3%, BigData: 86.4%, BigData50: 83.3%
 ANDV: 64%, BigData: 84.1%
 ARLP: 93.5%, BigData: 90.9%
 ATVI: 71% BigData: 81.8%
-Tim:
-  BRKS:
 CTL: 66%, BigData: 69.7%
 Ethan:
-  DE: 70.5%, BigData:
+  DE: 70.5%
 EA:  81%, BigData: 80.3%
 Tim:
-  FTI:
+  FTI: 98.18% BigData: 100%
   HAS: 50%, BigData: 73.5%
   INTC:
   IVZ: 71.2%
   KSS:
-Ethan:
   MO: 71.2%
 NVDA: 71% BigData: 82.1%
 PDLI: 55.6%, BigData: 72.73%
 Ethan:
-  PEP: 71%, BigData: 75.8%
-  SBUX:
-  STT: 62%, BigData: 72.7%
-  T: 76.5%, BigData: 70.5%
-  TTWO: 79.5%, BigData: 79.05%
+  PEP: 71%
+  STT: 62%
+  T: 76.5%
+  TTWO:
   WYNN: 80%
