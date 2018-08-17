@@ -2,12 +2,16 @@ List:
 All companies (benchmark): 48.5%
 
 AAPL: 83.3%, BigData: 86.4%, BigData50: 83.3%
+Tim:
+  ADS:
 ANDV: 64%, BigData: 84.1%
 ARLP: 93.5%, BigData: 90.9%
 ATVI: 71% BigData: 81.8%
 Tim:
   BRKS:
+  COKE:
 CTL: 66%, BigData: 69.7%
+  CVS:
 Ethan:
   DE: 70.5%, BigData:
 EA:  81%, BigData: 80.3%
@@ -16,10 +20,13 @@ Tim:
   HAS: 50%, BigData: 73.5%
   INTC:
   IVZ: 71.2%
+  JNJ:
   KSS:
 Ethan:
   MO: 71.2%
+  MSFT:
 NVDA: 71% BigData: 82.1%
+  NKE:
 PDLI: 55.6%, BigData: 72.73%
 Ethan:
   PEP: 71%, BigData: 75.8%
@@ -27,4 +34,7 @@ Ethan:
   STT: 62%, BigData: 72.7%
   T: 76.5%, BigData: 70.5%
   TTWO: 79.5%, BigData: 79.05%
+  UAA: 
+  WBA:
+  WMT:
   WYNN: 80%
