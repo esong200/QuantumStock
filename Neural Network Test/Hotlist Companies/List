@@ -18,37 +18,23 @@ EA:  81%, BigData: 80.3%
 Tim:
   FTI: 98.18% BigData: 100%
   HAS: 50%, BigData: 73.5%
-  INTC:
+  INTC: 72.73% BigData: 74.24%
   IVZ: 71.2%
   JNJ:
-  KSS:
-<<<<<<< HEAD
-  MO: 71.2%
-  MSFT:
-NVDA: 71% BigData: 82.1%
-NKE:
-=======
+  KSS: 69.7% BigData: 62.88%
 Ethan:
   MO: 71.2%, BigData: 72.7%
   MSFT: BigData: 68.9%
 NVDA: 71% BigData: 82.1%
   NKE: BigData: 75.8%
->>>>>>> b687a94c5e8fe20d8d4cbd31985fc8e87f659276
 PDLI: 55.6%, BigData: 72.73%
 Ethan:
   PEP: 71%, BigData: 75.8%
   SBUX: BigData: 70.5%
   STT: 62%, BigData: 72.7%
-<<<<<<< HEAD
-  T: 76.5%, BigData: 70.5%
-  TTWO: 79.5%, BigData: 79.5%
-  UAA:
-  WBA:
-=======
   T: 76.5%, BigData: 75%
   TTWO: 79.5%, BigData: 78.1%
   UAA:
   WBA: BigData: 62.9%
->>>>>>> b687a94c5e8fe20d8d4cbd31985fc8e87f659276
   WMT:
   WYNN: 80%
