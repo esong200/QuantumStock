@@ -10,8 +10,8 @@ ATVI: 71% BigData: 81.8%
 Tim:
   BRKS: BigData: 81.68%
   COKE: 70.45% BigData: 76.52%
-CTL: 66%, BigData: 69.7%
-  CVS:
+  CTL: 66%, BigData: 69.7%
+  CVS: 75.76 BigData: 78.03
 Ethan:
   DE: 70.5%
 EA:  81%, BigData: 80.3%
@@ -19,7 +19,7 @@ Tim:
   FTI: 98.18% BigData: 100%
   HAS: 50%, BigData: 73.5%
   INTC: 72.73% BigData: 74.24%
-  IVZ: 71.2%
+  IVZ: 71.2% BigData: 66.4
   JNJ: 75.6% BigData: 76.5%
   KSS: 69.7% BigData: 62.88%
 Ethan:
