@@ -3,7 +3,7 @@ All companies (benchmark): 48.5%
 
 AAPL: 83.3%, BigData: 86.4%, BigData50: 83.3%
 Tim:
-  ADS:
+  ADS: 96.36% BigData: 96.36%
 ANDV: 64%, BigData: 84.1%
 ARLP: 93.5%, BigData: 90.9%
 ATVI: 71% BigData: 81.8%
@@ -20,7 +20,7 @@ Tim:
   HAS: 50%, BigData: 73.5%
   INTC: 72.73% BigData: 74.24%
   IVZ: 71.2%
-  JNJ:
+  JNJ: 75.6% BigData: 76.5%
   KSS: 69.7% BigData: 62.88%
 Ethan:
   MO: 71.2%, BigData: 72.7%
