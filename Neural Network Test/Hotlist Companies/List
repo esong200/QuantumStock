@@ -36,6 +36,7 @@ Ethan:
   T: 76.5%, BigData: 75%
   TTWO: 79.5%, BigData: 78.1%
   DISREGARD: UAA
+  VZ: BigData: 
   WBA: BigData: 72.7%
   WMT:
-  WYNN: 80%
+  WYNN: 80%, BigData: 100%
