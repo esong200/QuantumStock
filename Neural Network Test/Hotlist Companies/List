@@ -1,6 +1,6 @@
 List:
 All companies (benchmark): 48.5%
-
+AMZN: BigData: 76.9%
 AAPL: 83.3%, BigData: 86.4%, BigData50: 83.3%
 Tim:
   ADS: 96.36% BigData: 96.36%
@@ -23,7 +23,7 @@ Tim:
   JNJ: 75.6% BigData: 76.5%
   KSS: 69.7% BigData: 62.88%
 Ethan:
-  LMT: BigData: 
+  LMT: BigData: 74.2%
   MO: 71.2%, BigData: 72.7%
   MSFT: BigData: 71.9%
 NVDA: 71% BigData: 82.1%
