@@ -121,7 +121,7 @@ public class exactTranslation {
 			//}
 		}
 	}
-
+//
 	private static int[] toBin(int nonBin) {
 		int size = 9;
 /*		while(Math.pow(2, size)<= nonBin) {
