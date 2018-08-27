@@ -57,7 +57,7 @@ public class functions extends AlphaVantageCollector{
 		if(deriv==false) {
 			return 1/(1+Math.pow(Math.E,(-x)));
 		}else
-			return 1/(1+Math.pow(Math.E,(-x))) * (1-(1/(1+Math.pow(Math.E,(-x)))));
+			return x*(1-x);
 	}
 
 	public static double[] sigmoid1d(double[]x, boolean deriv) {

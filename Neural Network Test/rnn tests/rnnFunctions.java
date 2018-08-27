@@ -66,10 +66,10 @@ public class functions{
 		if(deriv==false) {
 			return 1/(1+Math.pow(Math.E,(-x)));
 		}else
-			return sigmoid(x,false)*(1-(sigmoid(x,false)));
+			return x*(1-x);
 	}
 
-	public static double[] sigmoid1d(double[]x, boolean deriv) {
+	public static double[] sigmoid(double[]x, boolean deriv) {
 		double[] Return = new double[x.length];
 		for(int i = 0; i< x.length; i++) {
 			Return[i] = sigmoid(x[i], deriv);
@@ -80,7 +80,7 @@ public class functions{
 	public static double[][] sigmoid(double[][]x, boolean deriv){
 		double[][] Return = new double[x.length][x[0].length];
 		for(int i = 0; i<x.length; i++) {
-			Return[i]= sigmoid1d(x[i], deriv);
+			Return[i]= sigmoid(x[i], deriv);
 		}
 		return Return;
 	}

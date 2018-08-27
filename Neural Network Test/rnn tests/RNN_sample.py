@@ -66,7 +66,7 @@ for j in range(10000):
 
         # generate input and output
         X = np.array([[a[binary_dim - position - 1],b[binary_dim - position - 1]]])
-        y = np.array([[c[binary_dim - position - 1]]]).T
+        y = np.array([[c[binary_dim - position - 1]]])
 
         # hidden layer (input ~+ prev_hidden)
         layer_1 = sigmoid(np.dot(X,synapse_0) + np.dot(layer_1_values[-1],synapse_h))
@@ -116,11 +116,11 @@ for j in range(10000):
 
     # print out progress
     if(j % 1000 == 0):
-        print "Error:" + str(overallError)
-        print "Pred:" + str(d)
-        print "True:" + str(c)
+        print ("Error:" + str(overallError))
+        print ("Pred:" + str(d))
+        print ("True:" + str(c))
         out = 0
         for index,x in enumerate(reversed(d)):
             out += x*pow(2,index)
-        print str(a_int) + " + " + str(b_int) + " = " + str(out)
-        print "------------"
+        print (str(a_int) + " + " + str(b_int) + " = " + str(out))
+        print ("------------")
