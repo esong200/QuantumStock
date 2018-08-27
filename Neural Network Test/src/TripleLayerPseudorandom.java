@@ -159,12 +159,14 @@ public class TripleLayerPseudorandom {
 			}
 
 			error1 = functions.rotateMultiply(synapticWeights2,delta2);
+			double[] save = functions.sigmoid1d(intermediateAnswer1,true);
 			for(int i = 0; i<delta1.length; i++) {
-				delta1[i]= error1[i] * (functions.sigmoid1d(intermediateAnswer1,true)[i]);
+				delta1[i]= error1[i] * (save.clone()[i]);
 			}
+			save = functions.sigmoid1d(intermediateAnswer0,true);
 			error0 = functions.rotateMultiply(synapticWeights1,delta1);
 			for(int i = 0; i<delta0.length; i++) {
-				delta0[i]= error0[i] * (functions.sigmoid1d(intermediateAnswer0,true)[i]);
+				delta0[i]= error0[i] * (save.clone()[i]);
 			}
 			double[][] debugger = functions.rotateMultiply(delta2 , intermediateAnswer1);
 			for(int i=0; i<synapticWeights2.length; i++) {
