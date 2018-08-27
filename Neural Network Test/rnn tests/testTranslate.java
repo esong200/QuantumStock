@@ -62,13 +62,13 @@ public class exactTranslation {
 				double[] X = {a[binary_dim - position -1], b[binary_dim - position -1]};
 				double[] y = {c[binary_dim - position -1]};
 
-				double[] layer_1 = functions.sigmoid1d(functions.add(functions.dotMultiply(X, synapse_0),
+				double[] layer_1 = functions.sigmoid1d(functionsRNN.add(functions.dotMultiply(X, synapse_0),
 						functions.dotMultiply(layer_1_values.get(layer_1_values.size()-1), synapse_h)), false);
 
 				double[] layer_2 = functions.sigmoid1d(functions.dotMultiply(layer_1, synapse_1), false);
 
-				double[] layer_2_error = functions.subtract(y, layer_2);
-				layer_2_deltas.add(functions.multiply(layer_2_error, functions.sigmoid1d(layer_2, true)));
+				double[] layer_2_error = functionsRNN.subtract(y, layer_2);
+				layer_2_deltas.add(functionsRNN.multiply(layer_2_error, functions.sigmoid1d(layer_2, true)));
 				overallError += Math.abs(layer_2_error[0]);
 
 				d[binary_dim-position-1] = (int) Math.round(layer_2[0]);
@@ -86,31 +86,31 @@ public class exactTranslation {
 
 				double[] layer_2_delta = layer_2_deltas.get(layer_2_deltas.size()-position-1);
 
-				double[] layer_1_delta = functions.multiply((functions.add(functions.rotateMultiply(future_layer_1_delta, synapse_h),
+				double[] layer_1_delta = functionsRNN.multiply((functionsRNN.add(functions.rotateMultiply(future_layer_1_delta, synapse_h),
 						functions.rotateMultiply(layer_2_delta, synapse_1))),functions.sigmoid1d(layer_1, false));
 
-				double[][] intermed = functions.add(synapse_1_update, functions.rotateMultiply(layer_2_delta, layer_1));
+				double[][] intermed = functionsRNN.add(synapse_1_update, functions.rotateMultiply(layer_2_delta, layer_1));
 				synapse_1_update = intermed.clone();
-				intermed = functions.add(synapse_h_update, functions.rotateMultiply(layer_1_delta, prev_layer_1));
+				intermed = functionsRNN.add(synapse_h_update, functions.rotateMultiply(layer_1_delta, prev_layer_1));
 				synapse_h_update = intermed.clone();
-				intermed = functions.add(synapse_0, functions.rotateMultiply(layer_1_delta, X));
+				intermed = functionsRNN.add(synapse_0, functions.rotateMultiply(layer_1_delta, X));
 				synapse_0_update = intermed.clone();
 
 				future_layer_1_delta = layer_1_delta.clone();
 			}
 			double[][] intermed;
-			intermed = functions.add(synapse_0, functions.multiply(synapse_0_update, alpha));
+			intermed = functionsRNN.add(synapse_0, functionsRNN.multiply(synapse_0_update, alpha));
 			synapse_0 = intermed.clone();
-			intermed = functions.add(synapse_1, functions.multiply(synapse_1_update, alpha));
+			intermed = functionsRNN.add(synapse_1, functionsRNN.multiply(synapse_1_update, alpha));
 			synapse_1 = intermed.clone();
-			intermed = functions.add(synapse_h, functions.multiply(synapse_h_update, alpha));
+			intermed = functionsRNN.add(synapse_h, functionsRNN.multiply(synapse_h_update, alpha));
 			synapse_h = intermed.clone();
 
-			intermed = functions.multiply(synapse_0_update, 0);
+			intermed = functionsRNN.multiply(synapse_0_update, 0);
 			synapse_0_update = intermed.clone();
-			intermed = functions.multiply(synapse_1_update, 0);
+			intermed = functionsRNN.multiply(synapse_1_update, 0);
 			synapse_1_update = intermed.clone();
-			intermed = functions.multiply(synapse_h_update, 0);
+			intermed = functionsRNN.multiply(synapse_h_update, 0);
 			synapse_h_update = intermed.clone();
 
 			//if(j%1000 == 0) {
