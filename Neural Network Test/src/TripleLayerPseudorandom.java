@@ -166,20 +166,22 @@ public class TripleLayerPseudorandom {
 			for(int i = 0; i<delta0.length; i++) {
 				delta0[i]= error0[i] * (functions.sigmoid1d(intermediateAnswer0,true)[i]);
 			}
+			double[][] debugger = functions.rotateMultiply(delta2 , intermediateAnswer1);
 			for(int i=0; i<synapticWeights2.length; i++) {
 				for(int j=0; j<synapticWeights2[0].length; j++) {
-					synapticWeights2[i][j] +=  functions.rotateMultiply(delta2 , intermediateAnswer1)[i][j];
+					synapticWeights2[i][j] +=  debugger.clone()[i][j];
 				}
 			}
+			debugger = functions.rotateMultiply(delta1, intermediateAnswer0);
 			for (int i = 0; i<synapticWeights1.length; i++) {
 				for(int j = 0; j<synapticWeights1[0].length; j++) {
-					double[][] debugger = functions.rotateMultiply(delta1, intermediateAnswer0);
-					synapticWeights1[i][j] += debugger[i][j];
+					synapticWeights1[i][j] += debugger.clone()[i][j];
 				}
 			}
+			debugger = functions.rotateMultiply(delta0 , inputs);
 			for(int i=0; i<synapticWeights0.length; i++) {
 				for(int j=0; j<synapticWeights0[0].length; j++) {
-					synapticWeights0[i][j] +=  functions.rotateMultiply(delta0 , inputs)[i][j];
+					synapticWeights0[i][j] +=  debugger.clone()[i][j];
 				}
 			}
 
