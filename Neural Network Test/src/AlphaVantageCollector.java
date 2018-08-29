@@ -470,7 +470,7 @@ public class AlphaVantageCollector extends CSVReadWrite{
 
 	public static double[] addAns (String symbol) {
 		ArrayList<double[]> monthly = monthlyData(symbol);
-		double[] answers = new double[];
+		double[] answers = new double[8];
 		//for(int i = 0; i < monthly.size() -1; i++){
 
 			double percentChange = ((monthly.get(0)[0] - monthly.get(1)[0])/monthly.get(1)[0])*100;
