@@ -13,14 +13,15 @@ public class DataWriting extends AlphaVantageCollector {
 //		String filePaths = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\ANDVAns.csv";
 //		writeCsv(ansr,filePaths);
 		//monthlyData("AAPL");
-		String[] comps = {  "ARLP", "ATVI", "CTL", "DE", "EA", "FTI", "HAS", "IVZ", "KSS", "MO", "NVDA", "PDLI", "PEP", "STT", "T", "WYNN"};
-//for new comps
+		String[] comps = { "AAPL","ADS","ANDV", "ARLP", "ATVI", "CTL", "DE", "EA", "FTI", "HAS", "IVZ", "KSS", "MO", "NVDA", "PDLI", "PEP", "STT", "T", "WYNN"};
+
 		for(String comp:comps) {
-			writeData(comp);
-		}
-//For first of month's to gather last month data
-		for(String comp: comps) {
-			addData(comp);
+			//for new comps
+			//writeData(comp);
+			//For first of month's to gather last month data
+			//addData(comp);
+			//For data gathering to decrease time wasted
+			sampleData(comp);
 		}
 
 	}
@@ -81,5 +82,12 @@ public class DataWriting extends AlphaVantageCollector {
 
 		writeCsv(data, dataPath);
 		writeCsv(ans, ansPath);
+	}
+
+	private static void sampleData(String comp) {
+		String dataPath = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\testingData\\" + comp + "newData.csv";
+		double[] data = DataAdd(comp);
+		writeCsv(data, dataPath);
+
 	}
 }
