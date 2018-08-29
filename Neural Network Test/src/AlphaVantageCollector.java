@@ -244,71 +244,71 @@ public class AlphaVantageCollector extends CSVReadWrite{
 			switch (percent)
 			{
 			case -10:
-				answers = one.clone();
+				answers.add(one);
 				break;
 			case -9:
-				answers = one.clone();
+				answers.add(one);
 				break;
 			case -8:
-				answers = one.clone();
+				answers.add(one);
 				break;
 			case -7:
-			answers = one.clone();
+			answers.add(one);
 				break;
 			case -6:
-				answers = one.clone();
+				answers.add(one);
 				break;
 			case -5:
-				answers = one.clone();
+				answers.add(one);
 				break;
 			case -4:
-				answers = two.clone();
+				answers.add(two);
 				break;
 			case -3:
-				answers = two.clone();
+				answers.add(two);
 				break;
 			case -2:
-				answers = two.clone();
+				answers.add(two);
 				break;
 			case -1:
-				answers = three.clone();
+				answers.add(three);
 				break;
 			case 0:
-				answers = three.clone();
+				answers.add(three);
 				break;
 			case 1:
-				answers = four.clone();
+				answers.add(four);
 				break;
 			case 2:
-				answers = four.clone();
+				answers.add(four);
 				break;
 			case 3:
-				answers = five.clone();
+				answers.add(five);
 				break;
 			case 4:
-				answers = five.clone();
+				answers.add(five);
 				break;
 			case 5:
-				answers = five.clone();
+				answers.add(five);
 				break;
 			case 6:
-				answers = six.clone();
+				answers.add(six);
 				break;
 			case 7:
-				answers = six.clone();
+				answers.add(six);
 				break;
 			case 8:
-				answers = six.clone();
+				answers.add(six);
 				break;
 			case 9:
-				answers = six.clone();
+				answers.add(six);
 				break;
 			default:
 				if(percent < -10){
-					answers = zero.clone();
+					answers.add(zero);
 			 }
 			 else if(percent>=10){
-				 answers = seven.clone();
+				 answers.add(seven);
 					 };
 			}
 
@@ -470,7 +470,7 @@ public class AlphaVantageCollector extends CSVReadWrite{
 
 	public static double[] addAns (String symbol) {
 		ArrayList<double[]> monthly = monthlyData(symbol);
-		double[] answers = new double[8];
+		double[] answers = new double[];
 		//for(int i = 0; i < monthly.size() -1; i++){
 
 			double percentChange = ((monthly.get(0)[0] - monthly.get(1)[0])/monthly.get(1)[0])*100;
@@ -486,71 +486,71 @@ public class AlphaVantageCollector extends CSVReadWrite{
 			switch (percent)
 			{
 			case -10:
-				answers.add(one);
+				answers =one.clone();
 				break;
 			case -9:
-				answers.add(one);
+				answers =one.clone();
 				break;
 			case -8:
-				answers.add(one);
+				answers =one.clone();
 				break;
 			case -7:
-				answers.add(one);
+				answers =one.clone();
 				break;
 			case -6:
-				answers.add(one);
+				answers =one.clone();
 				break;
 			case -5:
-				answers.add(one);
+				answers =one.clone();
 				break;
 			case -4:
-				answers.add(two);
+				answers =two.clone();
 				break;
 			case -3:
-				answers.add(two);
+				answers =two.clone();
 				break;
 			case -2:
-				answers.add(two);
+				answers =two.clone();
 				break;
 			case -1:
-				answers.add(three);
+				answers =three.clone();
 				break;
 			case 0:
-				answers.add(three);
+				answers =three.clone();
 				break;
 			case 1:
-				answers.add(four);
+				answers =four.clone();
 				break;
 			case 2:
-				answers.add(four);
+				answers =four.clone();
 				break;
 			case 3:
-				answers.add(five);
+				answers =five.clone();
 				break;
 			case 4:
-				answers.add(five);
+				answers =five.clone();
 				break;
 			case 5:
-				answers.add(five);
+				answers =five.clone();
 				break;
 			case 6:
-				answers.add(six);
+				answers =six.clone();
 				break;
 			case 7:
-				answers.add(six);
+				answers =six.clone();
 				break;
 			case 8:
-				answers.add(six);
+				answers =six.clone();
 				break;
 			case 9:
-				answers.add(six);
+				answers =six.clone();
 				break;
 			default:
 				if(percent < -10){
-					answers.add(zero);
+					answers =zero.clone();
 			 }
 			 else if(percent>=10){
-				 answers.add(seven);
+				 answers =seven.clone();
 					 };
 			}
 
