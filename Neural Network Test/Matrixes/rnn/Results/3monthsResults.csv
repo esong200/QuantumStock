@@ -3,6 +3,22 @@ ADS: 10<
 ANDV: -10 to -5, 5 to 10
 ARLP: 0 to 2, 10<
 ATVI: -2 to 0, 0 to 2, 2 to 5
-BRKS
-COKE
+BRKS: 2 to 5, 5 to 10
+COKE: 5 to 10, 10<
 CTL: 2 to 5, 10<
+CVS: 5 to 10
+DE: -2 to 0, 10<
+EA: -2 to 0, 2 to 5
+FTI: -2 to 0, 5 to 10
+HAS: 5 to 10, 10<
+INTC: 2 to 5, 10<
+IVZ: 0 to 2, 2 to 5, 5 to 10, 10<
+JNJ: -5 to -2, 0 to 2
+KSS: 2 to 5, 5 to 10
+LMT: -2 to 0, 0 to 2
+MO: 5 to 10
+MSFT: 0 to 2, 10<
+NVDA: 0 to 2, 10<
+NKE: 10<
+PDLI
+PEP: 0 to 2, 2 to 5, 5 to 10

@@ -7,7 +7,7 @@ BRKS: 5 to 10
 COKE: 0 to 2, 10<
 CTL: -5 to -2, -2 to 0, 2 to 5
 CVS: -2 to 0, 2 to 5, 5 to 10
-DE: 10<
+DE: 2 to 5, 10<
 EA: -2 to 0
 FTI: -2 to 0, 5 to 10
 HAS: 5 to 10

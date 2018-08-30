@@ -3,6 +3,9 @@ ADS: 2 to 5, 10<
 ANDV: -5 to -2, 10<
 ARLP: 10<
 ATVI: 2 to 5, 5 to 10
-BRKS
-COKE
+BRKS: -5 to -2
+COKE: 2 to 5, 10<
 CTL: -5 to -2, 10<
+CVS
+DE: 2 to 5, 5 to 10
+EA: -2 to 0, 2 to 5
