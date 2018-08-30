@@ -5,15 +5,14 @@ public class infoTests {
 
 	public static void main(String[] args) {
 
-		String comp = "IVZ";
+		String[] comps = {"IVZ"};
 		String runName = "";
+		for(String comp: comps) {
 		ArrayList<double[]> data = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\" + comp + "DataAdjst.csv");
 		ArrayList<double[]> ans = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\"+ comp + "Ans.csv");
 		ArrayList<double[]> dataTaylored = data;
 		//ArrayList<double[]> pseudorandomData = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\" + comp + "DataAdjst.csv");
 		//ArrayList<double[]> pseudorandomAns = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\"+ comp + "Ans.csv");
-		ArrayList<Integer> correct = new ArrayList<Integer>();
-		double[][] dataTayloredMatrix = new double[dataTaylored.size()][dataTaylored.get(0).length];
 		int maxSize = data.size();
 		while(ans.size()>maxSize){
 			ans.remove(ans.size()-1);
@@ -34,7 +33,7 @@ public class infoTests {
 		rand(synap1);
 		rand(synaph);
 
-		int monthsBefore = 1;
+		int monthsBefore = 3;
 
 		for(int j = 0; j<1000000; j++) {
 			int monthSelect = (int) (Math.random()*(data.size()-monthsBefore));
@@ -119,6 +118,7 @@ public class infoTests {
 			}
 
 		}
+	}
 
 
 	}

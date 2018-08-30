@@ -558,5 +558,45 @@ public class AlphaVantageCollector extends CSVReadWrite{
 
 		return answers;
 	}
+	public static ArrayList<double[]> answerCompileExact (String symbol){
+			ArrayList<double[]> monthly = monthlyData(symbol);
+			monthly.remove(0);
+			ArrayList<double[]> answers = new ArrayList<double[]>();
+			for(int i = 0; i < monthly.size() -1; i++){
+
+				double percentChange = ((monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0])*100;
+				int percent = (int) percentChange;
+				double[] exact = toBin(percent);
+
+				answers.add(exact.clone());
+				}
+
+
+			return answers;
+		}
+
+		private static double[] toBin(int nonBin) {
+			int size = 8;
+	/*		while(Math.pow(2, size)<= nonBin) {
+				size++;
+			}*/
+			double[] binary = new double[size];
+			if(nonBin > Math.pow(2, size-1)) {
+				for(int i = size-2; i>=0; i--) {
+					binary[i] = 1;
+				}
+			}
+			for(int i = size-2; i >= 0; i--) {
+				binary[i] = nonBin%2;
+				nonBin = nonBin/2;
+			}
+			if(nonBin>0) {
+				binary[binary.length-1] = 1;
+			}
+			else {
+				binary[binary.length-1] = 0;
+			}
+			return binary;
+		}
 	}
 }
