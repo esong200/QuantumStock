@@ -590,6 +590,7 @@ public class AlphaVantageCollector extends CSVReadWrite{
 			else {
 				binary[binary.length-1] = 0;
 			}
+			nonBin = Math.abs(nonBin);
 			if(nonBin > Math.pow(2, size-1)) {
 				for(int i = size-2; i>=0; i--) {
 					binary[i] = 1;
@@ -732,7 +733,7 @@ public class AlphaVantageCollector extends CSVReadWrite{
 
 			double percentChange = ((monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0])*100;
 			int percent = (int) percentChange;
-			System.out.println("Percent: " + percent);
+			//System.out.println("Percent: " + percent);
 			double[] exact = toBin(percent);
 			answers.add(exact.clone());
 			}
