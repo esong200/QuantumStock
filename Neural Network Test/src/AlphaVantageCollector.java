@@ -22,6 +22,7 @@ import org.patriques.output.technicalindicators.data.MACDData;
 import org.patriques.output.technicalindicators.data.STOCHDataFast;
 import org.patriques.output.technicalindicators.data.STOCHDataSlow;
 import org.patriques.output.timeseries.Monthly;
+import org.patriques.output.timeseries.Weekly;
 import org.patriques.output.timeseries.data.StockData;
 import java.util.List;
 
@@ -558,6 +559,7 @@ public class AlphaVantageCollector extends CSVReadWrite{
 
 		return answers;
 	}
+
 	public static ArrayList<double[]> answerCompileExact (String symbol){
 			ArrayList<double[]> monthly = monthlyData(symbol);
 			monthly.remove(0);
@@ -575,7 +577,7 @@ public class AlphaVantageCollector extends CSVReadWrite{
 			return answers;
 		}
 
-		private static double[] toBin(int nonBin) {
+	private static double[] toBin(int nonBin) {
 			int size = 8;
 	/*		while(Math.pow(2, size)<= nonBin) {
 				size++;
@@ -598,5 +600,143 @@ public class AlphaVantageCollector extends CSVReadWrite{
 			}
 			return binary;
 		}
+
+	public static ArrayList<double[]> weeklyData (String symbol){
+
+		//returns montly oepn high low close volume
+		ArrayList<double[]> data = new ArrayList<double[]>();
+
+		try {
+			Weekly response = stockTimeSeries.weekly(symbol);
+			Map<String, String> metaData = response.getMetaData();
+			System.out.println("Information: " + metaData.get("1. Information"));
+			System.out.println("Stock: " + metaData.get("2. Symbol"));
+
+			List<StockData> stockData = response.getStockData();
+			stockData.forEach(stock -> {
+				double[] inputData = {0,0,0,0,0};
+				inputData[0] = stock.getOpen();
+				inputData[1] = stock.getHigh();
+				inputData[2] = stock.getLow();
+				inputData[3] = stock.getClose();
+				inputData[4] = stock.getVolume();
+				data.add(inputData);
+
+			});
+
+		} catch (AlphaVantageException e) {
+			System.out.println("something went wrong");
+		}
+		return data;
 	}
+
+	public static ArrayList<double[]> weeklyAnswer(String symbol){
+		ArrayList<double[]> monthly = weeklyData(symbol);
+		monthly.remove(0);
+		ArrayList<double[]> answers = new ArrayList<double[]>();
+		for(int i = 0; i < monthly.size() -1; i++){
+
+			double percentChange = ((monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0])*100;
+			int percent = (int) percentChange;
+			double[] one = {0,1,0,0,0,0,0,0};
+			double[] two = {0,0,1,0,0,0,0,0};
+			double[] three = {0,0,0,1,0,0,0,0};
+			double[] four = {0,0,0,0,1,0,0,0};
+			double[] five = {0,0,0,0,0,1,0,0};
+			double[] six = {0,0,0,0,0,0,1,0};
+			double[] seven = {0,0,0,0,0,0,0,1};
+			double[] zero = {1,0,0,0,0,0,0,0};
+			switch (percent)
+			{
+			case -10:
+				answers.add(one);
+				break;
+			case -9:
+				answers.add(one);
+				break;
+			case -8:
+				answers.add(one);
+				break;
+			case -7:
+			answers.add(one);
+				break;
+			case -6:
+				answers.add(one);
+				break;
+			case -5:
+				answers.add(one);
+				break;
+			case -4:
+				answers.add(two);
+				break;
+			case -3:
+				answers.add(two);
+				break;
+			case -2:
+				answers.add(two);
+				break;
+			case -1:
+				answers.add(three);
+				break;
+			case 0:
+				answers.add(three);
+				break;
+			case 1:
+				answers.add(four);
+				break;
+			case 2:
+				answers.add(four);
+				break;
+			case 3:
+				answers.add(five);
+				break;
+			case 4:
+				answers.add(five);
+				break;
+			case 5:
+				answers.add(five);
+				break;
+			case 6:
+				answers.add(six);
+				break;
+			case 7:
+				answers.add(six);
+				break;
+			case 8:
+				answers.add(six);
+				break;
+			case 9:
+				answers.add(six);
+				break;
+			default:
+				if(percent < -10){
+					answers.add(zero);
+			 }
+			 else if(percent>=10){
+				 answers.add(seven);
+					 };
+			}
+
+		}
+
+		return answers;
+	}
+
+	public static ArrayList<double[]> weeklyAnswerExact(String symbol){
+		ArrayList<double[]> monthly = weeklyData(symbol);
+		monthly.remove(0);
+		ArrayList<double[]> answers = new ArrayList<double[]>();
+		for(int i = 0; i < monthly.size() -1; i++){
+
+			double percentChange = ((monthly.get(i)[0] - monthly.get(i+1)[0])/monthly.get(i+1)[0])*100;
+			int percent = (int) percentChange;
+			double[] exact = toBin(percent);
+
+			answers.add(exact.clone());
+			}
+
+
+		return answers;
+	}
+
 }
