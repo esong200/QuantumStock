@@ -1,15 +1,20 @@
 import java.util.ArrayList;
 import java.text.*;
 
-public class infoTests {
+public class rnnStockCalcs {
 
 	public static void main(String[] args) {
 
 		String[] comps = {"AAPL","ADS","ANDV","ARLP","ATVI","BRKS","COKE","CTL","CVS","DE","EA","FTI","HAS","INTC","IVZ","JNJ","KSS","LMT","MO","MSFT","NVDA","NKE","PDLI","PEP","SBUX","STT","T","TTWO","WBA","WMT","WYNN"};
 		String runName = "";
 		for(String comp: comps) {
-		ArrayList<double[]> data = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\ShortTimeBigData\\" + comp + "Weekly Adjst.csv");
-		ArrayList<double[]> ans = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\ShortTimeBigData\\"+ comp + "ScaledAns.csv");
+			String dataDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/ShortTimeBigData/"+ comp + "WeeklyDataAdjst.csv";
+			String ansDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/ShortTimeBigData/"+ comp + "WeeklyScaledAns.csv";
+			String Synap0Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes50/TripleLayer/Weights0/"+ comp + runName+"synapticWeights0.csv";
+			String Synap1Directory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes50/TripleLayer/Weights1/"+ comp + runName+"synapticWeights1.csv";
+			String SynaphDirectory = "/Users/ethansong/Documents/GitHub/highlighter/Neural Network Test/STBigMatrixes50/TripleLayer/Weights2/"+ comp + runName+"synapticWeights2.csv";
+		ArrayList<double[]> data = CSVReadWrite.readCsv(dataDirectory);
+		ArrayList<double[]> ans = CSVReadWrite.readCsv(ansDirectory);
 		ArrayList<double[]> dataTaylored = data;
 		//ArrayList<double[]> pseudorandomData = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\" + comp + "DataAdjst.csv");
 		//ArrayList<double[]> pseudorandomAns = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\"+ comp + "Ans.csv");
@@ -33,9 +38,9 @@ public class infoTests {
 		rand(synap1);
 		rand(synaph);
 
-		for(int monthsBefore = 3; monthsBefore<6; monthsBefore++) {
+		for(int monthsBefore = 3; monthsBefore<7; monthsBefore++) {
 
-		for(int j = 0; j<550000; j++) {
+		for(int j = 0; j<750000; j++) {
 			int monthSelect = (int) (Math.random()*(data.size()-monthsBefore));
 			//System.out.println("MontSelect is: " + monthSelect);
 			ArrayList<double[]> monthData = new ArrayList<double[]>();
@@ -118,15 +123,15 @@ public class infoTests {
 			}
 
 		}
-		String fileSynp0 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\rnn\\Synap0\\" + comp + monthsBefore +"monthsScaledSynap0.csv";
-		String fileSynp1 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\rnn\\Synap1\\" + comp + monthsBefore +"monthsScaledSynap1.csv";
-		String fileSynph = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\rnn\\Synaph\\" + comp + monthsBefore +"monthsScaledSynaph.csv";
+		String fileSynp0 = Synap0Directory;
+		String fileSynp1 = Synap1Directory;
+		String fileSynph = SynaphDirectory;
 
 
 		CSVReadWrite.writeCsv(synap0, fileSynp0);
 		CSVReadWrite.writeCsv(synap1, fileSynp1);
 		CSVReadWrite.writeCsv(synaph, fileSynph);
-		System.out.println("Done with " + comp + " using " + monthsBefore + " months");
+		System.out.println("Done with " + comp + " using " + monthsBefore + " weeks");
 	}
 		}
 
