@@ -5,11 +5,11 @@ public class infoTests {
 
 	public static void main(String[] args) {
 
-		String[] comps = {"IVZ"};
+		String[] comps = {"AAPL","ADS","ANDV","ARLP","ATVI","BRKS","COKE","CTL","CVS","DE","EA","FTI","HAS","INTC","IVZ","JNJ","KSS","LMT","MO","MSFT","NVDA","NKE","PDLI","PEP","SBUX","STT","T","TTWO","WBA","WMT","WYNN"};
 		String runName = "";
 		for(String comp: comps) {
-		ArrayList<double[]> data = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\" + comp + "DataAdjst.csv");
-		ArrayList<double[]> ans = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\"+ comp + "Ans.csv");
+		ArrayList<double[]> data = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\ShortTimeBigData\\" + comp + "Weekly Adjst.csv");
+		ArrayList<double[]> ans = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\ShortTimeBigData\\"+ comp + "ScaledAns.csv");
 		ArrayList<double[]> dataTaylored = data;
 		//ArrayList<double[]> pseudorandomData = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\" + comp + "DataAdjst.csv");
 		//ArrayList<double[]> pseudorandomAns = CSVReadWrite.readCsv("C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Data\\"+ comp + "Ans.csv");
@@ -33,9 +33,9 @@ public class infoTests {
 		rand(synap1);
 		rand(synaph);
 
-		int monthsBefore = 3;
+		for(int monthsBefore = 3; monthsBefore<6; monthsBefore++) {
 
-		for(int j = 0; j<1000000; j++) {
+		for(int j = 0; j<550000; j++) {
 			int monthSelect = (int) (Math.random()*(data.size()-monthsBefore));
 			//System.out.println("MontSelect is: " + monthSelect);
 			ArrayList<double[]> monthData = new ArrayList<double[]>();
@@ -118,8 +118,17 @@ public class infoTests {
 			}
 
 		}
-	}
+		String fileSynp0 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\rnn\\Synap0\\" + comp + monthsBefore +"monthsScaledSynap0.csv";
+		String fileSynp1 = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\rnn\\Synap1\\" + comp + monthsBefore +"monthsScaledSynap1.csv";
+		String fileSynph = "C:\\Users\\Tim Huang\\Documents\\GitHub\\highlighter\\Neural Network Test\\Matrixes\\rnn\\Synaph\\" + comp + monthsBefore +"monthsScaledSynaph.csv";
 
+
+		CSVReadWrite.writeCsv(synap0, fileSynp0);
+		CSVReadWrite.writeCsv(synap1, fileSynp1);
+		CSVReadWrite.writeCsv(synaph, fileSynph);
+		System.out.println("Done with " + comp + " using " + monthsBefore + " months");
+	}
+		}
 
 	}
 
