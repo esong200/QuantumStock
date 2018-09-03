@@ -6,6 +6,7 @@ import java.util.List;
 
 
 public class CSVReadWrite {
+
 	public static void writeCsv(ArrayList<double[]> matrix, String file) {
 		FileWriter fw = null;
 
