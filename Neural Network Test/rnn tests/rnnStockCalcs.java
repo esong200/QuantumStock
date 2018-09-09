@@ -60,14 +60,14 @@ public class rnnStockCalcs {
 				double[] input = monthData.get(monthData.size()-1-i);
 				double[] expect = ansData.get(ansData.size()-1-i);
 
-				double[] layer1 = functions.sigmoid(functions.add(functions.dotMultiply(input, synap0)
+				double[] layer1 = functionsRNN.sigmoid(functionsRNN.add(functions.dotMultiply(input, synap0)
 						, functions.dotMultiply(layer_1_values.get(layer_1_values.size()-1), synaph)), false);
 
-				double[] layer2 = functions.sigmoid(functions.dotMultiply(layer1, synap1), false);
+				double[] layer2 = functionsRNN.sigmoid(functions.dotMultiply(layer1, synap1), false);
 				output = layer2.clone();
 
-				double[] layer2Error = functions.subtract(expect, layer2);
-				layer_2_deltas.add(functions.multiply(layer2Error,functions.sigmoid(layer2, true)));
+				double[] layer2Error = functionsRNN.subtract(expect, layer2);
+				layer_2_deltas.add(functionsRNN.multiply(layer2Error,functionsRNN.sigmoid(layer2, true)));
 
 				layer_1_values.add(layer1.clone());
 
@@ -82,27 +82,27 @@ public class rnnStockCalcs {
 
 				double[] layer2Delta = layer_2_deltas.get(layer_2_deltas.size()-1-position);
 
-				double[] layer1Delta = functions.multiply(functions.add(functions.rotateMultiply(layer1DeltaFuture, synaph)
-						, functions.rotateMultiply(layer2Delta, synap1)), functions.sigmoid(layer1, true));
+				double[] layer1Delta = functionsRNN.multiply(functionsRNN.add(functions.rotateMultiply(layer1DeltaFuture, synaph)
+						, functions.rotateMultiply(layer2Delta, synap1)), functionsRNN.sigmoid(layer1, true));
 
-				double[][] intermed = functions.add(synap1Up, functions.rotateMultiply(layer2Delta, layer1));
+				double[][] intermed = functionsRNN.add(synap1Up, functionsRNN.rotateMultiply(layer2Delta, layer1));
 				synap1Up = intermed.clone();
-				intermed = functions.add(synaphUp,  functions.rotateMultiply(layer1Delta, layer1Pre));
+				intermed = functionsRNN.add(synaphUp,  functions.rotateMultiply(layer1Delta, layer1Pre));
 				synaphUp = intermed.clone();
-				intermed = functions.add(functions.rotateMultiply(layer1Delta, input), synap0Up);
+				intermed = functionsRNN.add(functions.rotateMultiply(layer1Delta, input), synap0Up);
 				synap0Up = intermed.clone();
 			}
-			double[][] intermed  = functions.add(synap0, functions.multiply(synap0Up,alpha));
+			double[][] intermed  = functionsRNN.add(synap0, functionsRNN.multiply(synap0Up,alpha));
 			synap0 = intermed.clone();
-			intermed = functions.add(synap1, functions.multiply(synap1Up, alpha));
+			intermed = functionsRNN.add(synap1, functionsRNN.multiply(synap1Up, alpha));
 			synap1 = intermed.clone();
-			intermed = functions.add(synaph, functions.multiply(synaphUp, alpha));
+			intermed = functionsRNN.add(synaph, functionsRNN.multiply(synaphUp, alpha));
 
-			intermed = functions.multiply(synap1Up, 0);
+			intermed = functionsRNN.multiply(synap1Up, 0);
 			synap1Up = intermed.clone();
-			intermed = functions.multiply(synaphUp, 0);
+			intermed = functionsRNN.multiply(synaphUp, 0);
 			synaphUp = intermed.clone();
-			intermed = functions.multiply(synap0Up, 0);
+			intermed = functionsRNN.multiply(synap0Up, 0);
 			synap0Up = intermed.clone();
 			if(j%1000==0) {
 				System.out.println("Trail: " + j);
