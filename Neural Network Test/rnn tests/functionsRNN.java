@@ -1,5 +1,5 @@
 
-public class functions{
+public class functionsRNN{
 	public static double[] dotMultiply(double[] a, double[][] b){
 		double[]returnArr = new double[b[0].length];
 		for(int i = 0; i<b[0].length; i++) {
