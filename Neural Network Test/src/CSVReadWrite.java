@@ -6,7 +6,6 @@ import java.util.List;
 
 
 public class CSVReadWrite {
-
 	public static void writeCsv(ArrayList<double[]> matrix, String file) {
 		FileWriter fw = null;
 
@@ -17,6 +16,37 @@ public class CSVReadWrite {
 				for(double d: doub) {
 					fw.append(String.valueOf(d));
 					fw.append(",");
+				}
+				fw.append("\n");
+			}
+
+		}
+		catch (Exception ex) {
+			   ex.printStackTrace();
+			  }
+		finally {
+			try {
+				fw.flush();
+				fw.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public static void writeCsvDouble(ArrayList<double[][]> matrix, String file) {
+		FileWriter fw = null;
+
+		try {
+			fw = new FileWriter(file);
+			for(double[][] doub: matrix) {
+				fw.append("\n");
+				for(double dArr[]: doub) {
+					fw.append("\n");
+					for(double d : dArr) {
+						fw.append(String.valueOf(d));
+						fw.append(",");
+					}
+					
 				}
 				fw.append("\n");
 			}
@@ -65,9 +95,38 @@ public class CSVReadWrite {
 		try {
 			fw = new FileWriter(file);
 
-
+		
 				for(double d: matrix) {
 					fw.append(String.valueOf(d));
+					fw.append(",");
+					fw.append("\n");
+				}
+		}
+		catch (Exception ex) {
+			   ex.printStackTrace();
+			  }
+		finally {
+			try {
+				fw.flush();
+				fw.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public static void writeCsvStockOutcomes(double[] matrix, String comp, String file) {
+		FileWriter fw = null;
+		try {
+			fw = new FileWriter(file);
+			fw.append(comp);
+			fw.append(" Outcomes");
+			fw.append(",");
+			fw.append("\n");
+
+				for(int i=0; i<matrix.length; i++) {
+					fw.append(String.valueOf(i));
+					fw.append(": ");
+					fw.append(String.valueOf(matrix[i]));
 					fw.append(",");
 					fw.append("\n");
 				}
@@ -98,11 +157,11 @@ public class CSVReadWrite {
 					double[] data = new double[length];
 					for(int i = 0; i<fields.length; i++) {
 						data[i] = Double.parseDouble(fields[i]);
-
+						
 					}
 					returnArr.add(data);
 				}
-
+				
 			}
 		}catch (Exception ex) {
 			   ex.printStackTrace();
@@ -115,6 +174,48 @@ public class CSVReadWrite {
 		  }
 		return returnArr;
 	}
+	public static ArrayList<double[][]> readCsvDouble(String file, int chunkLength, int chunkWidth){
+		BufferedReader br = null;
+		ArrayList<double[]> intermediateData = new ArrayList<double[]>();
+		ArrayList<double[][]> returnArrayList = new ArrayList<double[][]>();
+		int intermediateDataIndex = -1;
+		try {
+			String ln = "";
+			br = new BufferedReader(new FileReader(file));
+			while((ln = br.readLine())!= null) {
+				String[] fields = ln.split(",");
+				if(fields.length>0) {
+					int length = fields.length;
+					double[] data = new double[length];
+					for(int i = 0; i<fields.length; i++) {
+						data[i] = Double.parseDouble(fields[i]);
+						
+					}
+					intermediateData.add(data);
+				}
+				
+			}
+			double[][] intermediateArr = new double[chunkLength][intermediateData.get(0).length];
+			for(int i=0; i<intermediateData.size()/4; i++) {
+				double[][] intermediateDataArr = new double[chunkLength][chunkWidth];
+				for(int j=0; j<4; j++) {
+					intermediateDataIndex++;
+					intermediateDataArr[j] =  intermediateData.get(intermediateDataIndex);
+				}
+				returnArrayList.add(intermediateDataArr);
+			}
+		}catch (Exception ex) {
+			   ex.printStackTrace();
+		  } finally {
+		   try {
+		    br.close();
+		   } catch (Exception e) {
+		    e.printStackTrace();
+		   }
+		  }
+		return returnArrayList;
+	}
+	
 	public static double[][] listToArray(ArrayList<double[]> a){
 		double[][] returnArray = new double[a.size()][a.get(0).length];
 		try {
@@ -127,6 +228,9 @@ public class CSVReadWrite {
 			e.printStackTrace();
 		}
 		return returnArray;
+	}
+	public static double[] listToArray1d(ArrayList<double[]> a) {
+		return a.get(0);
 	}
 
 }

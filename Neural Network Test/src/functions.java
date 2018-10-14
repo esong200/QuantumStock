@@ -1,5 +1,5 @@
 
-public class functions extends AlphaVantageCollector{
+public class functions {
 	public static double[] dotMultiply(double[] a, double[][] b){
 		double[]returnArr = new double[b[0].length];
 		for(int i = 0; i<b[0].length; i++) {
@@ -52,14 +52,14 @@ public class functions extends AlphaVantageCollector{
 		return returnArr;
 	}
 	*/
-
+	
 	public static double sigmoid(double x, boolean deriv) {
 		if(deriv==false) {
-			return 1/(1+Math.pow(Math.E,(-x)));
+			return 1/(1+Math.pow(Math.E,1*(-x)));
 		}else
-			return x*(1-x);
+			return 1/(1+Math.pow(Math.E,1*(-x))) * (1-(1/(1+Math.pow(Math.E,1*(-x)))));
+			
 	}
-
 	public static double[] sigmoid1d(double[]x, boolean deriv) {
 		double[] Return = new double[x.length];
 		for(int i = 0; i< x.length; i++) {
@@ -67,7 +67,7 @@ public class functions extends AlphaVantageCollector{
 		}
 		return Return;
 	}
-
+	
 	public static double[][] sigmoid(double[][]x, boolean deriv){
 		double[][] Return = new double[x.length][x[0].length];
 		for(int i = 0; i<x.length; i++) {
@@ -75,7 +75,7 @@ public class functions extends AlphaVantageCollector{
 		}
 		return Return;
 	}
-
+	
 	public static double[] rotateMultiply(double[][]b, double[]a){
 		double[]returnArr = new double[a.length];
 		double [][] rotatedArr = new double[b[0].length][b.length];
@@ -107,7 +107,7 @@ public class functions extends AlphaVantageCollector{
 				returnArr[j][i]=noRotate[i]*rotate[j];
 			}
 		}
-		return returnArr;
+		return returnArr;	
 	}
 	public static double[][] rotateMultiply(double[][]a, double[][]b){
 		double[][] returnArr = new double[a.length][b.length];
