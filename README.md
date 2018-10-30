@@ -1,3 +1,2 @@
 # highlighter
-highlight test project
-(non-operational)
+codename highlighter test project
